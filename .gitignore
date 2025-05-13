@@ -1,23 +1,26 @@
-# IDE
-.vscode
+# IDE config
+.vscode/
 
-# program
+# Program output
 /miniRT
 
-# folders
+# Folders to ignore
 lib/MLX42/
 dep/
 obj/
 
-# objects and dependencies
-*.d
+# Object files and build artifacts
 *.o
+*.d
 *.a
-
-# trashy
-.DS_store
-*.txt
-*.lldb
-*.png
 *.gch
 
+# Debug & logs
+*.lldb
+
+# Images
+*.png
+
+# Misc
+# *.txt
+.DS_Store
