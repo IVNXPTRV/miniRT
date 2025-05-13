@@ -1,0 +1,17 @@
+# vscode
+.vscode
+
+# Mac
+.DS_Store
+
+# binaries
+*.o
+*.a
+*.out
+miniRT
+
+# text
+log
+
+# python
+venv

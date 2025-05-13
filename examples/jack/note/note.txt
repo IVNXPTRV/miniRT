@@ -1,0 +1,146 @@
+Tasks:
+1. Parsing input
+
+2. Ray tracing part
+	geometric objects: plane, sphere, cylinder
+	handle possible intersections and the insides of the objects
+	resize properties of objects: 
+			sphere: diameter
+			cylinder: width & height
+	apply translation and rotation transformations to objects, lights, and cameras
+	Light management:
+		spot brightness
+		hard shadows
+		ambient lighting
+		diffuse lighting
+
+
+3. MLX42
+	using hook
+		Pressing ESC / Clicking on the red cross,
+		close the window & quit the program
+
+	key variables and functions:
+		mlx_t	*mlx;
+		typedef struct mlx
+		{
+			void*		window;		// window itself
+			void*		context;	// Abstracted opengl data
+			int32_t		width;		// width of the window
+			int32_t		height;		// height of the window
+			double		delta_time; // time difference between the previous frame and the current frame.
+		}	mlx_t;
+
+		mlx_t* 	mlx_init(int32_t width, int32_t height, const char* title, bool resize);
+			Initializes a new MLX42 Instance.
+			Returns: Ptr to the MLX handle or null on failure.
+
+		mlx_image_t		*img;
+		typedef struct mlx_image
+		{
+			const uint32_t	width;		// width of the image
+			const uint32_t	height;		// height of the image
+			uint8_t*		pixels;		// literal pixel data
+			mlx_instance_t*	instances;	// instance carrying the X, Y and Z location data
+			size_t			count;		// element count of the instances array
+			bool			enabled;	// If true the image is drawn onto the screen, else it's not
+			void*			context;	// Abstracted OpenGL data
+		}	mlx_image_t;
+
+		mlx_image_t*	mlx_new_image(mlx_t* mlx, uint32_t width, uint32_t height);
+			Creates and allocates a new image buffer.
+			Returns: Pointer to the image buffer, if it failed to allocate then NULL.
+	
+		int32_t	mlx_image_to_window(mlx_t* mlx, mlx_image_t* img, int32_t x, int32_t y);
+			Returns: Index to the instance, or -1 on failure.
+			NOTE: Keep in mind that the instance array gets reallocated, try to store the return value to the instance! NOT the pointer! It will become invalid!
+
+		void	mlx_loop(mlx_t* mlx);
+			Initializes the rendering of MLX, this function won't return until mlx_close_window is called, meaning it will loop until the user requests that the window should close.
+
+		void	mlx_close_window(mlx_t* mlx);
+			Notifies MLX that it should stop rendering and exit the main loop. This is not the same as terminate, this simply tells MLX to close the window.
+
+		void	mlx_delete_image(mlx_t* mlx, mlx_image_t* image);
+			Deleting an image will remove it from the render queue as well as any and all instances it might have. Additionally, just as extra measures sets all the data to NULL.
+			If you simply wish to stop rendering an image without de-allocation set the 'enabled' boolean in the image struct.
+
+		void	mlx_terminate(mlx_t* mlx);
+			Terminates MLX and cleans up any of its used resources. Using any functions that require mlx afterwards will be considered undefined behaviour, beware of segfaults.
+
+		void	mlx_draw_pixel(uint8_t* pixel, uint32_t color);
+		void	mlx_put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
+			Sets / puts a pixel onto an image.
+			NOTE: It is considered undefined behaviour when putting a pixel beyond the bounds of an image.
+
+		void	mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param);
+		void	key_press(mlx_key_data_t keycode, void *param);
+
+		void	mlx_scroll_hook(mlx_t* mlx, mlx_scrollfunc func, void* param);
+		void	scroll(double xdelta, double ydelta, void *param);
+
+
+
+
+t_color
+{
+	float	r;
+	float	g;
+	float	b;
+}
+
+t_point
+{
+	float	x;
+	float	y;
+	float	z;
+}
+
+t_ambient_lighting
+{
+	int		id; 				// A
+	float	lighting_ratio;		// [0.0, 1.0]
+	t_color	color;
+}
+
+t_camera
+{
+	int			id;						// C
+	t_point		viewpoint;
+	t_vector	normalized_orientation;	// [-1, 1] -> x, y, z
+	float		field_of_view;			// [0, 180]
+}
+
+t_light
+{
+	int		id;				// L
+	t_point	light_point;
+	float	brightness;		// [0.0, 1.0]
+	t_color	color;
+}
+
+t_sphere
+{
+	int		id;			// sp
+	t_point	center;
+	float	diameter;
+	t_color	color;
+}
+
+t_plane
+{
+	int			id;			// pl
+	t_point		point;
+	t_vector	normalize;	// [-1, 1]
+	t_color		color;
+}
+
+t_cylinder
+{
+	int			id;				// cy
+	t_point		center;
+	t_vector	normalize;		// [-1, 1]
+	float		diameter;
+	float		height;
+	t_color		color;
+}
