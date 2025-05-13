@@ -1,0 +1,52 @@
+{
+    "configurations": [
+		{
+            "name": "main",
+            "includePath": [
+
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "fdf",
+            "includePath": [
+                "${workspaceFolder}/examples/fdf/include/",
+                "${workspaceFolder}/examples/fdf/lib/MLX42/include/MLX42/",
+                "${workspaceFolder}/examples/fdf/lib/elibft/include/"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "jack",
+            "includePath": [
+                "${workspaceFolder}/examples/jack/libft/includes/**",
+                "${workspaceFolder}/examples/jack/inc/**",
+                "${workspaceFolder}/examples/jack/lib/MLX42/include/MLX42/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "gun",
+            "includePath": [
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

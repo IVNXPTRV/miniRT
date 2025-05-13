@@ -6,10 +6,9 @@
 #    By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:48:06 by ipetrov           #+#    #+#              #
-#    Updated: 2025/05/13 07:16:43 by ipetrov          ###   ########.fr        #
+#    Updated: 2025/05/13 07:42:06 by ipetrov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 # Compiler and flags
 CC					=	cc

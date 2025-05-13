@@ -1,11 +1,11 @@
 # IDE config
-.vscode/
+# .vscode/
 
 # Program output
 /miniRT
 
 # Folders to ignore
-lib/MLX42/
+**/MLX42/
 dep/
 obj/
 

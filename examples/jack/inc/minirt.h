@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruzhang <ruzhang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:23:00 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/04/11 18:45:08 by ruzhang          ###   ########.fr       */
+/*   Updated: 2025/05/13 08:15:55 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define HEIGHT 720
 # define FN_ERR "Filename must ends with .rt\n"
 
-# include "include/MLX42/MLX42.h"
+# include "MLX42.h"
 # include "libft.h"
 # include "structure.h"
 # include "my_error.h"
