@@ -1,0 +1,23 @@
+# IDE
+.vscode
+
+# program
+/miniRT
+
+# folders
+lib/MLX42/
+dep/
+obj/
+
+# objects and dependencies
+*.d
+*.o
+*.a
+
+# trashy
+.DS_store
+*.txt
+*.lldb
+*.png
+*.gch
+
