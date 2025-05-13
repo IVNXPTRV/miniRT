@@ -7,5 +7,5 @@
 
 2. Run the executable:
 	```bash
-	./miniRT ./scenes/basic.rt
+	./miniRT ./scenes/subject_example.rt
 	```
