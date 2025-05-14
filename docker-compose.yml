@@ -1,0 +1,14 @@
+services:
+  minirt: # This is the name of your service.
+    build:
+      context: . # Use the current directory as the build context.
+      dockerfile: Dockerfile  # Optional, defaults to "Dockerfile"
+    volumes: # Mounts files from your host machine into the container.
+      - ~/.ssh:/home/developer/.ssh:ro
+      - ~/.gitconfig:/home/developer/.gitconfig:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment: # Sets environment variables in the container.
+      - DISPLAY=host.docker.internal:0
+    working_dir: /home/developer/ # Sets the default working directory inside the container.
+    stdin_open: true # Keeps the standard input open
+    tty: true # Allocates a TTY device

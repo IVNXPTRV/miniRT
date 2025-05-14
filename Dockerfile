@@ -8,16 +8,29 @@ RUN apt-get update && apt-get install -y \
     mesa-utils \
     libgl1-mesa-glx \
     gcc \
+    g++ \
     make \
+    cmake \
     git \
+    gdb \
+    nano \
+    sudo \
+    less \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
+    freeglut3-dev \
+    libglfw3-dev \
+    libgl1-mesa-dri \
+    libglu1-mesa \
+    libx11-dev \
     # Add any other dependencies you need
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user
-RUN useradd -m developer && \
-    echo "developer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN useradd -m -s /bin/bash developer && \
+    echo 'developer:1234' | chpasswd && \
+    usermod -aG sudo developer
 
 USER developer
-WORKDIR /home/developer
-ENV DISPLAY=host.docker.internal:0
 
+CMD ["bash"]
