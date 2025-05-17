@@ -6,7 +6,7 @@
 #    By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:48:06 by ipetrov           #+#    #+#              #
-#    Updated: 2025/05/17 14:44:15 by ipetrov          ###   ########.fr        #
+#    Updated: 2025/05/17 15:21:42 by ipetrov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ INCLUDE				=	$(addprefix -I , $(INCLUDE_DIRS))
 # Libraries
 LIB 				=	./lib/elibft/elibft.a \
 						./lib/MLX42/build/libmlx42.a \
-						-lglfw \
+						-lglfw \ # brew install glfw
 						-pthread \
 						-ldl \
 						-lm \
