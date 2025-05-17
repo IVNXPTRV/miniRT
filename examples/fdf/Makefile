@@ -6,14 +6,14 @@
 #    By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:48:06 by ipetrov           #+#    #+#              #
-#    Updated: 2024/12/08 10:10:23 by ipetrov          ###   ########.fr        #
+#    Updated: 2025/05/17 14:44:15 by ipetrov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # make && ./fdf ../tests/subj/test_maps/42.fdf
 # Compiler and flags
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror -Wunreachable-code -Ofast -MMD -MF
+CFLAGS				=	-Wall -Wextra -Werror -Wunreachable-code -MMD -MF
 # -Ofast
 RM					=	rm -rf
 
@@ -36,14 +36,13 @@ INCLUDE				=	$(addprefix -I , $(INCLUDE_DIRS))
 # Libraries
 LIB 				=	./lib/elibft/elibft.a \
 						./lib/MLX42/build/libmlx42.a \
-						-ldl \
 						-lglfw \
 						-pthread \
+						-ldl \
 						-lm \
-# -framework Cocoa \
-# -framework OpenGL \
-# -framework IOKit \
-# -lglfw
+						-framework Cocoa \
+						-framework OpenGL \
+						-framework IOKit \
 
 
 LIBMLX	:= ./lib/MLX42
