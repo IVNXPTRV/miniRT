@@ -6,11 +6,10 @@
 #    By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:48:06 by ipetrov           #+#    #+#              #
-#    Updated: 2025/05/17 15:21:42 by ipetrov          ###   ########.fr        #
+#    Updated: 2025/05/18 11:31:15 by ipetrov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# make && ./fdf ../tests/subj/test_maps/42.fdf
 # Compiler and flags
 CC					=	cc
 CFLAGS				=	-Wall -Wextra -Werror -Wunreachable-code -MMD -MF
@@ -33,17 +32,23 @@ VPATH				=	./src/:\
 # Include flags
 INCLUDE				=	$(addprefix -I , $(INCLUDE_DIRS))
 
-# Libraries
-LIB 				=	./lib/elibft/elibft.a \
-						./lib/MLX42/build/libmlx42.a \
-						-lglfw \ # brew install glfw
-						-pthread \
-						-ldl \
-						-lm \
-						-framework Cocoa \
-						-framework OpenGL \
-						-framework IOKit \
+UNAME := $(shell uname)
 
+ifeq ($(UNAME), Darwin)
+	LIB = ./lib/elibft/elibft.a \
+		  ./lib/MLX42/build/libmlx42.a \
+		  -framework Cocoa \
+		  -framework OpenGL \
+		  -framework IOKit \
+		  -lglfw
+else ifeq ($(UNAME), Linux)
+	LIB = ./lib/elibft/elibft.a \
+		  ./lib/MLX42/build/libmlx42.a \
+		  -ldl \
+		  -lglfw \
+		  -pthread \
+		  -lm
+endif
 
 LIBMLX	:= ./lib/MLX42
 

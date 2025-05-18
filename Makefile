@@ -6,7 +6,7 @@
 #    By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:48:06 by ipetrov           #+#    #+#              #
-#    Updated: 2025/05/13 07:42:06 by ipetrov          ###   ########.fr        #
+#    Updated: 2025/05/18 11:35:35 by ipetrov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,17 +30,21 @@ VPATH				=	./src/:\
 # Include flags
 INCLUDE				=	$(addprefix -I , $(INCLUDE_DIRS))
 
-# Libraries
-LIB 				=	./lib/elibft/elibft.a \
-						./lib/MLX42/build/libmlx42.a \
-						-ldl \
-						-lglfw \
-						-pthread \
-						-lm \
-# -framework Cocoa \
-# -framework OpenGL \
-# -framework IOKit \
-# -lglfw
+ifeq ($(UNAME), Darwin)
+	LIB = ./lib/elibft/elibft.a \
+		  ./lib/MLX42/build/libmlx42.a \
+		  -framework Cocoa \
+		  -framework OpenGL \
+		  -framework IOKit \
+		  -lglfw
+else ifeq ($(UNAME), Linux)
+	LIB = ./lib/elibft/elibft.a \
+		  ./lib/MLX42/build/libmlx42.a \
+		  -ldl \
+		  -lglfw \
+		  -pthread \
+		  -lm
+endif
 
 
 LIBMLX	:= ./lib/MLX42
