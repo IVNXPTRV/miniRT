@@ -6,7 +6,7 @@
 #    By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:48:06 by ipetrov           #+#    #+#              #
-#    Updated: 2025/05/18 13:05:26 by ipetrov          ###   ########.fr        #
+#    Updated: 2025/05/18 13:05:40 by ipetrov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ NAME 				=	fdf
 
 # Include directories
 INCLUDE_DIRS		=	./include \
-						./lib/elibft/include \
 						./lib/MLX42/include/MLX42 \
 
 # Source directories
@@ -33,20 +32,20 @@ INCLUDE				=	$(addprefix -I , $(INCLUDE_DIRS))
 UNAME := $(shell uname)
 
 ifeq ($(UNAME), Darwin)
-	LIB = ./lib/elibft/elibft.a \
-		  ./lib/MLX42/build/libmlx42.a \
+	LIB = ./lib/MLX42/build/libmlx42.a \
 		  -framework Cocoa \
 		  -framework OpenGL \
 		  -framework IOKit \
 		  -lglfw
 else ifeq ($(UNAME), Linux)
-	LIB = ./lib/elibft/elibft.a \
-		  ./lib/MLX42/build/libmlx42.a \
+	LIB = ./lib/MLX42/build/libmlx42.a \
 		  -ldl \
 		  -lglfw \
 		  -pthread \
 		  -lm
 endif
+
+# $(info LIB is: $(LIB))
 
 LIBMLX	:= ./lib/MLX42
 
@@ -64,7 +63,7 @@ DEP					=	$(SRC:%.c=dep/%.d)
 MFLAGS				=	 --no-print-directory -C
 
 # Build all targets
-all: lib $(NAME)
+all: lib/MLX42 $(NAME)
 
 # Link mandatory object files
 $(NAME): $(OBJ)
@@ -72,9 +71,6 @@ $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(LIB) -o $@
 	@echo "$(NAME) has been built"
 
-# Build libraries
-lib: lib/MLX42
-	@make $(MFLAGS) ./lib/elibft
 
 lib/MLX42:
 	@git clone https://github.com/codam-coding-college/MLX42.git ./lib/MLX42
@@ -96,13 +92,11 @@ dep_dir:
 clean:
 	@$(RM) obj
 	@$(RM) dep
-	@make clean $(MFLAGS) ./lib/elibft
 	@rm -rf ./lib/MLX42
 	@echo "$(NAME) has been cleaned"
 
 # Clean build files and executables
 fclean: clean
-	@make fclean $(MFLAGS) ./lib/elibft
 	@$(RM) $(NAME)
 
 # Rebuild everything

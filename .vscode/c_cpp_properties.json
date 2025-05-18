@@ -27,9 +27,9 @@
         {
             "name": "jack",
             "includePath": [
-                "${workspaceFolder}/examples/jack/libft/includes/**",
-                "${workspaceFolder}/examples/jack/inc/**",
-                "${workspaceFolder}/examples/jack/lib/MLX42/include/MLX42/**"
+                "${workspaceFolder}/examples/jack/libft/includes/",
+                "${workspaceFolder}/examples/jack/inc/",
+                "${workspaceFolder}/examples/jack/lib/MLX42/include/MLX42/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
@@ -40,6 +40,18 @@
         {
             "name": "gun",
             "includePath": [
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "playground",
+            "includePath": [
+				"${workspaceFolder}/examples/playground/include/",
+				"${workspaceFolder}/examples/playground/lib/MLX42/include/MLX42/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

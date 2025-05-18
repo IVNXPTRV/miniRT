@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:39:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2024/12/07 10:26:32 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/18 13:05:56 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	boot(t_imginf	*img)
 {
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	img->mlx = mlx_init(WIDTH, HEIGHT, "fdf", true);
+	img->mlx =
 	if (!img->mlx)
 		return (FAIL);
 	img->img = mlx_new_image(img->mlx, WIDTH, HEIGHT);

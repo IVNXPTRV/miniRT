@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"fdf.h": "c",
-		"minirt.h": "c"
+		"minirt.h": "c",
+		"header.h": "c"
 	}
 }

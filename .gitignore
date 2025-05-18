@@ -4,10 +4,10 @@
 # Program output
 /miniRT
 
-# Folders to ignore
+# Folders to ignore anywhere in the project
 **/MLX42/
-dep/
-obj/
+**/dep/
+**/obj/
 
 # Object files and build artifacts
 *.o
