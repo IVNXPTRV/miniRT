@@ -53,7 +53,7 @@ static char	**create_new_result(char *start, char *end, char **old, size_t i)
 	while (*old)
 		*new++ = *old++;
 	*(new + 1) = *old;
-	free(mold);
+	// free(mold);
 	*new = (char *)malloc((end - start + 1) * sizeof(char));
 	if (!*new)
 		return (free2d(new - (old - mold)));
