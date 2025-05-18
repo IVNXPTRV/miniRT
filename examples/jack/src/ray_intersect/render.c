@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 12:42:28 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/05/18 12:51:16 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/18 18:25:03 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_ray	get_ray(int x, int y, t_cam *cam)
 	double	py;
 	t_ray	ray;
 
+	// 2 here is optimized reult of tan(fov_rad / 2.0) * d????
 	px = (2 * (x + 0.5) / (double)WIDTH - 1) * cam->ratio * cam->scale;
 	py = (1 - 2 * (y + 0.5) / (double)HEIGHT) * cam->scale;
 	ray.origin = cam->position;

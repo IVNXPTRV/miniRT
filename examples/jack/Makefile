@@ -16,10 +16,23 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Include Directories
-HEADERS = -I ./inc -I $(LIBMLX) -I $(LIBFT_DIR)/includes
+HEADERS = -I ./inc -I $(LIBMLX)/include/MLX42 -I $(LIBFT_DIR)/includes
 
 # Libraries to Link
 LIBS = -L$(LIBFT_DIR) -lft $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+
+
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Darwin)
+	LIBS = -L$(LIBFT_DIR) -lft $(LIBMLX)/build/libmlx42.a \
+		  -framework Cocoa \
+		  -framework OpenGL \
+		  -framework IOKit \
+		  -lglfw
+else ifeq ($(UNAME), Linux)
+	LIBS = -L$(LIBFT_DIR) -lft $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+endif
 
 # Source Directories
 MAIN_DIR = src
