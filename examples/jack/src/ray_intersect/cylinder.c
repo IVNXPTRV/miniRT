@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchompoo <jchompoo@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:37:20 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/04/10 17:05:05 by jchompoo         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:51:54 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	get_rotation(t_point norm, t_rotation *rotation)
 	rotation->one_minus_c = 1 - rotation->cos;
 }
 
+// get intersection to side of cylinder
 void	calculate_cylinder(t_objs *obj, t_ray ray, t_quadratic *q)
 {
 	q->a = pow(ray.direction.x, 2) + pow(ray.direction.y, 2);
@@ -65,6 +66,7 @@ int	intersect_disk(t_ray *ray, t_cap *cap, double radius)
 	if (t < EPSILON)
 		return (0);
 	p = add_vectors(ray->origin, scale_vector(ray->direction, t));
+	// check if within radius of round plane
 	if (magnitude(subtract_vectors(p, cap->cap_center)) <= radius)
 	{
 		cap->cap = t;
@@ -73,6 +75,7 @@ int	intersect_disk(t_ray *ray, t_cap *cap, double radius)
 	return (0);
 }
 
+// check if ray intersects caps of cylinder
 void	add_disk(t_ray transformed_ray, t_objs *obj, t_ray *ray)
 {
 	t_cap		cap;

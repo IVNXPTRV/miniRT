@@ -36,9 +36,9 @@ void	append_sphere(t_objs *obj, t_ray *ray)
 	t_quadratic	q;
 
 	calculate_quadratic(obj, *ray, &q);
-	if (q.discriminant < 0)
+	if (q.discriminant < 0) // means no possible solutions -- no intersections
 		return ;
-	if (q.t1 > EPSILON)
+	if (q.t1 > EPSILON) // prevent float imprecision
 	{
 		intersect = malloc(sizeof(t_intersect));
 		if (!intersect)
@@ -46,6 +46,8 @@ void	append_sphere(t_objs *obj, t_ray *ray)
 		fill_intersect(obj, ray, q.t1, intersect);
 		ft_lstadd_back(&(ray)->intersect, ft_lstnew((void *)intersect));
 	}
+	// For basic rendering, you might pick the closest positive t
+	// So code often checks both t1 and t2 to collect all hits, then later picks the best.
 	if (q.t2 > EPSILON && !equal(q.t2, q.t1))
 	{
 		intersect2 = malloc(sizeof(t_intersect));

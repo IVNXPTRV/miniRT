@@ -14,7 +14,7 @@
 
 void	fill_intersect(t_objs *obj, t_ray *ray, double t, t_intersect *new)
 {
-	t_point	p0l0;
+	t_point	p0l0; // cylinder normal to hit
 
 	new->point = add_vectors(ray->origin, scale_vector(ray->direction, t));
 	if (obj->type == PL)
@@ -71,6 +71,11 @@ void	check_cy_intersect(t_quadratic q, t_ray transformed_ray,
 	}
 }
 
+/*
+We transform the ray into the object’s local space, where the cylinder is aligned along the Z-axis, so:
+The math becomes MUCH simpler.
+You can use a standard intersection formula assuming the cylinder is centered at the origin and points "up" (along Z-axis).
+*/
 void	append_cylinder(t_objs *obj, t_ray *ray)
 {
 	t_ray		transformed_ray;
@@ -78,13 +83,16 @@ void	append_cylinder(t_objs *obj, t_ray *ray)
 	t_point		translated_origin;
 	t_quadratic	q;
 
+	// move cylinder to ray origin
 	translated_origin = subtract_vectors(ray->origin, obj->position);
+	// rotate ray for simpler math
 	rotation = generate_rotation_to_z(obj->norm);
 	transformed_ray.origin = apply_rotation(rotation, translated_origin);
 	transformed_ray.direction = apply_rotation(rotation, ray->direction);
 	calculate_cylinder(obj, transformed_ray, &q);
 	if (q.discriminant >= 0)
 		check_cy_intersect(q, transformed_ray, obj, ray);
+	// check if ray interect caps of cylinder
 	add_disk(transformed_ray, obj, ray);
 }
 
