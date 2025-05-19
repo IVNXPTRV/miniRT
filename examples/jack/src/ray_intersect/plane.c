@@ -17,8 +17,8 @@ void	append_plane(t_objs *obj, t_ray *ray)
 	// denom tells us if the ray is aligned with the plane normal (and if it’s not parallel).
 	// denom is the cosine of the angle between the ray and the plane normal, up to a scale factor
 	double		denom;
-	t_point		p0l0; // ray_to_obj_center or ray_to_obj
-	double		t;
+	t_point		p0l0; // ray_to_obj_center
+	double		t; // how far go from ray origin
 	t_intersect	*intersect;
 
 	denom = dot_product(normalize(obj->norm), ray->direction);

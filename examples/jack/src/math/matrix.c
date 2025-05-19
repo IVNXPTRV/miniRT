@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruzhang <ruzhang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:18:07 by jchompoo          #+#    #+#             */
-/*   Updated: 2025/04/08 14:00:39 by ruzhang          ###   ########.fr       */
+/*   Updated: 2025/05/19 17:35:27 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_matrix	generate_rotation_to_z(t_point norm)
 	t_matrix	m;
 
 	get_rotation(norm, &rotation);
-	u = normalize(rotation.axis);
+	u = normalize(rotation.axis); // dont need to normalize??
 	if (fabs(rotation.angle) < EPSILON || magnitude(rotation.axis) < EPSILON)
 		return (identity_matrix());
 	m.m[0][0] = rotation.cos + u.x * u.x * rotation.one_minus_c;

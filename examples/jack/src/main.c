@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:22:48 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/05/13 08:19:30 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/19 17:35:27 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ int	main(int argc, char **argv)
 	t_rt	rt;
 	t_sc	sc;
 
+	// scene parsing
 	if (validate(argc, argv, &sc))
 		return (1);
+	// init MLX
 	if (init_rt(&rt) < 0)
 		return (EXIT_FAILURE);
+	// get_img()
 	render(&rt, &sc);
 	mlx_key_hook(rt.mlx, &key_press, &rt);
 	mlx_loop(rt.mlx);

@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 12:42:28 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/05/19 10:18:11 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/19 20:07:53 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ t_ray	get_ray(int x, int y, t_cam *cam)
 	px = (2 * (x + 0.5) / (double)WIDTH - 1) * cam->ratio * cam->scale;
 	py = (1 - 2 * (y + 0.5) / (double)HEIGHT) * cam->scale;
 	ray.origin = cam->position;
-	ray.direction = normalize(add_vectors
-			(add_vectors(scale_vector(cam->right, px),
-					scale_vector(cam->up, py)), cam->forward));
+	ray.direction = normalize(add_vectors(add_vectors(scale_vector(cam->right, px), scale_vector(cam->up, py)), cam->forward));
 	ray.intersect = NULL;
 	return (ray);
 }

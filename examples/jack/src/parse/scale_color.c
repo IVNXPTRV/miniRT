@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   scale_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruzhang <ruzhang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:14:47 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/04/08 14:15:20 by ruzhang          ###   ########.fr       */
+/*   Updated: 2025/05/19 17:35:27 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+// convert from int to double??
 void	scale_color(t_sc *sc)
 {
 	t_list	*current;
