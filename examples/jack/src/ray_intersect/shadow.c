@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruzhang <ruzhang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:31:06 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/04/11 18:46:21 by ruzhang          ###   ########.fr       */
+/*   Updated: 2025/05/19 14:48:52 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	get_intersects(t_sc *sc, t_ray *ray, double t)
 	return (0);
 }
 
+// get_shadow()
 int	is_shadowed(t_sc *sc, t_intersect *hit)
 {
 	t_ray		ray;
@@ -43,9 +44,11 @@ int	is_shadowed(t_sc *sc, t_intersect *hit)
 	light = sc->light;
 	ray.origin = hit->point;
 	ray.direction = normalize(subtract_vectors(light.position, hit->point));
+	// move a little to avoid own object???
 	ray.origin = add_vectors(ray.origin,
 			scale_vector(normalize(ray.direction), 0.01));
 	ray.intersect = NULL;
+					// ray_from_hit_to_light
 	t = magnitude(subtract_vectors(light.position, hit->point));
 	return (get_intersects(sc, &ray, t));
 }

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruzhang <ruzhang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:31:06 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/04/11 18:39:58 by ruzhang          ###   ########.fr       */
+/*   Updated: 2025/05/19 14:56:45 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+// change xyz to rgb
 t_color	calculate_ambient_color(t_amb *light, t_objs *obj)
 {
 	t_point	amb_color;
@@ -28,17 +29,12 @@ t_color	calculate_diffuse_color(t_light *light, t_objs *obj, t_hit hit)
 	double	diffuse_intensity;
 
 	if (obj->type == PL)
-		diffuse_intensity = fabs(dot_product
-				(hit.light_vector, hit.surface_normal));
+		diffuse_intensity = fabs(dot_product(hit.light_vector, hit.surface_normal));
 	else
-		diffuse_intensity = fmax(0.0, dot_product
-				(hit.light_vector, hit.surface_normal));
-	diffuse_color.x = light->ratio * light->color.x
-		* obj->color.x * diffuse_intensity;
-	diffuse_color.y = light->ratio * light->color.y
-		* obj->color.y * diffuse_intensity;
-	diffuse_color.z = light->ratio * light->color.z
-		* obj->color.z * diffuse_intensity;
+		diffuse_intensity = fmax(0.0, dot_product(hit.light_vector, hit.surface_normal));
+	diffuse_color.x = light->ratio * light->color.x * obj->color.x * diffuse_intensity;
+	diffuse_color.y = light->ratio * light->color.y * obj->color.y * diffuse_intensity;
+	diffuse_color.z = light->ratio * light->color.z * obj->color.z * diffuse_intensity;
 	return (diffuse_color);
 }
 

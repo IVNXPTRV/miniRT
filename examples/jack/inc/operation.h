@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruzhang <ruzhang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:42:01 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/04/11 18:44:27 by ruzhang          ###   ########.fr       */
+/*   Updated: 2025/05/19 14:32:53 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ typedef struct s_quadratic
 
 /*
 point:
-coordinates of the intersection point
-normal;
-surface normal at the point of intersection.
-vector that is perpendicular to the surface of
-the object at the point of intersection.
+	coordinates of the intersection point
+normal:
+	surface normal at the point of intersection.
+	vector that is perpendicular to the surface of
+	the object at the point of intersection.
 distance:
-represent the distance from the ray’s origin to the intersection point.
-*solid:
-a pointer to the actual object that the ray intersects
+	represent the distance from the ray’s origin to the intersection point.
+solid:
+	a pointer to the actual object that the ray intersects
 */
 typedef struct s_intersect
 {
-	t_point				point;
-	t_point				normal;
-	double				distance;
-	void				*solid;
+	t_point				point; // coordinates of hit_point
+	t_point				normal; // normal of hit_point
+	double				distance; // distance to get from ray origin to hit_point
+	void				*solid; // object
 	struct s_intersect	*next;
 }	t_intersect;
 

@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchompoo <jchompoo@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:47:37 by jchompoo          #+#    #+#             */
-/*   Updated: 2025/04/10 16:51:56 by jchompoo         ###   ########.fr       */
+/*   Updated: 2025/05/19 15:25:10 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+// is_valid_decimal
+// The run_line function checks whether a given string s represents a valid floating-point number with some restrictions
 int	run_line(char *s)
 {
 	int	dot;

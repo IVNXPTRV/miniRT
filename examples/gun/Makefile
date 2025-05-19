@@ -7,10 +7,13 @@ RM := rm -rf
 LIBFT := ./libs/libft
 LIBMLX := ./libs/MLX42
 
-# Linux
-LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-# Mac
-# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Darwin)
+	LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
+else ifeq ($(UNAME), Linux)
+	LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+endif
 
 HEADERS := \
 	includes/camera.h \

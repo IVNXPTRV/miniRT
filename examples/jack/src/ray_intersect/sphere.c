@@ -14,13 +14,12 @@
 
 void	calculate_quadratic(t_objs *obj, t_ray ray, t_quadratic *q)
 {
-	t_point	sphere_to_ray;
+	t_point	sphere_to_ray; // ray_to_obj_center
 
 	sphere_to_ray = subtract_vectors(ray.origin, obj->position);
 	q->a = dot_product(ray.direction, ray.direction);
 	q->b = 2 * dot_product(ray.direction, sphere_to_ray);
-	q->c = dot_product(sphere_to_ray, sphere_to_ray)
-		- pow(obj->diameter / 2, 2);
+	q->c = dot_product(sphere_to_ray, sphere_to_ray) - pow(obj->diameter / 2, 2);
 	q->discriminant = pow(q->b, 2) - 4 * q->a * q->c;
 	if (q->discriminant >= 0)
 	{
@@ -35,6 +34,7 @@ void	append_sphere(t_objs *obj, t_ray *ray)
 	t_intersect	*intersect2;
 	t_quadratic	q;
 
+	// to get intercetions distances
 	calculate_quadratic(obj, *ray, &q);
 	if (q.discriminant < 0) // means no possible solutions -- no intersections
 		return ;

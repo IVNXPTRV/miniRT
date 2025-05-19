@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objs2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchompoo <jchompoo@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 22:51:32 by jchompoo          #+#    #+#             */
-/*   Updated: 2025/04/10 16:32:59 by jchompoo         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:11:57 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

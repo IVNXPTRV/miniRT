@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_elements.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchompoo <jchompoo@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 22:49:01 by jchompoo          #+#    #+#             */
-/*   Updated: 2025/04/10 15:35:14 by jchompoo         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:28:05 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

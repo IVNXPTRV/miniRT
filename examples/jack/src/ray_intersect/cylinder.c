@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:37:20 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/05/19 12:51:54 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/19 14:11:29 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ double	calculate_angle(t_point axis)
 	return (acos(dot / (magnitude_axis * magnitude_z_axis)));
 }
 
+// move ray to aligne with cylinder
 void	get_rotation(t_point norm, t_rotation *rotation)
 {
 	rotation->target = (t_point){0, 0, 1};
@@ -37,13 +38,12 @@ void	get_rotation(t_point norm, t_rotation *rotation)
 }
 
 // get intersection to side of cylinder
+// REPLACE WITH void	calculate_quadratic(t_objs *obj, t_ray ray, t_quadratic *q)
 void	calculate_cylinder(t_objs *obj, t_ray ray, t_quadratic *q)
 {
 	q->a = pow(ray.direction.x, 2) + pow(ray.direction.y, 2);
-	q->b = 2 * (ray.direction.x
-			* ray.origin.x + ray.direction.y * ray.origin.y);
-	q->c = pow(ray.origin.x, 2)
-		+ pow(ray.origin.y, 2) - pow(obj->diameter / 2, 2);
+	q->b = 2 * (ray.direction.x * ray.origin.x + ray.direction.y * ray.origin.y);
+	q->c = pow(ray.origin.x, 2) + pow(ray.origin.y, 2) - pow(obj->diameter / 2, 2);
 	q->discriminant = pow(q->b, 2) - 4 * q->a * q->c;
 	if (q->discriminant >= 0)
 	{
@@ -61,15 +61,17 @@ int	intersect_disk(t_ray *ray, t_cap *cap, double radius)
 	denom = dot_product(ray->direction, cap->cap_normal);
 	if (fabs(denom) < EPSILON)
 		return (0);
+	//t_point		p0l0; // ray_to_obj_center is embeded here
 	t = dot_product(subtract_vectors(cap->cap_center, ray->origin),
 			cap->cap_normal) / denom;
 	if (t < EPSILON)
 		return (0);
+	// get coords of hit point
 	p = add_vectors(ray->origin, scale_vector(ray->direction, t));
 	// check if within radius of round plane
 	if (magnitude(subtract_vectors(p, cap->cap_center)) <= radius)
 	{
-		cap->cap = t;
+		cap->cap = t; //cap->hit_distance
 		return (1);
 	}
 	return (0);

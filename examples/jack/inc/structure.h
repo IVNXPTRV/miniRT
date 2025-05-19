@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchompoo <jchompoo@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 22:49:10 by jchompoo          #+#    #+#             */
-/*   Updated: 2025/04/10 17:05:29 by jchompoo         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:45:14 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ typedef struct s_colors
 
 typedef struct s_objs
 {
-	t_type	type;
-	double	diameter;
-	double	height;
-	t_point	position;
-	t_point	norm;
-	t_color	color;
+	t_type	type; // sp, p, cl
+	double	diameter; //
+	double	height; //
+	t_point	position; // origin of object
+	t_point	norm; // norm of object
+	t_color	color; // color of object
 }	t_objs;
 
 typedef struct s_parse_temp
@@ -103,7 +103,7 @@ typedef struct s_rotation
 
 typedef struct s_cap
 {
-	double	cap;
+	double	cap; // cap->hit_distance
 	t_point	cap_center;
 	t_point	cap_normal;
 }	t_cap;
@@ -113,7 +113,7 @@ typedef struct t_scence
 	t_amb	amb;
 	t_cam	cam;
 	t_light	light;
-	t_list	*head;
+	t_list	*head; // objects on scene
 }	t_sc;
 
 #endif

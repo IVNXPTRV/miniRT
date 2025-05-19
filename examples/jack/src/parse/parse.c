@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruzhang <ruzhang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 22:48:58 by jchompoo          #+#    #+#             */
-/*   Updated: 2025/04/10 20:43:20 by ruzhang          ###   ########.fr       */
+/*   Updated: 2025/05/19 15:19:00 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static void	validate_filename(int argc, char **argv)
 	close(fd);
 }
 
+// scene parsing
 int	validate(int argc, char **argv, t_sc *sc)
 {
 	int		error;
@@ -107,7 +108,7 @@ int	validate(int argc, char **argv, t_sc *sc)
 	error = 0;
 	validate_filename(argc, argv);
 	filename = argv[1];
-	init_sc(sc);
+	init_sc(sc); // use memset
 	error |= parse(filename, sc);
 	error |= validate_elements(sc);
 	error |= validate_amount(sc);
