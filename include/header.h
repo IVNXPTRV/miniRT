@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 12:21:23 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/20 13:43:36 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "elibft.h"				// utils library
 # include <stdbool.h>				// true, false
 # include <math.h>					// cos, tag etc
+# include <errno.h>					// errno
 
 // struct to keep connection to graphic library
 typedef struct s_gl
@@ -51,7 +52,7 @@ typedef struct s_color
 # define SUCCESS 1					// general success code
 # define BLACK 0x000000FF			// black color
 # define t_file	int					// file descriptor, fd
-# define PTRINIT NULL + 1			// Non NULL pointer
+# define PTR_INIT NULL + 1			// Non NULL pointer
 
 typedef struct s_camera
 {

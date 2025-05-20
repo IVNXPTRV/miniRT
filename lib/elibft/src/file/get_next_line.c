@@ -5,149 +5,114 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 10:16:52 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/01/26 19:26:27 by ipetrov          ###   ########.fr       */
+/*   Created: 2025/05/20 13:18:36 by ipetrov           #+#    #+#             */
+/*   Updated: 2025/05/20 13:44:40 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "elibft.h"
 
-/**
- * Removes and frees the file context associated with the given file descriptor.
- *
- * @param fl Pointer to the head of the linked list of file contexts.
- * @param fd File descriptor to remove from the list.
- * @return Always returns NULL.
- */
-char	*pop(t_file **fl, int fd)
+static char	*ft_free_strjoin(char *s1, char *s2)
 {
-	t_file	*f;
-	t_file	*prv;
+	char	*temp;
 
-	f = *fl;
-	prv = f;
-	while (f)
+	temp = ft_strjoin(s1, s2);
+	free(s1);
+	return (temp);
+}
+
+static char	*ft_find_newline(int fd, char *file_read)
+{
+	char	*buff;
+	int		num_read;
+
+	if (!file_read)
+		file_read = ft_calloc(1, sizeof(char));
+	buff = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+	if (!buff)
+		return (free(file_read), ((void *)0));
+	num_read = 1;
+	while (num_read > 0)
 	{
-		if (f->fd == fd)
+		num_read = read(fd, buff, BUFFER_SIZE);
+		if (num_read == 0)
 			break ;
-		prv = f;
-		f = f->next;
+		if (num_read == -1)
+			return (free(buff), free(file_read), ((void *)0));
+		buff[num_read] = '\0';
+		file_read = ft_free_strjoin(file_read, buff);
+		if (ft_strchr(buff, '\n'))
+			break ;
 	}
-	if (f == *fl)
-	{
-		*fl = f->next;
-		free(f);
-	}
-	else
-	{
-		prv->next = f->next;
-		free(f);
-	}
-	return (NULL);
+	free(buff);
+	return (file_read);
 }
 
-/**
- * Retrieves the file context for the given file descriptor,
- * or creates a new one if it doesn't exist.
- *
- * @param fl Pointer to the head of the linked list of file contexts.
- * @param fd File descriptor to retrieve or create the context for.
- * @return Pointer to the file context.
- */
-t_file	*get_context(t_file **fl, int fd)
+static char	*ft_remove_remain(char *file_read)
 {
-	t_file	*f;
-	t_file	*prv;
+	char	*result;
+	int		index;
 
-	f = *fl;
-	prv = f;
-	while (f)
+	index = 0;
+	if (!file_read[index])
+		return ((void *)0);
+	while (file_read[index] && file_read[index] != '\n')
+		index++;
+	result = ft_calloc(index + 2, sizeof(char));
+	if (!result)
+		return ((void *)0);
+	index = 0;
+	while (file_read[index] && file_read[index] != '\n')
 	{
-		if (f->fd == fd)
-			return (f);
-		prv = f;
-		f = f->next;
+		result[index] = file_read[index];
+		index++;
 	}
-	f = malloc(sizeof(t_file));
-	if (!f)
-		return (NULL);
-	if (prv)
-		prv->next = f;
-	f->b = 0;
-	f->ttl = 0;
-	f->next = NULL;
-	if (!*fl)
-		*fl = f;
-	return (f->fd = fd, f->line = NULL, f->i = 0, f);
+	if (file_read[index] && file_read[index] == '\n')
+	{
+		result[index] = file_read[index];
+		index++;
+	}
+	return (result);
 }
 
-/**
- * Adds a chunk of data from the buffer to the current line in the file context.
- *
- * @param f Pointer to the file context.
- * @param fl Pointer to the head of the linked list of file contexts.
- * @return Pointer to the updated line, or NULL on failure.
- */
-char	*add_chunk(t_file *f, t_file *fl)
+static char	*ft_get_remain(char *file_read)
 {
-	ssize_t			len;
-	char			*old;
-	int				j;
+	char	*result;
+	int		index;
+	int		result_index;
 
-	len = 0;
-	while (len < (f->b - f->i) && f->buf[f->i + len++] != '\n')
-		;
-	old = f->line;
-	f->line = (char *)malloc(sizeof(char) * (f->ttl + len + 1));
-	if (!f->line)
-		return (free(old), pop(&fl, f->fd));
-	j = -1;
-	while (old && old[++j])
-		f->line[j] = old[j];
-	while (len--)
-		f->line[f->ttl++] = f->buf[f->i++];
-	(free(old), f->line[f->ttl] = '\0');
-	return ((char *)1);
+	index = 0;
+	while (file_read[index] && file_read[index] != '\n')
+		index++;
+	if (!file_read[index])
+		return (free(file_read), ((void *)0));
+	result = ft_calloc(sizeof(char), ft_strlen(file_read) - index + 1);
+	if (!result)
+		return (free(file_read), ((void *)0));
+	index++;
+	result_index = 0;
+	while (file_read[index])
+	{
+		result[result_index] = file_read[index];
+		index++;
+		result_index++;
+	}
+	free(file_read);
+	return (result);
 }
 
-/**
- * Reads the next line from the file associated with the given file descriptor.
- *
- * TODO: ability to change mode return lines
- * with \\n or no or mb other delimiters
- *
- *   0 - if no data to read
- * 	 1 - continue to read
- *  -1 - code for error
- *
- * @param fd File descriptor to read from.
- * @param error Pointer to an integer to store error status.
- * @return Pointer to the next line, or NULL on failure or end of file.
- *
- */
-int	get_next_line(int fd, char **line, t_file **fl_link)
+char	*get_next_line(int fd)
 {
-	static t_file	*fl;
-	t_file			*f;
+	static char	*file_read;
+	char		*current_line;
 
-	f = ((t_file *)get_context(&fl, fd));
-	if (!f || fd < 0 || BUFFER_SIZE <= 0)
-		return (pop(&fl, fd), FAIL);
-	*fl_link = fl;
-	while (1)
-	{
-		if (f->i == f->b)
-		{
-			f->b = read(fd, f->buf, BUFFER_SIZE);
-			f->i = 0;
-		}
-		if (f->b == 0)
-			return (*line = f->line, pop(&fl, fd), STOP);
-		else if (f->b < 0)
-			return (free(f->line), pop(&fl, fd), ERROR);
-		if (!add_chunk(f, fl))
-			return (free(f->line), pop(&fl, fd), ERROR);
-		if (f->line[f->ttl - 1] == '\n' || f->b < BUFFER_SIZE)
-			return (f->ttl = 0, *line = f->line, f->line = NULL, CONTINUE);
-	}
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return ((void *)0);
+	file_read = ft_find_newline(fd, file_read);
+	if (!file_read)
+		return ((void *)0);
+	current_line = ft_remove_remain(file_read);
+	file_read = ft_get_remain(file_read);
+	return (current_line);
 }

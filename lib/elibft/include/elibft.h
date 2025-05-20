@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:04:12 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/02/27 10:48:37 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/20 13:56:50 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_file
 	struct s_file	*next;
 }	t_file;
 
-//array
+// array
 t_arr		*arr_new(t_arr **arr, void *item, size_t size_of, size_t len);
 t_arr		*arr_iter(t_arr **arr, int (*f)(t_arr **, void *), void *param);
 t_arr		*arr_insert(t_arr **arr, t_arr **new, int i);
@@ -81,15 +81,15 @@ t_arr		*arr_del(t_arr **arr, int i, int (*f)(void *));
 void		*arr_extract(t_arr **arr, int i);
 void		*arr_retrieve(t_arr **arr);
 
-//conversion
+// conversion
 t_lst		*arr_to_lst(t_arr **arr);
 t_arr		*lst_to_arr(t_lst **lst);
 int			ft_atoi(char *str, void *number, size_t size_of, int base);
 char		*ft_itoa(int n);
 t_arr		*strs_to_arr(t_arr **arr, char **strs);
 
-//file
-int			get_next_line(int fd, char **line, t_file **fl_link);
+// file
+char		*get_next_line(int fd);
 
 // list
 int			lst_new(t_lst **lst, void *item);
@@ -133,7 +133,7 @@ int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
-char		**ft_split(char const *s, char c);
+char		**ft_split(char *str, char *charset);
 
 char		*ft_strchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
