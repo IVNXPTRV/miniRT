@@ -3,7 +3,9 @@
 		{
             "name": "main",
             "includePath": [
-
+				"${workspaceFolder}/lib/MLX42/include/MLX42/",
+				"${workspaceFolder}/include/",
+				"${workspaceFolder}/lib/elibft/include/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
