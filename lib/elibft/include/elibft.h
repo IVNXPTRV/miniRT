@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:04:12 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 13:56:50 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/20 15:29:53 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
-void		puterr(char *error);
 void		putout(char *str);
 
 //parr
