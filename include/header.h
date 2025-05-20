@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 13:43:36 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/20 14:27:40 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdbool.h>				// true, false
 # include <math.h>					// cos, tag etc
 # include <errno.h>					// errno
+
+typedef char			*t_m[5];	// print error messages in a loop
 
 // struct to keep connection to graphic library
 typedef struct s_gl
@@ -78,18 +80,22 @@ typedef struct s_light
 	t_color		color;				// not used in the mandatory part
 }	t_light;
 
-// object type
+// element type
 typedef enum e_type
 {
+	NONE = 0, 						// for empty object to init and to stop when traverse
 	PL,								// plane
 	SP, 							// sphere
-	CY								// cylinder
+	CY,								// cylinder
+	CM,								// camera
+	AM,								// ambient
+	LG,								// light
 }	t_type;
 
 // general obj struct for all type of objects
 typedef struct s_obj
 {
-	t_type		type;				// type of the object: PL, SP, CY
+	t_type		type;				// type of the element: PL, SP, CY
 	t_point		position;			// coordinates of the light in the world
 	t_color		color;				// color of the object
 	t_vector	normal;				// used for PL and CY only; normal of the plane or axis of the cylinder
@@ -105,7 +111,7 @@ typedef struct s_scene
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
-	t_obj		obj[MAX_OBJ + 1];	// array of all objects on the scene
+	t_obj		obj[MAX_OBJ];		// array of all objects on the scene
 }	t_scene;
 
 #endif
