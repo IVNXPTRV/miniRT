@@ -6,6 +6,9 @@
 		"mlx42.h": "c",
 		"elibft.h": "c",
 		"stdbool.h": "c",
-		"errno.h": "c"
+		"errno.h": "c",
+		"sstream": "c",
+		"queue": "c",
+		"stack": "c"
 	}
 }

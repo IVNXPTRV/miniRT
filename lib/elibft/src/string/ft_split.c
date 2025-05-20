@@ -6,98 +6,99 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 09:52:56 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 13:58:06 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/20 18:07:53 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "elibft.h"
 
-static char	**ft_free2(char **result, int len)
+static int	ft_is_charset(char c, char *charset)
 {
-	char	**head;
-
-	head = result;
-	while (len)
+	while (*charset)
 	{
-		free(*result);
-		result++;
-		len--;
+		if (c == *charset)
+			return (1);
+		charset++;
 	}
-	free(head);
+	return (c == '\0');
+}
+
+static int	ft_word_count(char *str, char *charset)
+{
+	int	word_count;
+	int	in_word;
+
+	word_count = 0;
+	in_word = 0;
+	while (*str)
+	{
+		if (ft_is_charset(*str, charset))
+			in_word = 0;
+		else if (!in_word)
+		{
+			in_word = 1;
+			word_count++;
+		}
+		str++;
+	}
+	return (word_count);
+}
+
+static char	*ft_create_word(char *str, char *charset)
+{
+	int		len;
+	int		i;
+	char	*result;
+
+	len = 0;
+	while (str[len] && !ft_is_charset(str[len], charset))
+		len++;
+	result = malloc(sizeof(char) * (len + 1));
+	if (!result)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		result[i] = str[i];
+		i++;
+	}
+	result[len] = '\0';
+	return (result);
+}
+
+static void	*ft_free_split_charset(char **result, int index)
+{
+	while (index > 0)
+		free(result[--index]);
+	free(result);
 	return (NULL);
 }
 
-static int	count_parts(char const *s, char c)
+char	**ft_split(char *str, char *charset)
 {
-	int	parts;
-
-	parts = 0;
-	while (*s)
-	{
-		if (*s == c)
-			s++;
-		else
-		{
-			parts++;
-			while (*s && *s != c)
-				s++;
-		}
-	}
-	return (parts);
-}
-
-static char	*copy_part(char const **s, char c, char *part)
-{
-	int			len;
-	char const	*head;
-
-	len = 0;
-	while (**s)
-	{
-		if (**s == c)
-			(*s)++;
-		else
-		{
-			head = *s;
-			while (**s && **s != c)
-			{
-				len++;
-				(*s)++;
-			}
-			break ;
-		}
-	}
-	part = (char *)malloc(sizeof(char) * (len + 1));
-	if (!part)
-		return (NULL);
-	ft_memcpy(part, head, len);
-	part[len] = '\0';
-	return (part);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	int		parts;
-	int		counter;
 	char	**result;
-	char	**head;
+	int		word_count;
+	int		index;
 
-	if (!s)
-		return (NULL);
-	parts = count_parts(s, c);
-	result = (char **)malloc(sizeof(char *) * (parts + 1));
+	word_count = ft_word_count(str, charset);
+	result = malloc(sizeof(char *) * (word_count + 1));
 	if (!result)
-		return (NULL);
-	head = result;
-	counter = parts;
-	while (counter)
+	return (NULL);
+	index = 0;
+	while (*str)
 	{
-		*result = copy_part(&s, c, *result);
-		if (!*result)
-			return (ft_free2(head, (parts - counter)));
-		result++;
-		counter--;
+		while (*str && ft_is_charset(*str, charset))
+			str++;
+		if (*str && !ft_is_charset(*str, charset))
+		{
+			result[index] = ft_create_word(str, charset);
+			if (!result[index])
+				return (ft_free_split_charset(result, index));
+			index++;
+			while (*str && !ft_is_charset(*str, charset))
+				str++;
+		}
 	}
-	*result = NULL;
-	return (head);
+	result[index] = NULL;
+	return (result);
 }

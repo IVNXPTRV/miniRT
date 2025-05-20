@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vvoronts <vvoronts@student.42.fr>          +#+  +:+       +#+         #
+#    By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:48:06 by ipetrov           #+#    #+#              #
-#    Updated: 2025/02/15 11:37:15 by vvoronts         ###   ########.fr        #
+#    Updated: 2025/05/20 18:06:44 by ipetrov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC					= 	arr_add.c \
 						arr_retrieve.c \
 						\
 						ft_atoi.c \
+						ft_atod.c \
 						ft_itoa.c \
 						\
 						get_next_line.c \
@@ -73,7 +74,6 @@ SRC					= 	arr_add.c \
 						ft_putendl_fd.c \
 						ft_putnbr_fd.c \
 						ft_putstr_fd.c \
-						puterr.c \
 						putout.c \
 						\
 						ft_parrclean.c \

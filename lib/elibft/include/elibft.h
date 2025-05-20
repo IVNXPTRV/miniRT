@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:04:12 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 15:29:53 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/20 18:07:59 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define CONTINUE 1
 # define STOP 0
 # define ERROR -1
+# define Z 0				// lineno 0 to not print in err
 
 //param: to add some env struct
 typedef struct s_lst
@@ -85,6 +86,7 @@ void		*arr_retrieve(t_arr **arr);
 t_lst		*arr_to_lst(t_arr **arr);
 t_arr		*lst_to_arr(t_lst **lst);
 int			ft_atoi(char *str, void *number, size_t size_of, int base);
+int			ft_atod(char *number, double *dest);
 char		*ft_itoa(int n);
 t_arr		*strs_to_arr(t_arr **arr, char **strs);
 
