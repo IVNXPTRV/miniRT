@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 11:04:42 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 11:42:17 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdbool.h>				// true, false
 # include <math.h>					// cos, tag etc
 # include <errno.h>					// errno
+# include <string.h>				// strerror
 
 # define PI 3.14159265358979323846
 # define EPSILON 1e-6
