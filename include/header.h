@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 19:40:31 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 09:43:46 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdbool.h>				// true, false
 # include <math.h>					// cos, tag etc
 # include <errno.h>					// errno
+
+# define PI 3.14159265358979323846
+# define EPSILON 1e-6
 
 typedef char			*t_m[5];	// print error messages in a loop
 

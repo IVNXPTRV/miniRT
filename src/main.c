@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:54 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 19:43:44 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 10:35:58 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,22 @@ double get_double(char **element, char *numbers, int i, int lineno)
 		err(lineno, (t_m){numbers[i], "incorrect double"});
 		ft_parrclean(element);
 		ft_parrclean(numbers);
+		exit(EXIT_SUCCESS);
+	}
+	return (result);
+}
+
+int get_int(char **element, char *numbers, int i, int lineno)
+{
+	int result;
+
+	result = 0;
+	if (ft_atoi(numbers[i], &result, sizeof(int), 10) == FAIL)
+	{
+		err(lineno, (t_m){numbers[i], "incorrect integer"});
+		ft_parrclean(element);
+		ft_parrclean(numbers);
+		exit(EXIT_SUCCESS);
 	}
 	return (result);
 }
@@ -161,13 +177,56 @@ inline bool is_in_range(double num, double min, double max)
 	return (num >= min && num <= max);
 }
 
+// use faster sqrt??
+t_num get_magnitude(t_vector vector)
+{
+    return sqrt(vector.x * vector.x
+            + vector.y * vector.y
+            + vector.z * vector.z);
+}
+
+//returns how aligned 2 vectors -1 to +1 if vectors normilized
+t_num get_dot(t_vector a, t_vector b)
+{
+    return (a.x * b.x
+		+ a.y * b.y
+		+ a.z * b.z);
+}
+
+// normalization embeded
+t_vector get_cross(t_vector a, t_vector b)
+{
+    t_vector result;
+
+    result.x = a.y * b.z - a.z * b.y;
+    result.y = a.z * b.x - a.x * b.z;
+    result.z = a.x * b.y - a.y * b.x;
+    return (normalize(result));
+}
+
+t_vector normalize(t_vector vector)
+{
+    double	mag;
+
+	mag = get_magnitude(vector);
+    return ((t_vector){vector.x / mag, vector.y / mag, vector.z / mag});
+}
+
 void verify_vector(char **element, int i, int lineno, t_vector vector)
 {
-	if (!is_in_range(vector.x, -1, 1) || \
-		!is_in_range(vector.y, -1, 1) || \
-		!is_in_range(vector.z, -1, 1))
+	if (get_magnitude(vector) != 1.0)
 	{
-		err(lineno, (t_m){element[i], "is byond -1 to +1 range"});
+		err(lineno, (t_m){element[i], "is not normalized, magnitude should be 1"});
+		ft_parrclean(element);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void verify_fov(char **element, int i, int lineno, int fov)
+{
+	if (!is_in_range((double)fov, 0, 180))
+	{
+		err(lineno, (t_m){element[i], "is beyond 0 to 180 range"});
 		ft_parrclean(element);
 		exit(EXIT_FAILURE);
 	}
@@ -187,11 +246,44 @@ t_vector get_vector(char **element, int i, int lineno)
 	return (vector);
 }
 
+t_num get_scale(char **element, int i, int lineno)
+{
+	char		**numbers;
+	int			fov;
+	t_num		scale;
+
+	numbers = get_numbers(element, i, lineno);
+	fov = get_int(element, numbers, 0, lineno);
+	ft_parrclean(numbers);
+	verify_fov(element, i, lineno, fov);					// verify if in 0 to 180 range
+	scale = tan(fov * 0.5 * PI / 180.0);					// is it correct?
+	return (scale);
+}
+
+// get right vector for camera
+t_vector get_right(t_vector forward)
+{
+	t_vector	world_up;
+
+	world_up = (t_vector){0, 1, 0};					// pick +Y as world up
+	// if forward and wolrd_up to mach aligned choose another direction
+	// for strong cross calculations (vectors should be close to perpendicular)
+	// we do not chang global world_up it is stiil +Y but here we change as hack
+	if (fabs(get_dot(forward, world_up)) > 0.9)
+		world_up = (t_point){0, 0, 1};
+	return (get_cross(forward, world_up));
+}
+
+t_vector get_up(t_vector right, t_vector forward)
+{
+	return (get_cross(right, forward));
+}
+
 // max 3 attrs / we have only 3 attributes for the camera
 //
 void	parse_camera(char **element, t_scene *scene, int lineno)
 {
-	static bool singleton;				// set to true when first time meet camera element, by desifn initially is false
+	static bool singleton;										// set to true when first time meet camera element, by desifn initially is false
 
 	verify_uniqueness(element, &singleton, lineno);
 	verify_attrs_number(element, 3, lineno);
@@ -199,10 +291,9 @@ void	parse_camera(char **element, t_scene *scene, int lineno)
 	scene->camera.position = get_point(element, 1, lineno);
 	scene->camera.forward = get_vector(element, 2, lineno);
 	scene->camera.scale = get_scale(element, 3, lineno); 		// verify fov and convert to scale
-	scene->camera.up = ;
-	scene->camera.right = ;
-	scene->camera.ratio = WIDTH / HEIGHT;
-
+	scene->camera.right = get_right(scene->camera.forward);
+	scene->camera.up = get_up(scene->camera.right, scene->camera.forward);
+	scene->camera.ratio = (double)WIDTH / (double)HEIGHT;
 }
 void parse_element(char **element, t_scene *scene, int	lineno)
 {
