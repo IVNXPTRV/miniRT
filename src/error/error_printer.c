@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:03:37 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 13:47:38 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 14:30:39 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void err(int lineno, t_m msg)
 			err(Z, (t_m){"malloc: fatal error"});
 			exit(EXIT_FAILURE);
 		}
+		puterr("line ");
 		puterr(str);
 		puterr(": ");
 		free(str);

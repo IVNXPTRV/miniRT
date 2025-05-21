@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:27:14 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 13:50:19 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 14:44:16 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ double get_double(char **element, char **numbers, int i, int lineno)
 	if (ft_atod(numbers[i], &result) == FAIL)
 	{
 		err(lineno, (t_m){numbers[i], "incorrect double"});
-		ft_parrclean(element);
-		ft_parrclean(numbers);
+		ft_parrclean(&element);
+		ft_parrclean(&numbers);
 		exit(EXIT_SUCCESS);
 	}
 	return (result);
@@ -41,8 +41,8 @@ int get_int(char **element, char **numbers, int i, int lineno)
 	if (ft_atoi(numbers[i], &result, sizeof(int), 10) == FAIL)
 	{
 		err(lineno, (t_m){numbers[i], "incorrect integer"});
-		ft_parrclean(element);
-		ft_parrclean(numbers);
+		ft_parrclean(&element);
+		ft_parrclean(&numbers);
 		exit(EXIT_SUCCESS);
 	}
 	return (result);

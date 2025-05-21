@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:14:34 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 13:50:23 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 14:44:13 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void verify_fov(char **element, int i, int lineno, int fov)
 	if (!is_in_range((double)fov, 0, 180))
 	{
 		err(lineno, (t_m){element[i], "is beyond 0 to 180 range"});
-		ft_parrclean(element);
+		ft_parrclean(&element);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -30,7 +30,7 @@ static t_num get_scale(char **element, int i, int lineno)
 
 	numbers = get_numbers(element, i, lineno, 1);
 	fov = get_int(element, numbers, 0, lineno);
-	ft_parrclean(numbers);
+	ft_parrclean(&numbers);
 	verify_fov(element, i, lineno, fov);					// verify if in 0 to 180 range
 	scale = tan(fov * 0.5 * PI / 180.0);					// is it correct?
 	return (scale);

@@ -68,23 +68,23 @@ DEP := $(patsubst ./src/%.c,./dep/%.d,$(SRC))
 
 MFLAGS := --no-print-directory -C
 
-.PHONY: all clean fclean re lib lib/MLX42 obj_dir dep_dir
+.PHONY: all clean fclean re lib obj_dir dep_dir
 
 all: lib $(NAME)
 
 # Link object files into executable
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) ./lib/elibft/elibft.a ./lib/MLX42/build/libmlx42.a
 	@echo "Linking $(NAME)..."
-	$(CC) $(OBJ) $(LIB) -o $@
+	@$(CC) $(OBJ) $(LIB) -o $@
 	@echo "$(NAME) built successfully."
 
 # Build libraries
 lib: lib/MLX42/
-	@make $(MFLAGS) ./lib/elibft
+	@make $(MFLAGS) ./lib/elibft/
 
 lib/MLX42/:
-	@git clone https://github.com/codam-coding-college/MLX42.git ./lib/MLX42
-	@cmake ./lib/MLX42 -B ./lib/MLX42/build && make -C ./lib/MLX42/build -j4
+	@git clone https://github.com/codam-coding-college/MLX42.git ./lib/MLX42/
+	@cmake ./lib/MLX42/ -B ./lib/MLX42/build/ && make -C ./lib/MLX42/build/ -j4
 
 # Compile rule for each object, create obj subdirs as needed
 ./obj/%.o: ./src/%.c | obj_dir dep_dir

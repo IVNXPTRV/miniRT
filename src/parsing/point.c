@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:24:29 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:39:05 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 14:44:38 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ t_point get_point(char **element, int i, int lineno)
 	point.x = get_double(element, numbers, 0, lineno);
 	point.y = get_double(element, numbers, 1, lineno);
 	point.z = get_double(element, numbers, 2, lineno);
-	ft_parrclean(numbers);
+	ft_parrclean(&numbers);
 	return (point);
 }

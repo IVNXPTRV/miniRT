@@ -6,113 +6,118 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 13:18:36 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 13:44:40 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 14:35:35 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "elibft.h"
 
-static char	*ft_free_strjoin(char *s1, char *s2)
+char	*pop(t_file **flist, int fd)
 {
-	char	*temp;
+	t_file	*file;
+	t_file	*prev;
+	char	*temp_line;
 
-	temp = ft_strjoin(s1, s2);
-	free(s1);
-	return (temp);
-}
-
-static char	*ft_find_newline(int fd, char *file_read)
-{
-	char	*buff;
-	int		num_read;
-
-	if (!file_read)
-		file_read = ft_calloc(1, sizeof(char));
-	buff = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
-	if (!buff)
-		return (free(file_read), ((void *)0));
-	num_read = 1;
-	while (num_read > 0)
+	file = *flist;
+	prev = NULL;
+	while (file)
 	{
-		num_read = read(fd, buff, BUFFER_SIZE);
-		if (num_read == 0)
+		if (file->fd == fd)
 			break ;
-		if (num_read == -1)
-			return (free(buff), free(file_read), ((void *)0));
-		buff[num_read] = '\0';
-		file_read = ft_free_strjoin(file_read, buff);
-		if (ft_strchr(buff, '\n'))
-			break ;
+		prev = file;
+		file = file->next;
 	}
-	free(buff);
-	return (file_read);
+	if (!file)
+		return (NULL);
+	temp_line = file->line;
+	if (prev)
+		prev->next = file->next;
+	else
+		*flist = file->next;
+	file->line = NULL;
+	free(file);
+	return (temp_line);
 }
 
-static char	*ft_remove_remain(char *file_read)
+t_file	*search_file(t_file **flist, int fd)
 {
-	char	*result;
-	int		index;
+	t_file	*file;
+	t_file	*prev;
 
-	index = 0;
-	if (!file_read[index])
-		return ((void *)0);
-	while (file_read[index] && file_read[index] != '\n')
-		index++;
-	result = ft_calloc(index + 2, sizeof(char));
-	if (!result)
-		return ((void *)0);
-	index = 0;
-	while (file_read[index] && file_read[index] != '\n')
+	file = *flist;
+	while (file)
 	{
-		result[index] = file_read[index];
-		index++;
+		if (file->fd == fd)
+			return (file);
+		prev = file;
+		file = file->next;
 	}
-	if (file_read[index] && file_read[index] == '\n')
-	{
-		result[index] = file_read[index];
-		index++;
-	}
-	return (result);
+	file = malloc(sizeof(t_file));
+	if (!file)
+		return (NULL);
+	file->fd = fd;
+	file->bytes = 0;
+	file->blen = 0;
+	file->line = NULL;
+	file->llen = 0;
+	file->next = NULL;
+	if (!*flist)
+		*flist = file;
+	else
+		prev->next = file;
+	return (file);
 }
 
-static char	*ft_get_remain(char *file_read)
+char	*append_buffer_to_line(t_file *file)
 {
-	char	*result;
-	int		index;
-	int		result_index;
+	ssize_t			len;
+	char			*old;
+	int				j;
 
-	index = 0;
-	while (file_read[index] && file_read[index] != '\n')
-		index++;
-	if (!file_read[index])
-		return (free(file_read), ((void *)0));
-	result = ft_calloc(sizeof(char), ft_strlen(file_read) - index + 1);
-	if (!result)
-		return (free(file_read), ((void *)0));
-	index++;
-	result_index = 0;
-	while (file_read[index])
-	{
-		result[result_index] = file_read[index];
-		index++;
-		result_index++;
-	}
-	free(file_read);
-	return (result);
+	len = 0;
+	while (len < (file->bytes - file->blen)
+		&& file->buf[file->blen + len++] != '\n')
+		;
+	old = file->line;
+	file->line = (char *)malloc(sizeof(char) * (file->llen + len + 1));
+	if (!file->line)
+		return (free(old), NULL);
+	j = -1;
+	while (old && old[++j])
+		file->line[j] = old[j];
+	while (len--)
+		file->line[file->llen++] = file->buf[file->blen++];
+	free(old);
+	file->line[file->llen] = '\0';
+	return (file->line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*file_read;
-	char		*current_line;
+	static t_file	*flist;
+	t_file			*file;
+	char			*temp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return ((void *)0);
-	file_read = ft_find_newline(fd, file_read);
-	if (!file_read)
-		return ((void *)0);
-	current_line = ft_remove_remain(file_read);
-	file_read = ft_get_remain(file_read);
-	return (current_line);
+	file = search_file(&flist, fd);
+	if (!file || fd < 0 || BUFFER_SIZE <= 0)
+		return (pop(&flist, fd), NULL);
+	while (1)
+	{
+		if (file->blen == file->bytes)
+		{
+			file->bytes = read(fd, file->buf, BUFFER_SIZE);
+			file->blen = 0;
+		}
+		if (file->bytes == 0)
+			return (pop(&flist, fd));
+		else if (file->bytes < 0)
+			return (pop(&flist, fd), NULL);
+		if (!append_buffer_to_line(file))
+			return (pop(&flist, fd), NULL);
+		if (file->line[file->llen - 1] == '\n' || file->bytes < BUFFER_SIZE)
+		{
+			return (file->llen = 0, temp = file->line, file->line = NULL, temp);
+		}
+	}
+	return (NULL);
 }

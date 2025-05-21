@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:04:12 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 18:07:59 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 14:19:31 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ typedef struct s_infarr
 typedef struct s_file
 {
 	int				fd;
-	ssize_t			b;
+	ssize_t			bytes;
 	char			buf[BUFFER_SIZE];
-	ssize_t			i;
+	ssize_t			blen;
 	char			*line;
-	size_t			ttl;
+	size_t			llen;
 	struct s_file	*next;
 }	t_file;
 

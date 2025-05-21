@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:13:19 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 13:52:45 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 14:37:05 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char **get_element(char *line)
 {
 	char **element;
 
-	element = ft_split(line, " \r\f\v\t\n");
+	element = ft_split(line, " \t\n");
 	free(line);
 	if (element == NULL)						// malloc failed
 	{
@@ -35,7 +35,7 @@ static char **get_element(char *line)
 }
 
 
-static void	parse_line(char *line, t_scene *scene, int	lineno)
+static void	parse_line(char *line, t_scene *scene, int lineno)
 {
 	char **element;							// element attributes
 
@@ -70,6 +70,6 @@ static void load_elements(t_scene *scene)
 
 void parse(int argc, char **argv, t_scene *scene)
 {
-	validate_argument(argc, argv);
+	validate_argument(argc, argv, scene);
 	load_elements(scene);			// get each line, parse and load to corresponding struct
 }

@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 13:52:52 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 14:28:11 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef struct s_scene
 
 // parsing
 void parse(int argc, char **argv, t_scene *scene);
-void validate_argument(int argc, char **argv);
+void validate_argument(int argc, char **argv, t_scene *scene);
 void parse_element(char **element, t_scene *scene, int	lineno);
 
 char **get_numbers(char **element, int i, int lineno, size_t limit);
