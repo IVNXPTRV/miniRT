@@ -88,7 +88,7 @@ lib/MLX42/:
 
 # Compile rule for each object, create obj subdirs as needed
 ./obj/%.o: ./src/%.c | obj_dir dep_dir
-	@mkdir -p $(dir $@)
+	@mkdir -p $(dir $@) ./dep/$(dir $(@:obj/%.o=%))
 	$(CC) $(CFLAGS) ./dep/$(@:obj/%.o=%.d) $(INCLUDE) -c $< -o $@
 
 # Create root obj directory (subdirs made automatically)

@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:39:21 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/20 19:03:03 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 07:53:15 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int integer_part(double *integer,  int *sig_digits, char **s)
         (*s)++;
     }
     if (**s != '\0' && **s != '.')
-        return (FAIL);
+		return (FAIL);
 	return (SUCCESS);
 }
 
