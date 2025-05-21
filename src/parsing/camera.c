@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:14:34 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 10:15:48 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 18:44:50 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_num get_scale(char **element, int i, int lineno)
 	fov = get_int(element, numbers, 0, lineno);
 	ft_parrclean(&numbers);
 	verify_fov(element, i, lineno, fov);					// verify if in 0 to 180 range
-	scale = tan(fov * 0.5 * PI / 180.0);					// is it correct?
+	scale = tan(0.5 * (fov * M_PI / 180.0));				// convert degrees to rad (fov * M_PI / 180.0) and half ( * 0.5)??
 	return (scale);
 }
 

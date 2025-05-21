@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:12:52 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 17:43:58 by ipetrov          ###   ########.fr       */
+/*   Created: 2025/05/21 19:06:13 by ipetrov           #+#    #+#             */
+/*   Updated: 2025/05/21 19:07:37 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void execute(t_scene *scene)
+t_color get_pixel_color(t_scene *scene, int x, int y)
 {
-	init_graphic_library(scene);	// connect to gl and prepare an image and register hooks
-	compute_image(scene);			// fill all final pixels color
-	display_image(scene);			// render an image in an OS window
+	t_ray	ray;
+	t_hit	hit;
+	t_color	pixel;
+	bool	shadow;
+	int		light; 				// some coefficent
+
+	get_ray(scene->camera, x, y, &ray);
+	get_hit(scene, ray, &hit);
+	get_shadow(scene, hit, &shadow);
+	get_light(scene, hit, shadow, &light);
+	apply_light(hit, light, &pixel);
+	return (pixel);
 }

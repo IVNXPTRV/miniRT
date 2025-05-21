@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 09:26:46 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 19:07:24 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <errno.h>					// errno
 # include <string.h>				// strerror
 
-# define PI 3.14159265358979323846
 # define EPSILON 1e-6
 
 typedef char			*t_m[5];	// print error messages in a loop
@@ -57,7 +56,9 @@ typedef struct s_color
 # define ERROR -1					// general error code
 # define SUCCESS 1					// general success code
 # define BLACK 0x000000FF			// black color
+# define OPAQUE 0x000000FF			// fully intransaprent alpha channel
 # define t_file	int					// file descriptor, fd
+# define t_raw_color	uint32_t	// color in form of int 0x000000FF
 
 typedef struct s_camera
 {
@@ -120,6 +121,19 @@ typedef struct s_scene
 	t_obj		obj[MAX_OBJ];		// array of all objects on the scene
 }	t_scene;
 
+typedef struct s_ray
+{
+	t_point		position;
+	t_vector	direction;
+}	t_ray;
+
+typedef struct s_hit
+{
+	bool		missed;				// true if ray missed and no any object hit
+	t_point		position;			// world coordinates of hit point
+	t_vector	normal;				// normal at hit point
+	t_color		color;				// color ob and object at a hit point
+}	t_hit;
 
 // parsing
 void parse(int argc, char **argv, t_scene *scene);
@@ -163,6 +177,20 @@ t_num magnitude(t_vector vector);
 t_vector normalize(t_vector vector);
 t_num dot(t_vector a, t_vector b);
 t_vector cross(t_vector a, t_vector b);
+t_vector add_vectors(t_vector a, t_vector b, t_vector c);
+t_vector scale_vector(t_vector vector, t_num scale);
+
+// gl
+void init_graphic_library(t_scene *scene);
+void display_image(t_scene *scene);
+
+
+// execution
+void execute(t_scene *scene);
+void	compute_image(t_scene *scene);
+t_color get_pixel_color(t_scene *scene, int x, int y);
+
+
 
 
 #endif

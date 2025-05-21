@@ -9,6 +9,7 @@
 		"errno.h": "c",
 		"sstream": "c",
 		"queue": "c",
-		"stack": "c"
+		"stack": "c",
+		"__node_handle": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:11:55 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 09:37:16 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 18:54:15 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,9 @@ t_vector normalize(t_vector vector)
 
 	mag = magnitude(vector);
     return ((t_vector){vector.x / mag, vector.y / mag, vector.z / mag});
+}
+
+t_vector scale_vector(t_vector vector, t_num scale)
+{
+	return ((t_vector){vector.x * scale, vector.y * scale, vector.z * scale});
 }
