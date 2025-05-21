@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   two_vectors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:49:57 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:53:57 by ipetrov          ###   ########.fr       */
+/*   Created: 2025/05/21 12:09:19 by ipetrov           #+#    #+#             */
+/*   Updated: 2025/05/21 12:40:19 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(int argc, char **argv)
+//returns how aligned 2 vectors -1 to +1 if vectors normilized
+t_num dot(t_vector a, t_vector b)
 {
-	t_scene	scene;
+    return (a.x * b.x
+		+ a.y * b.y
+		+ a.z * b.z);
+}
 
-	ft_bzero(&scene, sizeof(t_scene));	// init scene with zeroes
-	\
-	parse(argc, argv, &scene); 			// deserialize
-	// execute(&scene);					// render: init graphic library, get_image, display window with image
+// normalization embeded
+t_vector cross(t_vector a, t_vector b)
+{
+    t_vector result;
 
-	return (EXIT_SUCCESS);
-	// validate
-
-	// parse
-	// execute
-
-	// clean
-	// exit
+    result.x = a.y * b.z - a.z * b.y;
+    result.y = a.z * b.x - a.x * b.z;
+    result.z = a.x * b.y - a.y * b.x;
+    return (normalize(result));
 }

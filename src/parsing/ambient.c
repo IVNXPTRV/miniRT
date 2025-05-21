@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ambient.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:49:57 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:53:57 by ipetrov          ###   ########.fr       */
+/*   Created: 2025/05/21 12:14:34 by ipetrov           #+#    #+#             */
+/*   Updated: 2025/05/21 12:28:24 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(int argc, char **argv)
+void parse_ambient(char **element, t_scene *scene, int lineno)
 {
-	t_scene	scene;
+	static bool singleton;
 
-	ft_bzero(&scene, sizeof(t_scene));	// init scene with zeroes
+	verify_uniqueness(element, &singleton, lineno);
+	verify_attrs_number(element, 2, lineno);
 	\
-	parse(argc, argv, &scene); 			// deserialize
-	// execute(&scene);					// render: init graphic library, get_image, display window with image
-
-	return (EXIT_SUCCESS);
-	// validate
-
-	// parse
-	// execute
-
-	// clean
-	// exit
+	scene->ambient.brightness = get_brightness(element, 1, lineno);
+	scene->ambient.color = get_color(element, 2, lineno);
 }

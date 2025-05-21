@@ -6,26 +6,22 @@
 #    By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:48:06 by ipetrov           #+#    #+#              #
-#    Updated: 2025/05/20 11:18:56 by ipetrov          ###   ########.fr        #
+#    Updated: 2025/05/21 12:56:42 by ipetrov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compiler and flags
 CC					=	cc
 CFLAGS				=	-Wall -Wextra -Werror -Wunreachable-code -MMD -MF
-# -Ofast
 RM					=	rm -rf
 
 # Name of the output library
-NAME 				=	fdf
+NAME 				=	miniRT
 
 # Include directories
-INCLUDE_DIRS		=	./include \
-						./lib/elibft/include \
-						./lib/MLX42/include/MLX42 \
-
-# Source directories
-VPATH				=	./src/:\
+INCLUDE_DIRS		=	./include/ \
+						./lib/elibft/include/ \
+						./lib/MLX42/include/MLX42/ \
 
 # Include flags
 INCLUDE				=	$(addprefix -I , $(INCLUDE_DIRS))
@@ -52,13 +48,37 @@ LIBMLX	:= ./lib/MLX42
 
 # Source files
 SRC					=	\
-						main.c \
+						./src/main.c \
+						\
+						./src/error/error_printer.c \
+						./src/error/error_wrappers.c \
+						\
+						\
+						./src/math/one_vector.c \
+						./src/math/two_vectors.c \
+						\
+						./src/parsing/ambient.c \
+						./src/parsing/brightness.c \
+						./src/parsing/camera.c \
+						./src/parsing/color.c \
+						./src/parsing/cylinder.c \
+						./src/parsing/element.c \
+						./src/parsing/file.c \
+						./src/parsing/light.c \
+						./src/parsing/number.c \
+						./src/parsing/parsing.c \
+						./src/parsing/plane.c \
+						./src/parsing/point.c \
+						./src/parsing/size.c \
+						./src/parsing/sphere.c \
+						./src/parsing/vector.c \
 
 # Object files
 OBJ					=	$(SRC:%.c=obj/%.o)
+$(info OBJ: $(OBJ))
 
 # Dependency files
-DEP					=	$(SRC:%.c=dep/%.d)
+DEP					=	$(SRC:/%.c=dep/%.d)
 
 # Make flags
 MFLAGS				=	 --no-print-directory -C
@@ -81,7 +101,7 @@ lib/MLX42:
 	@cmake ./lib/MLX42 -B ./lib/MLX42/build && make -C ./lib/MLX42/build -j4
 
 # Compile mandatory object files
-obj/%.o: %.c | obj_dir dep_dir
+obj/%.o: /%.c | obj_dir dep_dir
 	$(CC) $(CFLAGS) dep/$(@:obj/%.o=%.d) $(INCLUDE) -c $< -o $@
 
 # Create mandatory object directories

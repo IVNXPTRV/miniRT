@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   size.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:49:57 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:53:57 by ipetrov          ###   ########.fr       */
+/*   Created: 2025/05/21 12:25:59 by ipetrov           #+#    #+#             */
+/*   Updated: 2025/05/21 12:26:07 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(int argc, char **argv)
+t_num	get_size(char **element, int i, int lineno)
 {
-	t_scene	scene;
+	char		**numbers;
+	t_num		diameter;
 
-	ft_bzero(&scene, sizeof(t_scene));	// init scene with zeroes
-	\
-	parse(argc, argv, &scene); 			// deserialize
-	// execute(&scene);					// render: init graphic library, get_image, display window with image
-
-	return (EXIT_SUCCESS);
-	// validate
-
-	// parse
-	// execute
-
-	// clean
-	// exit
+	numbers = get_numbers(element, i, lineno, 1);
+	diameter = get_double(element, numbers, 0, lineno);
+	ft_parrclean(numbers);
+	return (diameter);
 }
+

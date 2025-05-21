@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   one_vector.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:49:57 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:53:57 by ipetrov          ###   ########.fr       */
+/*   Created: 2025/05/21 12:11:55 by ipetrov           #+#    #+#             */
+/*   Updated: 2025/05/21 12:12:17 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(int argc, char **argv)
+// use faster sqrt??
+t_num magnitude(t_vector vector)
 {
-	t_scene	scene;
+    return sqrt(vector.x * vector.x
+            + vector.y * vector.y
+            + vector.z * vector.z);
+}
 
-	ft_bzero(&scene, sizeof(t_scene));	// init scene with zeroes
-	\
-	parse(argc, argv, &scene); 			// deserialize
-	// execute(&scene);					// render: init graphic library, get_image, display window with image
+t_vector normalize(t_vector vector)
+{
+    double	mag;
 
-	return (EXIT_SUCCESS);
-	// validate
-
-	// parse
-	// execute
-
-	// clean
-	// exit
+	mag = magnitude(vector);
+    return ((t_vector){vector.x / mag, vector.y / mag, vector.z / mag});
 }

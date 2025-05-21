@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_wrappers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:49:57 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:53:57 by ipetrov          ###   ########.fr       */
+/*   Created: 2025/05/21 12:03:37 by ipetrov           #+#    #+#             */
+/*   Updated: 2025/05/21 12:06:40 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(int argc, char **argv)
+void er_close(int fd)
 {
-	t_scene	scene;
-
-	ft_bzero(&scene, sizeof(t_scene));	// init scene with zeroes
-	\
-	parse(argc, argv, &scene); 			// deserialize
-	// execute(&scene);					// render: init graphic library, get_image, display window with image
-
-	return (EXIT_SUCCESS);
-	// validate
-
-	// parse
-	// execute
-
-	// clean
-	// exit
+	if (close(fd) == ERROR)
+	{
+		err(Z, (t_m){"close: fatal error"});
+		exit(EXIT_FAILURE);
+	}
 }
+

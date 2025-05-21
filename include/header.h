@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 11:42:17 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 12:40:17 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,43 @@ typedef struct s_scene
 	size_t		obj_num;			// total number of objects
 	t_obj		obj[MAX_OBJ];		// array of all objects on the scene
 }	t_scene;
+
+
+// parsing
+void parse(int argc, char **argv, t_scene *scene);
+void validate_argument(int argc, char **argv);
+void parse_element(char **element, t_scene *scene, int	lineno);
+
+char **get_numbers(char **element, int i, int lineno, int limit);
+
+// verify
+void verify_attrs_number(char **element, int num, int lineno);
+void veriy_uniqueness(char **element, bool *singleton, int lineno);
+void verify_max_obj_num(char **element, t_scene *scene, int lineno);
+
+// objs
+void	parse_camera(char **element, t_scene *scene, int lineno);
+void parse_ambient(char **element, t_scene *scene, int lineno);
+void parse_light(char **element, t_scene *scene, int lineno);
+void	parse_plane(char **element, t_scene *scene, int lineno);
+void	parse_sphere(char **element, t_scene *scene, int lineno);
+void	parse_cylinder(char **element, t_scene *scene, int lineno);
+
+// attrs
+t_point get_point(char **element, int i, int lineno);
+t_vector get_vector(char **element, int i, int lineno);
+t_num	get_brightness(char **element, int i, int lineno);
+t_color	get_color(char **element, int i, int lineno);
+
+// error
+void err(int lineno, t_m msg);
+void er_close(int fd);
+
+// math
+t_num magnitude(t_vector vector);
+t_vector normalize(t_vector vector);
+t_num dot(t_vector a, t_vector b);
+t_vector cross(t_vector a, t_vector b);
+
 
 #endif
