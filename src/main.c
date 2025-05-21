@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:54 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 10:35:58 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 11:22:32 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void verify_attrs_number(char **element, int num, int lineno)
 }
 
 // get number and check how many we have
-char **get_numbers(char **element, int i, int lineno)
+// limit how many numbers should be
+char **get_numbers(char **element, int i, int lineno, int limit)
 {
 	char	**numbers;
 
@@ -116,7 +117,7 @@ char **get_numbers(char **element, int i, int lineno)
 		err(Z, (t_m){"malloc: fatal error"});
 		exit(EXIT_FAILURE);
 	}
-	if (ft_parrlen(numbers) != 3)				// if len of result != 3
+	if (ft_parrlen(numbers) != limit)				// if len of result != 3
 	{
 		err(lineno, (t_m){"wrong number of parameters in an attribute -> ", element[i]});
 		ft_parrclean(element);
@@ -127,7 +128,7 @@ char **get_numbers(char **element, int i, int lineno)
 }
 
 // indx of number
-double get_double(char **element, char *numbers, int i, int lineno)
+double get_double(char **element, char **numbers, int i, int lineno)
 {
 	double result;
 
@@ -237,7 +238,7 @@ t_vector get_vector(char **element, int i, int lineno)
 	char		**numbers;
 	t_vector	vector;
 
-	numbers = get_numbers(element, i, lineno);
+	numbers = get_numbers(element, i, lineno, 3);
 	vector.x = get_double(element, numbers, 0, lineno);
 	vector.y = get_double(element, numbers, 1, lineno);
 	vector.z = get_double(element, numbers, 2, lineno);
@@ -252,7 +253,7 @@ t_num get_scale(char **element, int i, int lineno)
 	int			fov;
 	t_num		scale;
 
-	numbers = get_numbers(element, i, lineno);
+	numbers = get_numbers(element, i, lineno, 1);
 	fov = get_int(element, numbers, 0, lineno);
 	ft_parrclean(numbers);
 	verify_fov(element, i, lineno, fov);					// verify if in 0 to 180 range
@@ -269,7 +270,7 @@ t_vector get_right(t_vector forward)
 	// if forward and wolrd_up to mach aligned choose another direction
 	// for strong cross calculations (vectors should be close to perpendicular)
 	// we do not chang global world_up it is stiil +Y but here we change as hack
-	if (fabs(get_dot(forward, world_up)) > 0.9)
+	if (fabs(get_dot(forward, world_up)) > 0.999)
 		world_up = (t_point){0, 0, 1};
 	return (get_cross(forward, world_up));
 }
@@ -295,6 +296,134 @@ void	parse_camera(char **element, t_scene *scene, int lineno)
 	scene->camera.up = get_up(scene->camera.right, scene->camera.forward);
 	scene->camera.ratio = (double)WIDTH / (double)HEIGHT;
 }
+
+void verify_brightness(char **element, int i, int lineno, t_num brightness)
+{
+	if (!is_in_range(brightness, 0, 1))
+	{
+		err(lineno, (t_m){element[i], "is beyond 0 to 1 range"});
+		ft_parrclean(element);
+		exit(EXIT_FAILURE);
+	}
+}
+
+t_num	get_brightness(char **element, int i, int lineno)
+{
+	char		**numbers;
+	t_num		brightness;
+
+	numbers = get_numbers(element, i, lineno, 1);
+	brightness = get_double(element, numbers, 0, lineno);
+	ft_parrclean(numbers);
+	verify_brightness(element, i, lineno, brightness);
+	return (brightness);
+}
+
+void verify_color(char **element, int i, int lineno, t_color color)
+{
+	if (!is_in_range(color.r, 0, 1) || \
+		!is_in_range(color.g, 0, 1) || \
+		!is_in_range(color.b, 0, 1))
+	{
+		err(lineno, (t_m){element[i], "is beyond 0 to 255 range"});
+		ft_parrclean(element);
+		exit(EXIT_FAILURE);
+	}
+}
+
+t_color	get_color(char **element, int i, int lineno)
+{
+	char		**numbers;
+	t_color		color;
+
+	numbers = get_numbers(element, i, lineno, 3);
+	color.r = get_int(element, numbers, 0, lineno) / 255.0;				// converted to 0.0 to 1.0 representation
+	color.g = get_int(element, numbers, 1, lineno) / 255.0;
+	color.b = get_int(element, numbers, 2, lineno) / 255.0;
+	ft_parrclean(numbers);
+	verify_color(element, i, lineno, color);
+}
+
+void parse_ambient(char **element, t_scene *scene, int lineno)
+{
+	static bool singleton;
+
+	verify_uniqueness(element, &singleton, lineno);
+	verify_attrs_number(element, 2, lineno);
+	\
+	scene->ambient.brightness = get_brightness(element, 1, lineno);
+	scene->ambient.color = get_color(element, 2, lineno);
+}
+
+void parse_light(char **element, t_scene *scene, int lineno)
+{
+	static bool singleton;
+
+	verify_uniqueness(element, &singleton, lineno);
+	verify_attrs_number(element, 3, lineno);
+	\
+	scene->light.position = get_point(element, 1, lineno);
+	scene->light.brightness = get_brightness(element, 2, lineno);
+	scene->light.color = get_color(element, 3, lineno);
+}
+
+void verify_max_obj_num(char **element, t_scene *scene, int lineno)
+{
+	if (scene->obj_num >= MAX_OBJ)
+	{
+		err(lineno, (t_m){"reached maximum number of objects"});
+		ft_parrclean(element);
+	}
+}
+
+void	parse_plane(char **element, t_scene *scene, int lineno)
+{
+	verify_max_obj_num(element, scene, lineno);
+	verify_attrs_number(element, 3, lineno);
+	\
+	scene->obj[scene->obj_num].position = get_point(element, 1, lineno);
+	scene->obj[scene->obj_num].normal = get_vector(element, 2, lineno);
+	scene->obj[scene->obj_num].color = get_color(element, 3, lineno);
+	scene->obj[scene->obj_num].type = PL;
+	scene->obj_num++;
+}
+
+t_num	get_size(char **element, int i, int lineno)
+{
+	char		**numbers;
+	t_num		diameter;
+
+	numbers = get_numbers(element, i, lineno, 1);
+	diameter = get_double(element, numbers, 0, lineno);
+	ft_parrclean(numbers);
+	return (diameter);
+}
+
+void	parse_sphere(char **element, t_scene *scene, int lineno)
+{
+	verify_max_obj_num(element, scene, lineno);
+	verify_attrs_number(element, 3, lineno);
+	\
+	scene->obj[scene->obj_num].position = get_point(element, 1, lineno);
+	scene->obj[scene->obj_num].diameter = get_size(element, 2, lineno);
+	scene->obj[scene->obj_num].color = get_color(element, 3, lineno);
+	scene->obj[scene->obj_num].type = SP;
+	scene->obj_num++;
+}
+
+void	parse_cylinder(char **element, t_scene *scene, int lineno)
+{
+	verify_max_obj_num(element, scene, lineno);
+	verify_attrs_number(element, 3, lineno);
+	\
+	scene->obj[scene->obj_num].position = get_point(element, 1, lineno);
+	scene->obj[scene->obj_num].diameter = get_size(element, 2, lineno);
+	scene->obj[scene->obj_num].height = get_size(element, 3, lineno);
+	scene->obj[scene->obj_num].color = get_color(element, 4, lineno);
+	scene->obj[scene->obj_num].type = CY;
+	scene->obj_num++;
+}
+
 void parse_element(char **element, t_scene *scene, int	lineno)
 {
 	if (is_eqlstr(element[0], "C"))

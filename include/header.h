@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 09:43:46 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 11:04:42 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_scene
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
+	size_t		obj_num;			// total number of objects
 	t_obj		obj[MAX_OBJ];		// array of all objects on the scene
 }	t_scene;
 
