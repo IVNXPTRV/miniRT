@@ -6,15 +6,16 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:13:19 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 14:37:05 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 08:30:22 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
+// skip emptyline and commented lines
 static inline bool is_empty_line(char *line)
 {
-	if (!is_eqlstr(line, "\n"))
+	if (!is_eqlstr(line, "\n") && !is_eqlchar(line[0], '#'))
 		return (false);
 	free(line);
 	return (true);
@@ -33,7 +34,6 @@ static char **get_element(char *line)
 	}
 	return (element);
 }
-
 
 static void	parse_line(char *line, t_scene *scene, int lineno)
 {
@@ -61,9 +61,8 @@ static void load_elements(t_scene *scene)
 			err(Z, (t_m){"malloc: fatal error"});
 			exit(EXIT_FAILURE);
 		}
-		lineno++;
 		if (line)
-			parse_line(line, scene, lineno);
+			parse_line(line, scene, ++lineno);
 	}
 	er_close(scene->file);					// close fd of file
 }
@@ -71,5 +70,7 @@ static void load_elements(t_scene *scene)
 void parse(int argc, char **argv, t_scene *scene)
 {
 	validate_argument(argc, argv, scene);
-	load_elements(scene);			// get each line, parse and load to corresponding struct
+	load_elements(scene);						// get each line, parse and load to corresponding struct
+	validate_scene(scene);						// prevent scene without obj or without camera etc
+
 }

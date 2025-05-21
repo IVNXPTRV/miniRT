@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC        := cc
-CFLAGS    := -Wall -Wextra -Werror -Wunreachable-code -MMD -MF
+CFLAGS    := -Wall -Wextra -Werror -Wunreachable-code -g -MMD -MF
 RM        := rm -rf
 
 NAME      := miniRT
@@ -73,7 +73,7 @@ MFLAGS := --no-print-directory -C
 all: lib $(NAME)
 
 # Link object files into executable
-$(NAME): $(OBJ) ./lib/elibft/elibft.a ./lib/MLX42/build/libmlx42.a
+$(NAME): $(OBJ) ./lib/elibft/elibft.a ./lib/MLX42/build/libmlx42.a Makefile
 	@echo "Linking $(NAME)..."
 	@$(CC) $(OBJ) $(LIB) -o $@
 	@echo "$(NAME) built successfully."
