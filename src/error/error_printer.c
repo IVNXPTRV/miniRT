@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:03:37 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:39:18 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 13:47:38 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void err(int lineno, t_m msg)
 {
 	char *str;
 
-	pterr("Error\n");
+	puterr("Error\n");
 	if (lineno > 0)
 	{
 		str = ft_itoa(lineno);
@@ -33,14 +33,14 @@ void err(int lineno, t_m msg)
 			err(Z, (t_m){"malloc: fatal error"});
 			exit(EXIT_FAILURE);
 		}
-		pterr(str);
-		pterr(": ");
+		puterr(str);
+		puterr(": ");
 		free(str);
 	}
 	while (*msg != NULL)
 	{
-		pterr(msg);
+		puterr(*msg);
 		msg++;
 	}
-	pterr("\n");
+	puterr("\n");
 }

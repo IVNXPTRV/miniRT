@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:40:17 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 13:52:52 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_color
 # define SUCCESS 1					// general success code
 # define BLACK 0x000000FF			// black color
 # define t_file	int					// file descriptor, fd
-# define PTR_INIT NULL + 1			// Non NULL pointer
 
 typedef struct s_camera
 {
@@ -125,12 +124,17 @@ void parse(int argc, char **argv, t_scene *scene);
 void validate_argument(int argc, char **argv);
 void parse_element(char **element, t_scene *scene, int	lineno);
 
-char **get_numbers(char **element, int i, int lineno, int limit);
+char **get_numbers(char **element, int i, int lineno, size_t limit);
 
 // verify
-void verify_attrs_number(char **element, int num, int lineno);
-void veriy_uniqueness(char **element, bool *singleton, int lineno);
+void verify_attrs_number(char **element, size_t num, int lineno);
+void verify_uniqueness(char **element, bool *singleton, int lineno);
 void verify_max_obj_num(char **element, t_scene *scene, int lineno);
+
+// numbers
+bool is_in_range(double num, double min, double max);
+double get_double(char **element, char **numbers, int i, int lineno);
+int get_int(char **element, char **numbers, int i, int lineno);
 
 // objs
 void	parse_camera(char **element, t_scene *scene, int lineno);
@@ -145,6 +149,7 @@ t_point get_point(char **element, int i, int lineno);
 t_vector get_vector(char **element, int i, int lineno);
 t_num	get_brightness(char **element, int i, int lineno);
 t_color	get_color(char **element, int i, int lineno);
+t_num	get_size(char **element, int i, int lineno);
 
 // error
 void err(int lineno, t_m msg);

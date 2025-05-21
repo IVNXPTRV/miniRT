@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:19:02 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:25:20 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 13:51:34 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void verify_max_obj_num(char **element, t_scene *scene, int lineno)
 	}
 }
 
-void veriy_uniqueness(char **element, bool *singleton, int lineno)
+void verify_uniqueness(char **element, bool *singleton, int lineno)
 {
 	if (*singleton == true)			// means we've already met this element in a file
 	{
@@ -32,7 +32,7 @@ void veriy_uniqueness(char **element, bool *singleton, int lineno)
 	*singleton = true;
 }
 
-void verify_attrs_number(char **element, int num, int lineno)
+void verify_attrs_number(char **element, size_t num, int lineno)
 {
 	if (ft_parrlen(element + 1) != num)
 	{
@@ -44,7 +44,7 @@ void verify_attrs_number(char **element, int num, int lineno)
 
 // get number and check how many we have
 // limit how many numbers should be
-char **get_numbers(char **element, int i, int lineno, int limit)
+char **get_numbers(char **element, int i, int lineno, size_t limit)
 {
 	char	**numbers;
 

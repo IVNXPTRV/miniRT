@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:25:36 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:30:23 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 13:50:39 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ t_color	get_color(char **element, int i, int lineno)
 	color.b = get_int(element, numbers, 2, lineno) / 255.0;
 	ft_parrclean(numbers);
 	verify_color(element, i, lineno, color);
+	return (color);
 }

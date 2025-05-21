@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:13:19 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:32:45 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 13:52:45 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void load_elements(t_scene *scene)
 	char	*line;
 	int		lineno;
 
-	line = PTR_INIT;
+	line = (void *)true;					// non NULL ptr
 	lineno = 0;
 	while (line)
 	{
