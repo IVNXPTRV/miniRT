@@ -3,7 +3,7 @@ MAKEFLAGS += -s
 NAME = minirt
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 DEPFLAGS = -MMD -MP
 
 RM = rm -rf
