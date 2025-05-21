@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 19:07:24 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 20:20:38 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <math.h>					// cos, tag etc
 # include <errno.h>					// errno
 # include <string.h>				// strerror
+# include <float.h>					// DBL_MAX
 
 # define EPSILON 1e-6
 
@@ -129,10 +130,9 @@ typedef struct s_ray
 
 typedef struct s_hit
 {
-	bool		missed;				// true if ray missed and no any object hit
 	t_point		position;			// world coordinates of hit point
 	t_vector	normal;				// normal at hit point
-	t_color		color;				// color ob and object at a hit point
+	t_obj		*obj;				// hit object to get color of and object at a hit point, NULL if no hit
 }	t_hit;
 
 // parsing
@@ -189,6 +189,7 @@ void display_image(t_scene *scene);
 void execute(t_scene *scene);
 void	compute_image(t_scene *scene);
 t_color get_pixel_color(t_scene *scene, int x, int y);
+t_ray get_ray(t_camera camera, int x, int y);
 
 
 

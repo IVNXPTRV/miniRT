@@ -6,25 +6,56 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:10:35 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 19:14:19 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 20:23:12 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void get_hit(t_scene *scene, t_ray ray, t_hit *hit)
+static void register_closest_obj(t_num distance, t_num min_distance, t_obj **obj, int i)
 {
-	int		i;
-	t_num	t;
+	if (distance > 0 && distance < min_distance)
+	{
+		min_distance = distance;
+		*obj = &obj[i];
+	}
+}
 
-	i = 0;
-	while(i < scene->obj_num)							// loop to traverse all scene objects
+static t_hit init_hit(t_num distance, t_ray ray, t_obj *obj)
+{
+	t_hit	hit;
+
+	hit.position = (t_point){0};
+	hit.normal = (t_vector){0};
+	hit.obj = obj;
+	if (hit.obj == NULL)															// means no object hit
+		return (hit);
+	hit.position = add_vector(ray.position, scale_vector(ray.direction, distance));	// check if IT IS CORRECT?
+	hit.normal = (t);																	// get for light calculation later, or calculater later in a shadow??
+	return (hit);
+}
+
+t_hit get_hit(t_scene *scene, t_ray ray)
+{
+	int		i;											// counter
+	t_num	min_distance;								// distance along ray to object surface
+	t_num	distance;
+	t_hit	hit;
+	t_obj	*obj;
+
+	i = -1;
+	min_distance = DBL_MAX; 							// change to -1 ????
+	obj = NULL;											// no obj hit so far
+	while(++i < scene->obj_num)							// loop to traverse all scene objects
 	{
 		if (scene->obj[i].type == PL)
-			t = compute_plane_intersection();
+			distance = compute_plane_intersection(ray, scene->obj[i]);
 		else if (scene->obj[i].type == SP)
-			t = compute_sphere_intersection();
+			distance = compute_sphere_intersection(ray, scene->obj[i]);
 		else if (scene->obj[i].type == CY)
-			t = compute_cylinder_intersection();
+			distance = compute_cylinder_intersection(ray, scene->obj[i]);
+		register_closest_obj(distance, min_distance, &obj, i);
 	}
+	hit = init_hit(min_distance, ray, obj);
+	return (hit);
 }

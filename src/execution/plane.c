@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shadow_ray.c                                       :+:      :+:    :+:   */
+/*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 20:23:24 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 20:24:28 by ipetrov          ###   ########.fr       */
+/*   Created: 2025/05/21 19:44:00 by ipetrov           #+#    #+#             */
+/*   Updated: 2025/05/21 19:45:52 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-// get shadow and calculate normal at hit point if no shadow
-bool	get_shadow(t_scene *scene, t_hit hit)
+void compute_plane_intersection(t_hit *hit, t_obj obj)
 {
-	hit.normal = (t);		// get for light calculation later, or calculater later in a shadow??
+
 }

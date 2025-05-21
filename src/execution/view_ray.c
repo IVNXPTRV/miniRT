@@ -6,13 +6,13 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:30:40 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 19:08:13 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 19:39:32 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void get_ray(t_camera camera, int x, int y, t_ray *ray)
+t_ray get_ray(t_camera camera, int x, int y)
 {
 	// limit of variables in a function?
 	t_num	u;
@@ -23,6 +23,7 @@ void get_ray(t_camera camera, int x, int y, t_ray *ray)
 	t_num	half_height;
 	t_vector right;
 	t_vector up;
+	t_ray	ray;
 
 	half_width = camera.scale * 1;					// 1 -- Distance from camera to view plane (usually 1.0)
 	half_height = camera.ratio;
@@ -35,8 +36,9 @@ void get_ray(t_camera camera, int x, int y, t_ray *ray)
 	px = (2.0 * u - 1.0) * half_width;				// -1 -- shifts X from [0, 1] → [–1, +1]
 	py = (1.0 - 2.0 * v) * half_height;				// 1 - -- flips Y and shifts it to [+1, –1]
 	\
-	ray->position = camera.position;
+	ray.position = camera.position;
 	right = scale_vector(right, px);
 	up = scale_vector(up, px);
-	ray->direction = add_vectors(camera.forward, right, up);
+	ray.direction = add_vectors(camera.forward, right, up);
+	return (ray);
 }
