@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:14:34 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 14:44:13 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 09:42:14 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void verify_fov(char **element, int i, int lineno, int fov)
 {
 	if (!is_in_range((double)fov, 0, 180))
 	{
-		err(lineno, (t_m){element[i], "is beyond 0 to 180 range"});
+		err(lineno, (t_m){"fov is beyond 0 to 180 range -> ", element[i]});
 		ft_parrclean(&element);
 		exit(EXIT_FAILURE);
 	}
@@ -60,9 +60,7 @@ static t_vector get_up(t_vector right, t_vector forward)
 //
 void	parse_camera(char **element, t_scene *scene, int lineno)
 {
-	static bool singleton;										// set to true when first time meet camera element, by desifn initially is false
-
-	verify_uniqueness(element, &singleton, lineno);
+	verify_uniqueness(element, &scene->camera.status, lineno);
 	verify_attrs_number(element, 3, lineno);
 	\
 	scene->camera.position = get_point(element, 1, lineno);

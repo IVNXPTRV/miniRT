@@ -10,65 +10,65 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC        := cc
-CFLAGS    := -Wall -Wextra -Werror -Wunreachable-code -g -MMD -MF
-RM        := rm -rf
+CC					:=	cc
+CFLAGS				:=	-Wall -Wextra -Werror -Wunreachable-code -g -MMD -MF
+RM					:=	rm -rf
 
-NAME      := miniRT
+NAME				:=	miniRT
 
-INCLUDE_DIRS := ./include/ \
-                ./lib/elibft/include/ \
-                ./lib/MLX42/include/MLX42/
+INCLUDE_DIRS 		:=	./include/ \
+            			./lib/elibft/include/ \
+                		./lib/MLX42/include/MLX42/
 
-INCLUDE   := $(addprefix -I,$(INCLUDE_DIRS))
+INCLUDE				:=	$(addprefix -I,$(INCLUDE_DIRS))
 
-UNAME     := $(shell uname)
+UNAME				:=	$(shell uname)
 
 ifeq ($(UNAME), Darwin)
-    LIB = ./lib/elibft/elibft.a \
-          ./lib/MLX42/build/libmlx42.a \
-          -framework Cocoa \
-          -framework OpenGL \
-          -framework IOKit \
-          -lglfw
+    LIB 			=	./lib/elibft/elibft.a \
+						./lib/MLX42/build/libmlx42.a \
+						-framework Cocoa \
+						-framework OpenGL \
+						-framework IOKit \
+						-lglfw
 else ifeq ($(UNAME), Linux)
-    LIB = ./lib/elibft/elibft.a \
-          ./lib/MLX42/build/libmlx42.a \
-          -ldl \
-          -lglfw \
-          -pthread \
-          -lm
+    LIB				=	./lib/elibft/elibft.a \
+						./lib/MLX42/build/libmlx42.a \
+						-ldl \
+						-lglfw \
+						-pthread \
+						-lm
 endif
 
-SRC := \
-    ./src/main.c \
-    ./src/error/error_printer.c \
-    ./src/error/error_wrappers.c \
-    ./src/math/one_vector.c \
-    ./src/math/two_vectors.c \
-    ./src/parsing/ambient.c \
-    ./src/parsing/brightness.c \
-    ./src/parsing/camera.c \
-    ./src/parsing/color.c \
-    ./src/parsing/cylinder.c \
-    ./src/parsing/element.c \
-    ./src/parsing/file.c \
-    ./src/parsing/light.c \
-    ./src/parsing/number.c \
-    ./src/parsing/parsing.c \
-    ./src/parsing/plane.c \
-    ./src/parsing/point.c \
-    ./src/parsing/size.c \
-    ./src/parsing/sphere.c \
-    ./src/parsing/vector.c
+SRC 				:=	\
+						./src/main.c \
+						./src/error/error_printer.c \
+						./src/error/error_wrappers.c \
+						./src/math/one_vector.c \
+						./src/math/two_vectors.c \
+						./src/parsing/ambient.c \
+						./src/parsing/brightness.c \
+						./src/parsing/camera.c \
+						./src/parsing/color.c \
+						./src/parsing/cylinder.c \
+						./src/parsing/element.c \
+						./src/parsing/file.c \
+						./src/parsing/light.c \
+						./src/parsing/number.c \
+						./src/parsing/parsing.c \
+						./src/parsing/plane.c \
+						./src/parsing/point.c \
+						./src/parsing/scene.c \
+						./src/parsing/size.c \
+						./src/parsing/sphere.c \
+						./src/parsing/vector.c
 
 # Convert src paths to obj paths preserving directory structure
-OBJ := $(patsubst ./src/%.c,./obj/%.o,$(SRC))
-DEP := $(patsubst ./src/%.c,./dep/%.d,$(SRC))
+OBJ					:=	$(patsubst ./src/%.c,./obj/%.o,$(SRC))
+DEP					:=	$(patsubst ./src/%.c,./dep/%.d,$(SRC))
 
-MFLAGS := --no-print-directory -C
+MFLAGS				:=	--no-print-directory -C
 
-.PHONY: all clean fclean re lib obj_dir dep_dir
 
 all: lib $(NAME)
 
@@ -111,6 +111,8 @@ fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re lib obj_dir dep_dir
 
 # Include dependency files if they exist
 -include $(DEP)

@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:14:34 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 12:28:25 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 09:28:21 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void parse_light(char **element, t_scene *scene, int lineno)
 {
-	static bool singleton;
-
-	verify_uniqueness(element, &singleton, lineno);
+	verify_uniqueness(element, &scene->light.status, lineno);
 	verify_attrs_number(element, 3, lineno);
 	\
 	scene->light.position = get_point(element, 1, lineno);

@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:23:07 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 14:46:03 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 09:36:19 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void verify_vector(char **element, int i, int lineno, t_vector vector)
 {
 	if (magnitude(vector) != 1.0)
 	{
-		err(lineno, (t_m){element[i], " is not normalized, magnitude should be 1"});
+		err(lineno, (t_m){"vector is not normalized, magnitude should be 1 -> ", element[i]});
 		ft_parrclean(&element);
 		exit(EXIT_FAILURE);
 	}

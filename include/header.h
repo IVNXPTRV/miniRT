@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 08:30:43 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/21 09:26:46 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_color
 
 typedef struct s_camera
 {
+	bool		status;				// true if set up
 	t_point		position;			// coordinates of the camera in the world
 	t_vector	forward;			// front direction unit vector
 	t_vector	up;
@@ -72,12 +73,14 @@ typedef struct s_camera
 // no posiiton because it is everywhere
 typedef struct s_ambient
 {
+	bool		status;				// true if set up
 	t_num		brightness;			// multiplayer for the final result
 	t_color		color;
 }	t_ambient;
 
 typedef struct s_light
 {
+	bool		status;				// true if set up
 	t_point		position;			// coordinates of the light in the world
 	t_num		brightness;			// multiplayer for the final result
 	t_color		color;				// not used in the mandatory part
@@ -86,7 +89,6 @@ typedef struct s_light
 // element type
 typedef enum e_type
 {
-	NONE = 0, 						// for empty object to init and to stop when traverse
 	PL,								// plane
 	SP, 							// sphere
 	CY,								// cylinder
