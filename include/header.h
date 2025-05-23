@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 20:20:38 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/23 18:54:12 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ typedef struct s_color
 # define HEIGHT 720					// screen height
 # define ERROR -1					// general error code
 # define SUCCESS 1					// general success code
-# define BLACK 0x000000FF			// black color
+# define BLACK (t_color){0, 0, 0}			// black color
 # define OPAQUE 0x000000FF			// fully intransaprent alpha channel
+# define OFFSET 0.01				// offset a bit from obj surace to rpevent self-intersections
 # define t_file	int					// file descriptor, fd
 # define t_raw_color	uint32_t	// color in form of int 0x000000FF
+# define NOINTERSECTION	-1			// no intersection
 
 typedef struct s_camera
 {
@@ -177,8 +179,10 @@ t_num magnitude(t_vector vector);
 t_vector normalize(t_vector vector);
 t_num dot(t_vector a, t_vector b);
 t_vector cross(t_vector a, t_vector b);
-t_vector add_vectors(t_vector a, t_vector b, t_vector c);
+t_vector add_vectors(t_vector a, t_vector b);
+t_vector sub_vectors(t_vector a, t_vector b);
 t_vector scale_vector(t_vector vector, t_num scale);
+t_vector flip_vector(t_vector vector);
 
 // gl
 void init_graphic_library(t_scene *scene);
@@ -190,6 +194,10 @@ void execute(t_scene *scene);
 void	compute_image(t_scene *scene);
 t_color get_pixel_color(t_scene *scene, int x, int y);
 t_ray get_ray(t_camera camera, int x, int y);
+t_hit get_hit(t_scene *scene, t_ray ray);
+t_num compute_plane_intersection(t_ray ray, t_obj obj);
+t_num compute_sphere_intersection(t_ray ray, t_obj obj);
+t_num compute_cylinder_intersection(t_ray ray, t_obj obj);
 
 
 

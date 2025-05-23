@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:11:55 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 18:54:15 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/23 15:25:47 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,9 @@ t_vector normalize(t_vector vector)
 t_vector scale_vector(t_vector vector, t_num scale)
 {
 	return ((t_vector){vector.x * scale, vector.y * scale, vector.z * scale});
+}
+
+t_vector flip_vector(t_vector vector)
+{
+	return ((t_vector){vector.x * -1, vector.y * -1, vector.z * -1});
 }
