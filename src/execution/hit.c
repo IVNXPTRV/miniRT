@@ -6,18 +6,19 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:10:35 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 09:55:12 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 11:03:21 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static void register_closest_obj(t_num distance, t_num min_distance, t_obj **obj, int i)
+static void register_closest_obj(t_num distance, t_num min_distance, t_obj *obj, t_obj **dst)
 {
 	if (distance > 0 && distance < min_distance)
 	{
+		// printf("here\n");
 		min_distance = distance;
-		*obj = &obj[i];
+		*dst = obj;
 	}
 }
 
@@ -30,7 +31,7 @@ static t_hit init_hit(t_num distance, t_ray ray, t_obj *obj)
 	hit.obj = obj;
 	if (hit.obj == NULL)																		// means no object hit
 		return (hit);
-	hit.position = add_vector(add_vector(ray.position, scale_vector(ray.direction, distance)));	// check if IT IS CORRECT?																	// get for light calculation later, or calculater later in a shadow??
+	hit.position = add_vectors(ray.position, scale_vector(ray.direction, distance));	// check if IT IS CORRECT?																	// get for light calculation later, or calculater later in a shadow??
 	return (hit);
 }
 
@@ -53,7 +54,8 @@ t_hit get_hit(t_scene *scene, t_ray ray)
 			distance = compute_sphere_intersection(ray, scene->obj[i]);
 		else if (scene->obj[i].type == CY)
 			distance = compute_cylinder_intersection(ray, scene->obj[i]);
-		register_closest_obj(distance, min_distance, &obj, i);
+		// printf("distance: %f\n", distance);
+		register_closest_obj(distance, min_distance, &scene->obj[i], &obj);
 	}
 	hit = init_hit(min_distance, ray, obj);
 	return (hit);

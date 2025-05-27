@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 20:23:24 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 09:35:34 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 10:46:09 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // hit_point - ray->origin = ray->direction * t
 // t =  (hit_point - ray->origin) / ray->direction
 // get shadow and calculate normal at hit point if no shadow
-bool is_shadowed(t_scene *scene, t_hit hit, t_ray ray)
+bool is_shadowed(t_scene *scene, t_ray ray)
 {
 	int		i;
 	t_num	distance;

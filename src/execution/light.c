@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 18:56:04 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 10:22:05 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 10:46:36 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vector get_plane_normal(t_hit hit, t_ray ray)
 	if (dot(ray.direction, hit.obj->normal) > 0)				// if > 0 means two vectors point into same direction
 		normal = hit.obj->normal;
 	else
-		normal == flip_vector(hit.obj->normal);
+		normal = flip_vector(hit.obj->normal);
 	return (normal);
 }
 
@@ -33,7 +33,7 @@ t_vector get_sphere_normal(t_hit hit, t_ray ray)
 	if (dot(ray.direction, hit.obj->normal) > 0)
 		normal = hit_point_to_center;
 	else
-		normal == flip_vector(hit_point_to_center);
+		normal = flip_vector(hit_point_to_center);
 	return (normal);
 }
 
@@ -49,7 +49,7 @@ t_vector get_cylinder_normal(t_hit hit, t_ray ray)
 	if (dot(ray.direction, hit.obj->normal) > 0)
 		normal = hit_point_to_center;
 	else
-		normal == flip_vector(hit_point_to_center);
+		normal = flip_vector(hit_point_to_center);
 	return (normal);
 }
 
@@ -61,12 +61,13 @@ t_vector get_normal(t_hit hit, t_ray ray)
 		return (get_sphere_normal(hit, ray));
 	else if (hit.obj->type == CY)
 		return (get_cylinder_normal(hit, ray));
+	return ((t_vector){0});
 }
 
 void init_shadow_ray(t_light light, t_ray *ray, t_hit hit)
 {
 	ray->position = hit.position;
-	ray->direction = normalaize(sub_vectors(light.position, hit.position));
+	ray->direction = normalize(sub_vectors(light.position, hit.position));
 	ray->position = add_vectors(ray->position, scale_vector(ray->direction, OFFSET));
 }
 
@@ -82,8 +83,8 @@ t_color	get_diffuse(t_scene *scene, t_hit hit)
 	t_color diffuse;
 
 	init_shadow_ray(scene->light, &ray, hit);
-	if (is_shadowed(scene, hit, ray))
-		return ;							// no diffuse component
+	if (is_shadowed(scene, ray))
+		return ((t_color){0});							// no diffuse component
 	hit.normal = get_normal(hit, ray);		// get for light calculation later, or calculater later in a shadow??
 	intensity = get_intensity(ray.direction, hit.normal);
 	diffuse.r = scene->light.brightness * intensity * hit.obj->color.r;

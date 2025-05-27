@@ -42,10 +42,26 @@ endif
 
 SRC 				:=	\
 						./src/main.c \
+						\
 						./src/error/error_printer.c \
 						./src/error/error_wrappers.c \
+						\
+						./src/execution/cylinder.c \
+						./src/execution/display.c \
+						./src/execution/execution.c \
+						./src/execution/graphlib.c \
+						./src/execution/hit.c \
+						./src/execution/image.c \
+						./src/execution/light.c \
+						./src/execution/pixel.c \
+						./src/execution/plane.c \
+						./src/execution/shadow_ray.c \
+						./src/execution/sphere.c \
+						./src/execution/view_ray.c \
+						\
 						./src/math/one_vector.c \
 						./src/math/two_vectors.c \
+						\
 						./src/parsing/ambient.c \
 						./src/parsing/brightness.c \
 						./src/parsing/camera.c \
@@ -61,7 +77,8 @@ SRC 				:=	\
 						./src/parsing/scene.c \
 						./src/parsing/size.c \
 						./src/parsing/sphere.c \
-						./src/parsing/vector.c
+						./src/parsing/vector.c \
+						\
 
 # Convert src paths to obj paths preserving directory structure
 OBJ					:=	$(patsubst ./src/%.c,./obj/%.o,$(SRC))

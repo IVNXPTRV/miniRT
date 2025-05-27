@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:11:55 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 09:20:07 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 10:42:54 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,3 @@ t_vector flip_vector(t_vector vector)
 {
 	return ((t_vector){vector.x * -1, vector.y * -1, vector.z * -1});
 }
-
-

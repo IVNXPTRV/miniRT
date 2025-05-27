@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 10:17:11 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 10:55:27 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct s_scene
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
-	size_t		obj_num;			// total number of objects
+	int			obj_num;			// total number of objects
 	t_obj		obj[MAX_OBJ];		// array of all objects on the scene
 }	t_scene;
 
@@ -174,20 +174,21 @@ t_num	get_size(char **element, int i, int lineno);
 void err(int lineno, t_m msg);
 void er_close(int fd);
 
-// math
+// math one_vector
 t_num magnitude(t_vector vector);
 t_vector normalize(t_vector vector);
+t_vector scale_vector(t_vector vector, t_num scale);
+t_vector flip_vector(t_vector vector);
+
+// math two_vectors
 t_num dot(t_vector a, t_vector b);
 t_vector cross(t_vector a, t_vector b);
 t_vector add_vectors(t_vector a, t_vector b);
 t_vector sub_vectors(t_vector a, t_vector b);
-t_vector scale_vector(t_vector vector, t_num scale);
-t_vector flip_vector(t_vector vector);
 
 // gl
 void init_graphic_library(t_scene *scene);
 void display_image(t_scene *scene);
-
 
 // execution
 void execute(t_scene *scene);
@@ -198,6 +199,8 @@ t_hit get_hit(t_scene *scene, t_ray ray);
 t_num compute_plane_intersection(t_ray ray, t_obj obj);
 t_num compute_sphere_intersection(t_ray ray, t_obj obj);
 t_num compute_cylinder_intersection(t_ray ray, t_obj obj);
+t_color add_light(t_scene *scene, t_hit hit);
+bool is_shadowed(t_scene *scene, t_ray ray);
 
 
 

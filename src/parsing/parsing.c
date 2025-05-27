@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:13:19 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 08:30:22 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 11:45:40 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,4 @@ void parse(int argc, char **argv, t_scene *scene)
 	validate_argument(argc, argv, scene);
 	load_elements(scene);						// get each line, parse and load to corresponding struct
 	validate_scene(scene);						// prevent scene without obj or without camera etc
-
 }
