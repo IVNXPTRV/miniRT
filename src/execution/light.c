@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 18:56:04 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/23 19:38:20 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 10:22:05 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,43 @@
 
 t_vector get_plane_normal(t_hit hit, t_ray ray)
 {
-	t_vector normal;
+	t_vector	normal;
 
-	if (dot(ray.direction, hit.obj->normal) > 0)
+	if (dot(ray.direction, hit.obj->normal) > 0)				// if > 0 means two vectors point into same direction
 		normal = hit.obj->normal;
 	else
-		normal == flip(hit.obj->normal);
-	return (hit.obj->normal);
+		normal == flip_vector(hit.obj->normal);
+	return (normal);
+}
+
+t_vector get_sphere_normal(t_hit hit, t_ray ray)
+{
+	t_vector	normal;
+	t_vector	hit_point_to_center;
+
+	hit_point_to_center = sub_vectors(hit.position, hit.obj->position);
+	hit_point_to_center = normalize(hit_point_to_center);
+	if (dot(ray.direction, hit.obj->normal) > 0)
+		normal = hit_point_to_center;
+	else
+		normal == flip_vector(hit_point_to_center);
+	return (normal);
+}
+
+// ?????
+t_vector get_cylinder_normal(t_hit hit, t_ray ray)
+{
+	t_vector	normal;
+	t_vector	hit_point_to_center;
+
+	hit_point_to_center = sub_vectors(hit.position, hit.obj->position);
+	hit_point_to_center.z = 0;
+	hit_point_to_center = normalize(hit_point_to_center);
+	if (dot(ray.direction, hit.obj->normal) > 0)
+		normal = hit_point_to_center;
+	else
+		normal == flip_vector(hit_point_to_center);
+	return (normal);
 }
 
 t_vector get_normal(t_hit hit, t_ray ray)
@@ -44,26 +74,65 @@ t_num get_intensity(t_vector direction, t_vector normal)
 {
 	return (fabs(dot(direction, normal)));
 }
-t_num	get_diffuse(t_scene *scene, t_hit hit)
+
+t_color	get_diffuse(t_scene *scene, t_hit hit)
 {
-	t_num intensity;
-	t_ray ray;
+	t_num	intensity;
+	t_ray	ray;
+	t_color diffuse;
 
 	init_shadow_ray(scene->light, &ray, hit);
-	if (is_shadowed(scene, hit))
-		return (0);
+	if (is_shadowed(scene, hit, ray))
+		return ;							// no diffuse component
 	hit.normal = get_normal(hit, ray);		// get for light calculation later, or calculater later in a shadow??
 	intensity = get_intensity(ray.direction, hit.normal);
-	return (intensity * scene->light.brightness);
+	diffuse.r = scene->light.brightness * intensity * hit.obj->color.r;
+	diffuse.g = scene->light.brightness * intensity * hit.obj->color.g;
+	diffuse.b = scene->light.brightness * intensity * hit.obj->color.b;
+	return (diffuse);
+}
+
+t_color	get_ambient(t_scene *scene, t_hit hit)
+{
+	t_color ambient;
+
+	ambient.r = scene->ambient.brightness * scene->ambient.color.r * hit.obj->color.r;
+	ambient.g = scene->ambient.brightness * scene->ambient.color.g * hit.obj->color.g;
+	ambient.b = scene->ambient.brightness * scene->ambient.color.b * hit.obj->color.b;
+	return (ambient);
+}
+
+// prevent overlow more then 1.0
+t_color cap_color(t_color pixel)
+{
+	if (pixel.r > 1)
+		pixel.r = 1;
+	if (pixel.g > 1)
+		pixel.g = 1;
+	if (pixel.b > 1)
+		pixel.b = 1;
+	return (pixel);
+}
+t_color sum_light(t_color ambient, t_color diffuse)
+{
+	t_color pixel;
+
+	pixel.r = ambient.r + diffuse.r;
+	pixel.g = ambient.g + diffuse.g;
+	pixel.b = ambient.b + diffuse.b;
+	pixel = cap_color(pixel);
+	return (pixel);
 }
 
 // returns some cooeficient
-t_num get_light(t_scene *scene, t_hit hit)
+t_color add_light(t_scene *scene, t_hit hit)
 {
-	t_num diffuse;
-	t_num ambient;
+	t_color	pixel;
+	t_color	ambient;
+	t_color	diffuse;
 
+	ambient = get_ambient(scene, hit);
 	diffuse = get_diffuse(scene, hit);
-	ambient = get_ambient(scene);
-	return (diffuse + ambient);
+	pixel = sum_light(ambient, diffuse);
+	return (pixel);
 }

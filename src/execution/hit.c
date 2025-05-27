@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:10:35 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/23 18:38:33 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 09:55:12 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static t_hit init_hit(t_num distance, t_ray ray, t_obj *obj)
 	hit.obj = obj;
 	if (hit.obj == NULL)																		// means no object hit
 		return (hit);
-	hit.position = add_vector(add_vector(ray.position, scale_vector(ray.direction, distance)));	// check if IT IS CORRECT?
-	// hit.normal = (t);																		// get for light calculation later, or calculater later in a shadow??
+	hit.position = add_vector(add_vector(ray.position, scale_vector(ray.direction, distance)));	// check if IT IS CORRECT?																	// get for light calculation later, or calculater later in a shadow??
 	return (hit);
 }
 
