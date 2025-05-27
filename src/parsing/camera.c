@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:14:34 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 18:44:50 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 12:17:23 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_vector get_right(t_vector forward)
 	world_up = (t_vector){0, 1, 0};					// pick +Y as world up
 	// if forward and wolrd_up to mach aligned choose another direction
 	// for strong cross calculations (vectors should be close to perpendicular)
-	// we do not chang global world_up it is stiil +Y but here we change as hack
+	// we do not chang global world_up it is stil +Y but here we change as hack
 	if (fabs(dot(forward, world_up)) > 0.999)
 		world_up = (t_point){0, 0, 1};
 	return (cross(forward, world_up));

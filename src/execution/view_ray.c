@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:30:40 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 10:54:37 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/27 12:20:38 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ t_ray get_ray(t_camera camera, int x, int y)
 	ray.position = camera.position;
 	right = scale_vector(camera.right, px);
 	up = scale_vector(camera.up, py);
-	ray.direction = add_vectors(camera.forward, add_vectors(right, up));
+	ray.direction = normalize(add_vectors(camera.forward, add_vectors(right, up)));
 	return (ray);
 }
