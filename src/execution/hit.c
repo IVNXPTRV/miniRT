@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:10:35 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/28 12:03:57 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 18:13:41 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void register_closest_obj(t_num distance, t_num *min_distance, t_obj *obj, t_obj **dst)
 {
-	if (distance > 0 && distance < *min_distance)
+	if (distance < *min_distance)
 	{
 		// printf("here\n");
 		*min_distance = distance;

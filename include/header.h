@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/28 11:47:02 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 19:04:07 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_color
 # define OFFSET 0.01				// offset a bit from obj surace to rpevent self-intersections
 # define t_file	int					// file descriptor, fd
 # define t_raw_color	uint32_t	// color in form of int 0x000000FF
-# define NOINTERSECTION	-1			// no intersection
+# define NOINTERSECTION	INFINITY	// no intersection
 
 typedef struct s_camera
 {
