@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:30:40 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 12:20:38 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:16:42 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 t_ray get_ray(t_camera camera, int x, int y)
 {
 	// limit of variables in a function?
-	t_num	u;
-	t_num	v;
-	t_num	px;
-	t_num	py;
-	t_num	half_width;
-	t_num	half_height;
-	t_vector right;
-	t_vector up;
-	t_ray	ray;
+	t_num		u;
+	t_num		v;
+	t_num		px;
+	t_num		py;
+	t_num		half_width;
+	t_num		half_height;
+	t_vector	right;
+	t_vector	up;
+	t_ray		ray;
 
 	half_width = camera.scale * 1;					// 1 -- Distance from camera to view plane (usually 1.0)
 	half_height = camera.ratio;

@@ -41,7 +41,7 @@ else ifeq ($(UNAME), Linux)
 endif
 
 SRC 				:=	\
-						./src/main.c \
+						./src/debug/debug.c \
 						\
 						./src/error/error_printer.c \
 						./src/error/error_wrappers.c \
@@ -79,6 +79,7 @@ SRC 				:=	\
 						./src/parsing/sphere.c \
 						./src/parsing/vector.c \
 						\
+						./src/main.c \
 
 # Convert src paths to obj paths preserving directory structure
 OBJ					:=	$(patsubst ./src/%.c,./obj/%.o,$(SRC))

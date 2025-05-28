@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:44:00 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 11:23:50 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 12:05:03 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ t_num compute_plane_intersection(t_ray ray, t_obj obj)
 	// sleep(1);
 	distance = numerator / denom;
 	if (distance > EPSILON)							// check if not negative and not to close to 0
+	{
+		// printf("distance: %f\n", distance);
 		return (distance);
+	}
 	return (NOINTERSECTION);
 }

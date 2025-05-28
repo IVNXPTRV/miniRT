@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 10:55:27 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:47:02 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ typedef struct s_color
 # define t_vector t_3d
 # define t_num double				// most used numebr type in the program
 # define MAX_OBJ 42					// maximum objects to be proccessed
-# define WIDTH 1280					// screen width
-# define HEIGHT 720					// screen height
+# define WIDTH 800					// screen width
+# define HEIGHT 600					// screen height
 # define ERROR -1					// general error code
 # define SUCCESS 1					// general success code
-# define BLACK (t_color){0, 0, 0}			// black color
+# define BLACK (t_color){0, 0, 0}	// black color
 # define OPAQUE 0x000000FF			// fully intransaprent alpha channel
 # define OFFSET 0.01				// offset a bit from obj surace to rpevent self-intersections
 # define t_file	int					// file descriptor, fd
@@ -202,7 +202,12 @@ t_num compute_cylinder_intersection(t_ray ray, t_obj obj);
 t_color add_light(t_scene *scene, t_hit hit);
 bool is_shadowed(t_scene *scene, t_ray ray);
 
-
-
+// debug
+void dbg_print_camera(t_camera	camera);
+void dbg_print_num(t_num	num);
+void dbg_print_vector(t_3d	vector);
+void dbg_print_color(t_color	color);
+void dbg_print_ray(t_ray	ray);
+void dbg_print_hit(t_hit	hit);
 
 #endif

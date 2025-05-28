@@ -10,6 +10,7 @@
 		"sstream": "c",
 		"queue": "c",
 		"stack": "c",
-		"__node_handle": "c"
+		"__node_handle": "c",
+		"ios": "c"
 	}
 }

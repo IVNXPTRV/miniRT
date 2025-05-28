@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:06:13 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 11:01:29 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 12:05:07 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_color get_pixel_color(t_scene *scene, int x, int y)
 	hit = get_hit(scene, ray);
 	if (is_miss(hit))
 		return (BLACK);			// BLACK
-	// printf("here\n");
+	// dbg_print_ray(ray);
+	// dbg_print_hit(hit);
 	pixel = add_light(scene, hit);
 	return (pixel);
 }

@@ -6,15 +6,15 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:23:00 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/05/13 08:15:55 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:21:29 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 800
+# define HEIGHT 600
 # define FN_ERR "Filename must ends with .rt\n"
 
 # include "MLX42.h"

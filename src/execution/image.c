@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:44:19 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/27 11:01:01 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:38:28 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	compute_image(t_scene *scene)
 		while (x < WIDTH)
 		{
 			color = get_pixel_color(scene, x, y);
-			// printf("r: %f / g: %f / b: %f\n", color.r, color.g, color.b);
 			put_pixel(scene, x, y, color);
 			x++;
 		}
