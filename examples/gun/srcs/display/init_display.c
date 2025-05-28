@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_display.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 22:40:08 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:13:57 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_keypress(mlx_key_data_t keydata, void *data_)
 
 int	init_display(t_data *data)
 {
-	data->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "miniRT", true);
+	data->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "miniRT gun", true);
 	if (data->mlx == NULL)
 	{
 		printf("Error: ", STDERR_FILENO);

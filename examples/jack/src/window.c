@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruzhang <ruzhang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:15:21 by ruzhang           #+#    #+#             */
-/*   Updated: 2025/04/08 15:36:33 by ruzhang          ###   ########.fr       */
+/*   Updated: 2025/05/28 13:13:39 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	init_rt(t_rt *rt)
 {
-	rt->mlx = mlx_init(WIDTH, HEIGHT, "new", false);
+	rt->mlx = mlx_init(WIDTH, HEIGHT, "miniRT jack", false);
 	if (!rt->mlx)
 	{
 		perror("Error initiating mlx\n");

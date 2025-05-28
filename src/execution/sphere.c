@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 15:51:38 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/28 12:17:21 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 16:33:23 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ t_num compute_sphere_intersection(t_ray ray, t_obj obj)
     ray_to_obj_center = sub_vectors(ray.position, obj.position);
     // disc coefficients
     b = 2.0 * dot(ray.direction, ray_to_obj_center);
-    c = dot(ray_to_obj_center, ray_to_obj_center) - (obj.diameter / 2) * (obj.diameter / 2);
-    disc = b * b - 4.0 * c;  // (a = 1 so 4ac = 4c)
+    c = dot(ray_to_obj_center, ray_to_obj_center) - (obj.diameter * 0.5) * (obj.diameter * 0.5);
+    disc = b * b - 4.0 * c;  // (a = 1 always so 4ac = 4c)
     if (disc < 0.0)
         return (NOINTERSECTION);
     // two roots
     sqrt_disc = sqrt(disc);
     distance0 = (-b - sqrt_disc) * 0.5;
     distance1 = (-b + sqrt_disc) * 0.5;
-	printf("distance0: %f\n", distance0);
-	printf("distance1: %f\n", distance1);
     // pick the closest positive because t1 <= t0 by math
     if (distance0 > EPSILON)
         return (distance0);

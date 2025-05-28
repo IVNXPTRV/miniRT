@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:49:57 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/28 11:33:18 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 13:46:38 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&scene, sizeof(t_scene));	// init scene with zeroes
 	\
 	parse(argc, argv, &scene); 			// deserialize
-	dbg_print_camera(scene.camera);
+	// dbg_print_camera(scene.camera);
 	// dbg_print_elements(scene);
 	execute(&scene);					// render: init graphic library, get_image, display window with image
 
