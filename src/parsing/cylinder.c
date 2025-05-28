@@ -6,11 +6,33 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:14:34 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/21 14:48:37 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 19:53:47 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+void add_disks(t_scene *scene, t_obj cylinder)
+{
+	scene->obj_num++;
+
+	// add top cap
+	scene->obj[scene->obj_num].position = add_vectors(cylinder.position, scale_vector(cylinder.normal, cylinder.height * 0.5));
+	scene->obj[scene->obj_num].normal = cylinder.normal;
+	scene->obj[scene->obj_num].diameter = cylinder.diameter;
+	scene->obj[scene->obj_num].color = cylinder.color;
+	scene->obj[scene->obj_num].type = DS;
+
+	scene->obj_num++;
+
+	// add bottom cap
+	scene->obj[scene->obj_num].position = sub_vectors(cylinder.position, scale_vector(cylinder.normal, cylinder.height * 0.5));
+	scene->obj[scene->obj_num].normal = flip_vector(cylinder.normal);
+	scene->obj[scene->obj_num].diameter = cylinder.diameter;
+	scene->obj[scene->obj_num].color = cylinder.color;
+	scene->obj[scene->obj_num].type = DS;
+
+}
 
 void	parse_cylinder(char **element, t_scene *scene, int lineno)
 {
@@ -23,5 +45,6 @@ void	parse_cylinder(char **element, t_scene *scene, int lineno)
 	scene->obj[scene->obj_num].height = get_size(element, 4, lineno);
 	scene->obj[scene->obj_num].color = get_color(element, 5, lineno);
 	scene->obj[scene->obj_num].type = CY;
+	add_disks(scene, scene->obj[scene->obj_num]);
 	scene->obj_num++;
 }

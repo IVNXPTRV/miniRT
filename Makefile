@@ -47,6 +47,7 @@ SRC 				:=	\
 						./src/error/error_wrappers.c \
 						\
 						./src/execution/cylinder.c \
+						./src/execution/disk.c \
 						./src/execution/display.c \
 						./src/execution/execution.c \
 						./src/execution/graphlib.c \

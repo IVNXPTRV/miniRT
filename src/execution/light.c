@@ -6,13 +6,24 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 18:56:04 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/28 16:52:40 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 19:56:52 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
 t_vector get_plane_normal(t_hit hit, t_ray ray)
+{
+	t_vector	normal;
+
+	if (dot(ray.direction, hit.obj->normal) > 0)				// if > 0 means two vectors point into same direction
+		normal = hit.obj->normal;
+	else
+		normal = flip_vector(hit.obj->normal);
+	return (normal);
+}
+
+t_vector get_disk_normal(t_hit hit, t_ray ray)
 {
 	t_vector	normal;
 
@@ -77,6 +88,8 @@ t_vector get_normal(t_hit hit, t_ray ray)
 		return (get_sphere_normal(hit, ray));
 	else if (hit.obj->type == CY)
 		return (get_cylinder_normal(hit, ray));
+	else if (hit.obj->type == DS)
+		return (get_disk_normal(hit, ray));
 	return ((t_vector){0});
 }
 

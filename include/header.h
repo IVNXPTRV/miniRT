@@ -6,7 +6,7 @@
 /*   By: ipetrov <ipetrov@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:38:23 by ipetrov           #+#    #+#             */
-/*   Updated: 2025/05/28 19:04:07 by ipetrov          ###   ########.fr       */
+/*   Updated: 2025/05/28 19:57:15 by ipetrov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef enum e_type
 	PL,								// plane
 	SP, 							// sphere
 	CY,								// cylinder
+	DS,								// disk
 	CM,								// camera
 	AM,								// ambient
 	LG,								// light
@@ -199,6 +200,7 @@ t_hit get_hit(t_scene *scene, t_ray ray);
 t_num compute_plane_intersection(t_ray ray, t_obj obj);
 t_num compute_sphere_intersection(t_ray ray, t_obj obj);
 t_num compute_cylinder_intersection(t_ray ray, t_obj obj);
+t_num compute_disk_intersection(t_ray ray, t_obj obj);
 t_color add_light(t_scene *scene, t_hit hit);
 bool is_shadowed(t_scene *scene, t_ray ray);
 
