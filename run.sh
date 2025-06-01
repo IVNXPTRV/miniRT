@@ -14,27 +14,32 @@ if [ ! -d "$FOLDER" ]; then
   exit 1
 fi
 
-# Loop through all files in the folder
+# Get basename of folder to check if it is "error"
+BASENAME=$(basename "$FOLDER")
+
 for FILE in "$FOLDER"/*; do
   if [ -f "$FILE" ]; then
-    echo -e "Opening: $FILE\n"
-
-    ./miniRT "$FILE" &
-    PID1=$!
-
-    echo -e "Press Enter to close and open next, or 'q' to quit...\n"
-    read -r -n1 KEY
-    echo 
-
-    # Kill the processes if they are still running
-    kill $PID1 2>/dev/null
-    wait $PID1 2>/dev/null
-
-    if [ "$KEY" = "q" ]; then
-      echo "Exiting."
-      break
+    if [ "$BASENAME" = "error" ]; then
+      echo -e "Running valgrind on: $FILE\n"
+      valgrind --track-fds=yes --leak-check=full -q ./miniRT "$FILE" &
+      PID1=$!
+    else
+      echo -e "Opening: $FILE\n"
+      ./miniRT "$FILE" &
+      PID1=$!
     fi
-  fi
+      echo -e "Press Enter to close and open next, or 'q' to quit...\n"
+      read -r -n1 KEY
+      echo
+
+      kill $PID1 2>/dev/null
+      wait $PID1 2>/dev/null
+
+      if [ "$KEY" = "q" ]; then
+        echo "Exiting."
+        break
+      fi
+    fi
 done
 
 echo "All scenes are shown. Exiting..."
