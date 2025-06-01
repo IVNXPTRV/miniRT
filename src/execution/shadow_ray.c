@@ -37,6 +37,8 @@ bool is_shadowed(t_scene *scene, t_ray ray)
 			distance = compute_sphere_intersection(ray, scene->obj[i]);
 		else if (scene->obj[i].type == CY)
 			distance = compute_cylinder_intersection(ray, scene->obj[i]);
+		else if (scene->obj[i].type == DS)
+			distance = compute_disk_intersection(ray, scene->obj[i]);
 		if (distance != NOINTERSECTION && distance < distance_to_light)
 			return (true);
 
