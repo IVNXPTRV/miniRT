@@ -12,7 +12,7 @@
 
 #include "header.h"
 
-static void	key_press(mlx_key_data_t keycode, void *param)
+static void	esc_press(mlx_key_data_t keycode, void *param)
 {
 	t_scene	*scene;
 
@@ -23,6 +23,15 @@ static void	key_press(mlx_key_data_t keycode, void *param)
 			mlx_close_window(scene->gl.window);
 	}
 }
+
+static void	cross_click(void *param)
+{
+	t_scene	*scene;
+
+	scene = (t_scene *)param;
+	mlx_close_window(scene->gl.window);
+}
+
 
 static void	init_window(t_scene *scene)
 {
@@ -47,7 +56,8 @@ static void	init_image(t_scene *scene)
 
 static void	register_hooks(t_scene *scene)
 {
-	mlx_key_hook(scene->gl.window, &key_press, scene);
+	mlx_key_hook(scene->gl.window, &esc_press, scene);
+	mlx_close_hook(scene->gl.window, &cross_click, scene);
 }
 
 void	init_graphic_library(t_scene *scene)
