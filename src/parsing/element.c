@@ -18,6 +18,7 @@ void verify_max_obj_num(char **element, t_scene *scene, int lineno)
 	{
 		err(lineno, (t_m){"reached maximum number of objects"});
 		ft_parrclean(&element);
+		exit(EXIT_FAILURE);
 	}
 }
 

@@ -51,7 +51,7 @@ typedef struct s_color
 # define t_point t_3d
 # define t_vector t_3d
 # define t_num double				// most used numebr type in the program
-# define MAX_OBJ 42					// maximum objects to be proccessed
+# define MAX_OBJ 100			    // maximum objects to be proccessed
 # define WIDTH 800					// screen width
 # define HEIGHT 600					// screen height
 # define ERROR -1					// general error code

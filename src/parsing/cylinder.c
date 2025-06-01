@@ -12,9 +12,10 @@
 
 #include "header.h"
 
-void add_disks(t_scene *scene, t_obj cylinder)
+static void add_disks(char **element, t_scene *scene, t_obj cylinder, int lineno)
 {
 	scene->obj_num++;
+	verify_max_obj_num(element, scene, lineno);
 
 	// add top cap
 	scene->obj[scene->obj_num].position = add_vectors(cylinder.position, scale_vector(cylinder.normal, cylinder.height * 0.5));
@@ -24,6 +25,7 @@ void add_disks(t_scene *scene, t_obj cylinder)
 	scene->obj[scene->obj_num].type = DS;
 
 	scene->obj_num++;
+	verify_max_obj_num(element, scene, lineno);
 
 	// add bottom cap
 	scene->obj[scene->obj_num].position = sub_vectors(cylinder.position, scale_vector(cylinder.normal, cylinder.height * 0.5));
@@ -45,6 +47,6 @@ void	parse_cylinder(char **element, t_scene *scene, int lineno)
 	scene->obj[scene->obj_num].height = get_size(element, 4, lineno);
 	scene->obj[scene->obj_num].color = get_color(element, 5, lineno);
 	scene->obj[scene->obj_num].type = CY;
-	add_disks(scene, scene->obj[scene->obj_num]);
+	add_disks(element, scene, scene->obj[scene->obj_num], lineno);
 	scene->obj_num++;
 }
