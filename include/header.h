@@ -204,6 +204,11 @@ t_num compute_disk_intersection(t_ray ray, t_obj obj);
 t_color add_light(t_scene *scene, t_hit hit);
 bool is_shadowed(t_scene *scene, t_ray ray);
 
+// light
+t_color	get_ambient(t_scene *scene, t_hit hit);
+t_color	get_diffuse(t_scene *scene, t_hit hit);
+
+
 // normal
 t_vector	get_plane_normal(t_hit hit, t_ray ray);
 t_vector	get_disk_normal(t_hit hit, t_ray ray);
