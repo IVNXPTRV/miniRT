@@ -14,7 +14,7 @@
 
 static void verify_fov(char **element, int i, int lineno, int fov)
 {
-	if (!is_in_range((double)fov, 0, 180))
+	if (!is_in_range((double)fov, 1, 179))
 	{
 		err(lineno, (t_m){"fov is beyond 0 to 180 range -> ", element[i]});
 		ft_parrclean(&element);

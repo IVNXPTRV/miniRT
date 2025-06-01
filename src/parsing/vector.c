@@ -14,7 +14,16 @@
 
 static void verify_vector(char **element, int i, int lineno, t_vector *vector)
 {
-	if (magnitude(*vector) != 1.0)
+	t_num mag;
+
+	mag = magnitude(*vector);
+	if (mag == 0)
+	{
+		err(lineno, (t_m){"invalid vector ", element[i]});
+		ft_parrclean(&element);
+		exit(EXIT_FAILURE);
+	}
+	else if (mag != 1.0)
 	{
 		*vector = normalize(*vector);
 		err(lineno, (t_m){"vector is not normalized, magnitude should be 1 -> ", element[i], \
