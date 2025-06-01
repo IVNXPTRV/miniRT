@@ -17,22 +17,22 @@ RM					:=	rm -rf
 NAME				:=	miniRT
 
 INCLUDE_DIRS 		:=	./include/ \
-            			./lib/elibft/include/ \
-                		./lib/MLX42/include/MLX42/
+						./lib/elibft/include/ \
+						./lib/MLX42/include/MLX42/
 
 INCLUDE				:=	$(addprefix -I,$(INCLUDE_DIRS))
 
 UNAME				:=	$(shell uname)
 
 ifeq ($(UNAME), Darwin)
-    LIB 			=	./lib/elibft/elibft.a \
+LIB					:=	./lib/elibft/elibft.a \
 						./lib/MLX42/build/libmlx42.a \
 						-framework Cocoa \
 						-framework OpenGL \
 						-framework IOKit \
 						-lglfw
 else ifeq ($(UNAME), Linux)
-    LIB				=	./lib/elibft/elibft.a \
+LIB					:=	./lib/elibft/elibft.a \
 						./lib/MLX42/build/libmlx42.a \
 						-ldl \
 						-lglfw \
