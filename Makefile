@@ -46,7 +46,9 @@ SRC 				:=	\
 						./src/error/error_printer.c \
 						./src/error/error_wrappers.c \
 						\
+						./src/execution/ambient.c \
 						./src/execution/cylinder.c \
+						./src/execution/diffuse.c \
 						./src/execution/disk.c \
 						./src/execution/display.c \
 						./src/execution/execution.c \
@@ -54,6 +56,7 @@ SRC 				:=	\
 						./src/execution/hit.c \
 						./src/execution/image.c \
 						./src/execution/light.c \
+						./src/execution/normal.c \
 						./src/execution/pixel.c \
 						./src/execution/plane.c \
 						./src/execution/shadow_ray.c \
