@@ -16,7 +16,9 @@
  * Converts a lowercase letter to uppercase.
  *
  * @param c The character to be converted.
- * @return The uppercase equivalent of the character if it is a lowercase letter,
+
+	* @return The uppercase equivalent of the character if it
+	* is a lowercase letter,
  *         otherwise returns the character itself.
  */
 int	ft_toupper(int c)

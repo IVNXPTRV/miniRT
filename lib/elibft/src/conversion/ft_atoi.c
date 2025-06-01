@@ -83,13 +83,13 @@ static size_t	catch_overflow(size_t result, int digit, int *sign, int *status)
  *
  * 	All other codes currently doesnt work;
  *  -1 - Negative
- * 	 3 - Empty
- * 	 3 - Nonnumeric
- * 	 2 - 1 byte signed overflow
- * 	 2 - 1 byte unsigned overflow
- * 	 2 - 2 bytes long overflow
- * 	 2 - 4 bytes overflow, INT overflow
- * 	 2 - 8 bytes overflow, INT overflow
+ * 		3 - Empty
+ * 		3 - Nonnumeric
+ * 		2 - 1 byte signed overflow
+ * 		2 - 1 byte unsigned overflow
+ * 		2 - 2 bytes long overflow
+ * 		2 - 4 bytes overflow, INT overflow
+ * 		2 - 8 bytes overflow, INT overflow
  *
  *	???if (sizeof(size_t) != size_of)
  *		result = result << ((sizeof(size_t) - size_of) * 8);

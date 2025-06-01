@@ -12,9 +12,6 @@
 
 #include "elibft.h"
 
-//add after index
-//after: t_lnd *node
-//complexity: 1
 int	lst_add_after(t_lst **dst, t_lnd *node, void *item)
 {
 	t_lst	*src;

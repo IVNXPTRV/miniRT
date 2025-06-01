@@ -21,7 +21,7 @@
  * @param len The maximum number of characters to be compared.
  * @return 1 if 'needle' is found at the beginning of 'haystack', 0 otherwise.
  */
-static	int	is_needle(const char *haystack, const char *needle, size_t len)
+static int	is_needle(const char *haystack, const char *needle, size_t len)
 {
 	while (len-- && *haystack && *needle)
 	{

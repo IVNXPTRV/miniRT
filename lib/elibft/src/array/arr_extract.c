@@ -58,8 +58,8 @@ void	*arr_extract(t_arr **arr, int i)
 		return (NULL);
 	if (i < 0)
 		i = (*arr)->len + i;
-	ft_memcpy(item, (unsigned char *)(*arr)->item + i * (*arr)->size_of, \
-	(*arr)->size_of);
+	ft_memcpy(item, (unsigned char *)(*arr)->item + i * (*arr)->size_of,
+		(*arr)->size_of);
 	if (!pop(arr, i))
 		return (NULL);
 	(*arr)->len -= 1;

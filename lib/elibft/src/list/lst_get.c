@@ -12,7 +12,6 @@
 
 #include "elibft.h"
 
-//complexity: n
 t_lnd	*lst_get(t_lst **lst, int i)
 {
 	t_lnd	*result;

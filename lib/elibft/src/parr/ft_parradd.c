@@ -12,7 +12,6 @@
 
 #include "elibft.h"
 
-//it doesnot strdup void*item it just attachs
 void	*ft_parradd(void *arr, void *item)
 {
 	size_t	len;

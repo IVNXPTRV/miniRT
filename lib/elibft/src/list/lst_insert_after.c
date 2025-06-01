@@ -12,9 +12,6 @@
 
 #include "elibft.h"
 
-//fully cleans src
-//after: t_lnd *node
-//complexity: 1
 int	lst_insert_after(t_lst **dst, t_lnd *node, t_lst **src)
 {
 	t_lnd	*tmp;

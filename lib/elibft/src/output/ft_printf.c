@@ -135,7 +135,7 @@ int	ft_printf(const char *fstr, ...)
 			len += handler(*(++fstr), args);
 		else
 		{
-			write (1, fstr, 1);
+			write(1, fstr, 1);
 			len++;
 		}
 		fstr++;

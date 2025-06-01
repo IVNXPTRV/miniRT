@@ -12,7 +12,6 @@
 
 #include "elibft.h"
 
-//use &arr
 void	ft_parrclean(void *arr)
 {
 	void	**a;

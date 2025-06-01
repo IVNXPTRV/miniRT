@@ -12,7 +12,6 @@
 
 #include "elibft.h"
 
-//complexity: n
 int	lst_iter(t_lst **lst, int (*f)(t_lst **, t_lnd *, void *), void *param)
 {
 	size_t	len;

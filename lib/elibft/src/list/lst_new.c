@@ -12,7 +12,6 @@
 
 #include "elibft.h"
 
-//complexity: 1
 int	lst_new(t_lst **lst, void *item)
 {
 	t_lnd	*node;

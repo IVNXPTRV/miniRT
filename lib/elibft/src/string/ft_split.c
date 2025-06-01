@@ -83,7 +83,7 @@ char	**ft_split(char *str, char *charset)
 	word_count = ft_word_count(str, charset);
 	result = malloc(sizeof(char *) * (word_count + 1));
 	if (!result)
-	return (NULL);
+		return (NULL);
 	index = 0;
 	while (*str)
 	{

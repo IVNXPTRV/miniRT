@@ -12,7 +12,6 @@
 
 #include "header.h"
 
-// We could check here if each coordinate within range -1 to +1 or mag == 1
 /* else if (mag != 1.0) */
 /* { */
 /* 	*vector = normalize(*vector); */

@@ -29,7 +29,6 @@ static int	clean(t_lst **lst, t_lnd *node, void *f)
 	return (CONTINUE);
 }
 
-//complexity: n
 int	lst_clean(t_lst **lst, int (*f)(void *))
 {
 	if (!lst)

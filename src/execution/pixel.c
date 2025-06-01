@@ -26,7 +26,7 @@ t_color	get_pixel_color(t_scene *scene, int x, int y)
 	ray = get_ray(scene->camera, x, y);
 	hit = get_hit(scene, ray);
 	if (is_miss(hit))
-		return (BLACK);
+		return ((t_color){0, 0, 0});
 	pixel = add_light(scene, hit);
 	return (pixel);
 }

@@ -28,11 +28,11 @@ static t_num	calculate_disc(t_num *b, t_ray ray, t_obj obj)
 
 t_num	compute_sphere_intersection(t_ray ray, t_obj obj)
 {
-	t_num		disc;
-	t_num		sqrt_disc;
-	t_num		distance0;
-	t_num		distance1;
-	t_num		b;
+	t_num	disc;
+	t_num	sqrt_disc;
+	t_num	distance0;
+	t_num	distance1;
+	t_num	b;
 
 	disc = calculate_disc(&b, ray, obj);
 	if (disc < 0.0)

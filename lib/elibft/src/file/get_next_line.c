@@ -70,13 +70,13 @@ t_file	*search_file(t_file **flist, int fd)
 
 char	*append_buffer_to_line(t_file *file)
 {
-	ssize_t			len;
-	char			*old;
-	int				j;
+	ssize_t	len;
+	char	*old;
+	int		j;
 
 	len = 0;
-	while (len < (file->bytes - file->blen)
-		&& file->buf[file->blen + len++] != '\n')
+	while (len < (file->bytes - file->blen) && file->buf[file->blen
+			+ len++] != '\n')
 		;
 	old = file->line;
 	file->line = (char *)malloc(sizeof(char) * (file->llen + len + 1));
@@ -115,9 +115,7 @@ char	*get_next_line(int fd)
 		if (!append_buffer_to_line(file))
 			return (pop(&flist, fd), NULL);
 		if (file->line[file->llen - 1] == '\n' || file->bytes < BUFFER_SIZE)
-		{
 			return (file->llen = 0, temp = file->line, file->line = NULL, temp);
-		}
 	}
 	return (NULL);
 }
