@@ -143,7 +143,6 @@ dep_dir:
 clean:
 	@$(RM) obj
 	@$(RM) dep
-	@echo "$(NAME) has been cleaned"
 
 # Clean build files and executables
 fclean: clean
