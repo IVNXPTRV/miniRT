@@ -22,19 +22,13 @@ for FILE in "$FOLDER"/*; do
     ./miniRT "$FILE" &
     PID1=$!
 
-    ./examples/jack/minirt "$FILE" &
-    PID2=$!
-
-    ./examples/gun/miniRT "$FILE" &
-    PID3=$!
-
     echo -e "Press Enter to close and open next, or 'q' to quit...\n"
     read -r -n1 KEY
     echo 
 
     # Kill the processes if they are still running
-    kill $PID1 $PID2 $PID3 2>/dev/null
-    wait $PID1 $PID2 $PID3 2>/dev/null
+    kill $PID1 2>/dev/null
+    wait $PID1 2>/dev/null
 
     if [ "$KEY" = "q" ]; then
       echo "Exiting."
@@ -43,4 +37,4 @@ for FILE in "$FOLDER"/*; do
   fi
 done
 
-echo "All scenes are showed. Exiting..."
+echo "All scenes are shown. Exiting..."

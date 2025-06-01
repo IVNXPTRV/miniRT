@@ -40,18 +40,12 @@ t_num	limit_body(t_num distance0, t_num distance1, t_ray ray, t_obj obj)
 	return (NOINTERSECTION);
 }
 
-t_num	compute_cylinder_intersection(t_ray ray, t_obj obj)
+static t_num	calculate_coefficients(t_num *b, t_num *c, t_ray ray, t_obj obj)
 {
 	t_vector	ray_to_obj_center;
 	t_vector	prj_ray_direction;
 	t_vector	prj_ray_to_obj_direction;
 	t_num		a;
-	t_num		b;
-	t_num		c;
-	t_num		disc;
-	t_num		sqrt_disc;
-	t_num		distance0;
-	t_num		distance1;
 
 	ray_to_obj_center = sub_vectors(ray.position, obj.position);
 	prj_ray_direction = sub_vectors(ray.direction, scale_vector(obj.normal,
@@ -59,18 +53,27 @@ t_num	compute_cylinder_intersection(t_ray ray, t_obj obj)
 	prj_ray_to_obj_direction = sub_vectors(ray_to_obj_center,
 			scale_vector(obj.normal, dot(ray_to_obj_center, obj.normal)));
 	a = dot(prj_ray_direction, prj_ray_direction);
-	b = 2.0 * dot(prj_ray_direction, prj_ray_to_obj_direction);
-	c = dot(prj_ray_to_obj_direction, prj_ray_to_obj_direction) - (obj.diameter
+	*b = 2.0 * dot(prj_ray_direction, prj_ray_to_obj_direction);
+	*c = dot(prj_ray_to_obj_direction, prj_ray_to_obj_direction) - (obj.diameter
 			* 0.5) * (obj.diameter * 0.5);
+	return (a);
+}
+
+t_num	compute_cylinder_intersection(t_ray ray, t_obj obj)
+{
+	t_num	a;
+	t_num	b;
+	t_num	c;
+	t_num	disc;
+	t_num	sqrt_disc;
+
+	a = calculate_coefficients(&b, &c, ray, obj);
 	if (fabs(a) < EPSILON)
-	{
 		return (NOINTERSECTION);
-	}
 	disc = b * b - 4.0 * a * c;
 	if (disc < 0.0)
 		return (NOINTERSECTION);
 	sqrt_disc = sqrt(disc);
-	distance0 = (-b - sqrt_disc) / (2.0 * a);
-	distance1 = (-b + sqrt_disc) / (2.0 * a);
-	return (limit_body(distance0, distance1, ray, obj));
+	return (limit_body((-b - sqrt_disc) / (2.0 * a), (-b + sqrt_disc) / (2.0
+				* a), ray, obj));
 }

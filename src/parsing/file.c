@@ -17,7 +17,8 @@ static void	validate_synopsis(int argc)
 	if (argc != 2)
 	{
 		err(Z,
-			(t_m){"minirt: wrong number of arguments; program accepts exactly 1 argument"});
+			(t_m){"minirt: wrong number of arguments;\
+					program accepts exactly 1 argument"});
 		exit(EXIT_FAILURE);
 	}
 }
@@ -30,7 +31,8 @@ static void	validate_filename(char *filename)
 	if (len < 4 || !is_eqlstr(".rt", filename + (len - 3)))
 	{
 		err(Z,
-			(t_m){"minirt: wrong filename; file should end with .rt extention"});
+			(t_m){"minirt: wrong filename; file should end\
+					 with .rt extention"});
 		exit(EXIT_FAILURE);
 	}
 }

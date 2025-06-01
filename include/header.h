@@ -216,12 +216,4 @@ t_vector	get_sphere_normal(t_hit hit, t_ray ray);
 t_vector	get_cylinder_normal(t_hit hit, t_ray ray);
 t_vector	get_normal(t_hit hit, t_ray ray);
 
-// debug
-void dbg_print_camera(t_camera	camera);
-void dbg_print_num(t_num	num);
-void dbg_print_vector(t_3d	vector);
-void dbg_print_color(t_color	color);
-void dbg_print_ray(t_ray	ray);
-void dbg_print_hit(t_hit	hit);
-
 #endif

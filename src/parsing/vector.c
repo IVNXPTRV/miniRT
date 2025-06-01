@@ -12,6 +12,14 @@
 
 #include "header.h"
 
+// We could check here if each coordinate within range -1 to +1 or mag == 1
+/* else if (mag != 1.0) */
+/* { */
+/* 	*vector = normalize(*vector); */
+/* 	err(lineno, (t_m){"vector is not normalized, magnitude should be 1 -> ", */
+/* 		element[i], */
+/* 		"\nthis vector is automatically normalized for convinience"}); */
+/* } */
 static void	verify_vector(char **element, int i, int lineno, t_vector *vector)
 {
 	t_num	mag;
@@ -24,12 +32,7 @@ static void	verify_vector(char **element, int i, int lineno, t_vector *vector)
 		exit(EXIT_FAILURE);
 	}
 	else if (mag != 1.0)
-	{
 		*vector = normalize(*vector);
-		err(lineno, (t_m){"vector is not normalized, magnitude should be 1 -> ",
-			element[i],
-			"\nthis vector is automatically normalized for convinience"});
-	}
 }
 
 t_vector	get_vector(char **element, int i, int lineno)
