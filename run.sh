@@ -30,7 +30,7 @@ if [ "$BASENAME" = "error" ]; then
    )
    for CMD in "${CMDS[@]}"; do
       echo -e "Running valgrind on $CMD \n"
-      valgrind --track-fds=yes --leak-check=full -q ./miniRT "$CMD" &
+      valgrind --track-fds=yes --leak-check=full -q $CMD &
       PID1=$!
       echo -e "Press Enter to close and open next, or 'q' to quit...\n"
       read -r -n1 KEY
