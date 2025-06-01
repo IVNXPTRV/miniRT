@@ -29,6 +29,7 @@ static char	**get_element(char *line)
 	if (element == NULL)
 	{
 		err(Z, (t_m){"malloc: fatal error"});
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 	return (element);
@@ -57,6 +58,7 @@ static void	load_elements(t_scene *scene)
 		if (errno == ENOMEM)
 		{
 			err(Z, (t_m){"malloc: fatal error"});
+			er_close(scene->file);
 			exit(EXIT_FAILURE);
 		}
 		if (line)

@@ -19,6 +19,7 @@ static void	verify_color(char **element, int i, int lineno, t_color color)
 	{
 		err(lineno, (t_m){"color is beyond 0 to 255 range -> ", element[i]});
 		ft_parrclean(&element);
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }

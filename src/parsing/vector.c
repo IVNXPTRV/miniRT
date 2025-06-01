@@ -26,8 +26,9 @@ static void	verify_vector(char **element, int i, int lineno, t_vector *vector)
 	mag = magnitude(*vector);
 	if (mag == 0)
 	{
-		err(lineno, (t_m){"invalid vector ", element[i]});
+		err(lineno, (t_m){"invalid vector -> ", element[i]});
 		ft_parrclean(&element);
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 	else if (mag != 1.0)

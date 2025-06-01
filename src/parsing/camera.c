@@ -18,6 +18,7 @@ static void	verify_fov(char **element, int i, int lineno, int fov)
 	{
 		err(lineno, (t_m){"fov is beyond 0 to 180 range -> ", element[i]});
 		ft_parrclean(&element);
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }

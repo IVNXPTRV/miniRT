@@ -20,13 +20,13 @@ fi
 BASENAME=$(basename "$FOLDER")
 
 if [ "$BASENAME" = "error" ]; then
-   chmod -r "./error/nopermission.rt"
+   chmod -r "./scenes/error/nopermission.rt"
    CMDS=(
-     "./miniRT ./error/nonexistingfile.rt"
-     "./miniRT ./error/"
+     "./miniRT ./scenes/error/nonexistingfile.rt"
+     "./miniRT ./scenes/error/"
      "./miniRT ./arg1.rt ./arg2.rt"
      "./miniRT"
-     "./miniRT ./error/nopermission.rt"
+     "./miniRT ./scenes/error/nopermission.rt"
    )
    for CMD in "${CMDS[@]}"; do
       echo -e "Running valgrind on $CMD \n"

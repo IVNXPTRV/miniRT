@@ -18,6 +18,7 @@ void	verify_max_obj_num(char **element, t_scene *scene, int lineno)
 	{
 		err(lineno, (t_m){"reached maximum number of objects"});
 		ft_parrclean(&element);
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -28,6 +29,7 @@ void	verify_uniqueness(char **element, bool *singleton, int lineno)
 	{
 		err(lineno, (t_m){"encountered more then one ", element[0]});
 		ft_parrclean(&element);
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 	*singleton = true;
@@ -39,6 +41,7 @@ void	verify_attrs_number(char **element, size_t num, int lineno)
 	{
 		err(lineno, (t_m){"wrong number of attributes"});
 		ft_parrclean(&element);
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -52,6 +55,7 @@ char	**get_numbers(char **element, int i, int lineno, size_t limit)
 	{
 		ft_parrclean(&element);
 		err(Z, (t_m){"malloc: fatal error"});
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 	if (ft_parrlen(numbers) != limit)
@@ -60,6 +64,7 @@ char	**get_numbers(char **element, int i, int lineno, size_t limit)
 			element[i]});
 		ft_parrclean(&element);
 		ft_parrclean(&numbers);
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 	return (numbers);
@@ -83,6 +88,7 @@ void	parse_element(char **element, t_scene *scene, int lineno)
 	{
 		err(lineno, (t_m){"wrong identifier -> ", element[0]});
 		ft_parrclean(&element);
+		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 	ft_parrclean(&element);
