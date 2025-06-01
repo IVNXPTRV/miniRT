@@ -30,7 +30,8 @@ LIB					:=	./lib/elibft/elibft.a \
 						-framework Cocoa \
 						-framework OpenGL \
 						-framework IOKit \
-						-lglfw
+						-lglfw \
+						-lm
 else ifeq ($(UNAME), Linux)
 LIB					:=	./lib/elibft/elibft.a \
 						./lib/MLX42/build/libmlx42.a \
