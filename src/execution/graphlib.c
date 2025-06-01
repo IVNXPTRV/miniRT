@@ -32,7 +32,6 @@ static void	cross_click(void *param)
 	mlx_close_window(scene->gl.window);
 }
 
-
 static void	init_window(t_scene *scene)
 {
 	scene->gl.window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
@@ -54,15 +53,10 @@ static void	init_image(t_scene *scene)
 	}
 }
 
-static void	register_hooks(t_scene *scene)
-{
-	mlx_key_hook(scene->gl.window, &esc_press, scene);
-	mlx_close_hook(scene->gl.window, &cross_click, scene);
-}
-
 void	init_graphic_library(t_scene *scene)
 {
 	init_window(scene);
 	init_image(scene);
-	register_hooks(scene);
+	mlx_key_hook(scene->gl.window, &esc_press, scene);
+	mlx_close_hook(scene->gl.window, &cross_click, scene);
 }
