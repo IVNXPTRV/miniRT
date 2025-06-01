@@ -12,11 +12,6 @@
 
 #include "header.h"
 
-// void dbg_print_elements(t_scene scene)
-// {
-
-// }
-
 int	main(int argc, char **argv)
 {
 	t_scene	scene;
@@ -24,19 +19,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&scene, sizeof(t_scene));	// init scene with zeroes
 	\
 	parse(argc, argv, &scene); 			// deserialize
-	// dbg_print_camera(scene.camera);
-	// dbg_print_elements(scene);
 	execute(&scene);					// render: init graphic library, get_image, display window with image
-
-	// (void)argc;
-	// int fd = open(argv[1], O_RDONLY);
-	// printf("line: %s\n", get_next_line(fd));
+	\
 	return (EXIT_SUCCESS);
-	// validate
-
-	// parse
-	// execute
-
-	// clean
-	// exit
 }

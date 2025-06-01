@@ -72,12 +72,12 @@ t_vector get_cylinder_normal(t_hit hit, t_ray ray)
     normal = normalize(normal);
 
     // 5. Ensure the normal points outwards (away from the incoming ray)
-    // If the dot product of the ray direction and the normal is positive,
+    // If the dot product of the ray direction and the norm al is positive,
     // the normal is pointing towards the ray, so flip it.
     if (dot(ray.direction, normal) > 0)
         normal = flip_vector(normal); // Assuming flip_vector negates all components
 
-    return (normal);
+    return (flip_vector(normal));
 }
 
 t_vector get_normal(t_hit hit, t_ray ray)
