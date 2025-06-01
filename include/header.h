@@ -204,6 +204,13 @@ t_num compute_disk_intersection(t_ray ray, t_obj obj);
 t_color add_light(t_scene *scene, t_hit hit);
 bool is_shadowed(t_scene *scene, t_ray ray);
 
+// normal
+t_vector	get_plane_normal(t_hit hit, t_ray ray);
+t_vector	get_disk_normal(t_hit hit, t_ray ray);
+t_vector	get_sphere_normal(t_hit hit, t_ray ray);
+t_vector	get_cylinder_normal(t_hit hit, t_ray ray);
+t_vector	get_normal(t_hit hit, t_ray ray);
+
 // debug
 void dbg_print_camera(t_camera	camera);
 void dbg_print_num(t_num	num);

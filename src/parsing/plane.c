@@ -16,7 +16,6 @@ void	parse_plane(char **element, t_scene *scene, int lineno)
 {
 	verify_max_obj_num(element, scene, lineno);
 	verify_attrs_number(element, 3, lineno);
-	\
 	scene->obj[scene->obj_num].position = get_point(element, 1, lineno);
 	scene->obj[scene->obj_num].normal = get_vector(element, 2, lineno);
 	scene->obj[scene->obj_num].color = get_color(element, 3, lineno);

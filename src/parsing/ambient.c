@@ -12,11 +12,10 @@
 
 #include "header.h"
 
-void parse_ambient(char **element, t_scene *scene, int lineno)
+void	parse_ambient(char **element, t_scene *scene, int lineno)
 {
 	verify_uniqueness(element, &scene->ambient.status, lineno);
 	verify_attrs_number(element, 2, lineno);
-	\
 	scene->ambient.brightness = get_brightness(element, 1, lineno);
 	scene->ambient.color = get_color(element, 2, lineno);
 }

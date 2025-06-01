@@ -14,7 +14,7 @@
 
 static void	key_press(mlx_key_data_t keycode, void *param)
 {
-	t_scene *scene;
+	t_scene	*scene;
 
 	scene = (t_scene *)param;
 	if (keycode.action == MLX_PRESS || keycode.action == MLX_REPEAT)
@@ -24,7 +24,7 @@ static void	key_press(mlx_key_data_t keycode, void *param)
 	}
 }
 
-static void init_window(t_scene *scene)
+static void	init_window(t_scene *scene)
 {
 	scene->gl.window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	if (scene->gl.window == NULL)
@@ -34,7 +34,7 @@ static void init_window(t_scene *scene)
 	}
 }
 
-static void init_image(t_scene *scene)
+static void	init_image(t_scene *scene)
 {
 	scene->gl.image = mlx_new_image(scene->gl.window, WIDTH, HEIGHT);
 	if (scene->gl.image == NULL)
@@ -45,12 +45,12 @@ static void init_image(t_scene *scene)
 	}
 }
 
-static void register_hooks(t_scene *scene)
+static void	register_hooks(t_scene *scene)
 {
 	mlx_key_hook(scene->gl.window, &key_press, scene);
 }
 
-void init_graphic_library(t_scene *scene)
+void	init_graphic_library(t_scene *scene)
 {
 	init_window(scene);
 	init_image(scene);

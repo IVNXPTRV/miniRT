@@ -12,26 +12,25 @@
 
 #include "header.h"
 
-// Helper function to check if a point is within a circle's radius
-// This is used to check if a hit on a cap plane is within the disc
-bool is_inside_disc(t_point point_on_plane, t_point center_of_disc, t_num radius)
+bool	is_inside_disc(t_point point_on_plane, t_point center_of_disc,
+		t_num radius)
 {
-    t_vector vec_to_center;
+	t_vector	vec_to_center;
 
 	vec_to_center = sub_vectors(point_on_plane, center_of_disc);
-    return (dot(vec_to_center, vec_to_center) <= (radius * radius) + EPSILON);
+	return (dot(vec_to_center, vec_to_center) <= (radius * radius) + EPSILON);
 }
 
-t_num compute_disk_intersection(t_ray ray, t_obj obj)
+t_num	compute_disk_intersection(t_ray ray, t_obj obj)
 {
-    t_num distance;					// distance to a top cap or NONINTERSEC if no intersection
-	t_point hit_position;
+	t_num	distance;
+	t_point	hit_position;
 
 	distance = compute_plane_intersection(ray, obj);
-	// Intersect with top cap plane
 	if (distance != NOINTERSECTION)
 	{
-		hit_position = add_vectors(ray.position, scale_vector(ray.direction, distance));
+		hit_position = add_vectors(ray.position, scale_vector(ray.direction,
+					distance));
 		if (!is_inside_disc(hit_position, obj.position, obj.diameter * 0.5))
 			distance = NOINTERSECTION;
 	}

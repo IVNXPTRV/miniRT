@@ -12,7 +12,8 @@
 
 #include "header.h"
 
-static void verify_brightness(char **element, int i, int lineno, t_num brightness)
+static void	verify_brightness(char **element, int i, int lineno,
+		t_num brightness)
 {
 	if (!is_in_range(brightness, 0, 1))
 	{
@@ -24,8 +25,8 @@ static void verify_brightness(char **element, int i, int lineno, t_num brightnes
 
 t_num	get_brightness(char **element, int i, int lineno)
 {
-	char		**numbers;
-	t_num		brightness;
+	char	**numbers;
+	t_num	brightness;
 
 	numbers = get_numbers(element, i, lineno, 1);
 	brightness = get_double(element, numbers, 0, lineno);

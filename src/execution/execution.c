@@ -12,9 +12,9 @@
 
 #include "header.h"
 
-void execute(t_scene *scene)
+void	execute(t_scene *scene)
 {
-	init_graphic_library(scene);	// connect to gl and prepare an image and register hooks
-	compute_image(scene);			// fill all final pixels color
-	display_image(scene);			// render an image in an OS window
+	init_graphic_library(scene);
+	compute_image(scene);
+	display_image(scene);
 }

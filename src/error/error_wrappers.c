@@ -12,7 +12,7 @@
 
 #include "header.h"
 
-void er_close(int fd)
+void	er_close(int fd)
 {
 	if (close(fd) == ERROR)
 	{
@@ -20,4 +20,3 @@ void er_close(int fd)
 		exit(EXIT_FAILURE);
 	}
 }
-

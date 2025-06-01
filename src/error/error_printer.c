@@ -18,11 +18,9 @@ static void	puterr(char *str)
 		exit(EXIT_FAILURE);
 }
 
-// print error and exit if finish_program is true
-// (t_m){strerror(errno)}
-void err(int lineno, t_m msg)
+void	err(int lineno, t_m msg)
 {
-	char *str;
+	char	*str;
 
 	puterr("Error\n");
 	if (lineno > 0)

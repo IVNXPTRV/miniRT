@@ -12,15 +12,14 @@
 
 #include "header.h"
 
-inline bool is_in_range(double num, double min, double max)
+inline bool	is_in_range(double num, double min, double max)
 {
 	return (num >= min && num <= max);
 }
 
-// indx of number
-double get_double(char **element, char **numbers, int i, int lineno)
+double	get_double(char **element, char **numbers, int i, int lineno)
 {
-	double result;
+	double	result;
 
 	result = 0;
 	if (ft_atod(numbers[i], &result) == FAIL)
@@ -33,9 +32,9 @@ double get_double(char **element, char **numbers, int i, int lineno)
 	return (result);
 }
 
-int get_int(char **element, char **numbers, int i, int lineno)
+int	get_int(char **element, char **numbers, int i, int lineno)
 {
-	int result;
+	int	result;
 
 	result = 0;
 	if (ft_atoi(numbers[i], &result, sizeof(int), 10) == FAIL)

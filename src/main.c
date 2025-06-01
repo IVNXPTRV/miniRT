@@ -16,10 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_scene	scene;
 
-	ft_bzero(&scene, sizeof(t_scene));	// init scene with zeroes
-	\
-	parse(argc, argv, &scene); 			// deserialize
-	execute(&scene);					// render: init graphic library, get_image, display window with image
-	\
+	ft_bzero(&scene, sizeof(t_scene));
+	parse(argc, argv, &scene);
+	execute(&scene);
 	return (EXIT_SUCCESS);
 }

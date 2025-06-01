@@ -12,22 +12,22 @@
 
 #include "header.h"
 
-void dbg_print_color(t_color	color)
+void	dbg_print_color(t_color color)
 {
 	printf("r: %f / g: %f / b: %f\n", color.r, color.g, color.b);
 }
 
-void dbg_print_vector(t_3d	vector)
+void	dbg_print_vector(t_3d vector)
 {
 	printf("x: %f / y: %f / z: %f\n", vector.x, vector.y, vector.z);
 }
 
-void dbg_print_num(t_num	num)
+void	dbg_print_num(t_num num)
 {
 	printf("%f\n", num);
 }
 
-void dbg_print_camera(t_camera	camera)
+void	dbg_print_camera(t_camera camera)
 {
 	printf("\n----- camera -----\n");
 	printf("position:  "), dbg_print_vector(camera.position);
@@ -39,7 +39,7 @@ void dbg_print_camera(t_camera	camera)
 	sleep(2);
 }
 
-void dbg_print_ray(t_ray	ray)
+void	dbg_print_ray(t_ray ray)
 {
 	printf("\n----- ray -----\n");
 	printf("position:  "), dbg_print_vector(ray.position);
@@ -47,7 +47,7 @@ void dbg_print_ray(t_ray	ray)
 	sleep(2);
 }
 
-char *dbg_get_obj_type(t_obj *obj)
+char	*dbg_get_obj_type(t_obj *obj)
 {
 	if (obj->type == PL)
 		return ("plane");
@@ -58,7 +58,7 @@ char *dbg_get_obj_type(t_obj *obj)
 	return ("");
 }
 
-void dbg_print_hit(t_hit	hit)
+void	dbg_print_hit(t_hit hit)
 {
 	printf("\n----- hit -----\n");
 	if (hit.obj == NULL)

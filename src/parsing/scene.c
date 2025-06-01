@@ -12,7 +12,7 @@
 
 #include "header.h"
 
-static	void validate_camera(t_scene *scene)
+static void	validate_camera(t_scene *scene)
 {
 	if (scene->camera.status == false)
 	{
@@ -21,16 +21,17 @@ static	void validate_camera(t_scene *scene)
 	}
 }
 
-static	void validate_ambient(t_scene *scene)
+static void	validate_ambient(t_scene *scene)
 {
 	if (scene->ambient.status == false)
 	{
-		err(Z, (t_m){"minirt: no ambient light found in a scene configuration"});
+		err(Z,
+			(t_m){"minirt: no ambient light found in a scene configuration"});
 		exit(EXIT_FAILURE);
 	}
 }
 
-static	void validate_light(t_scene *scene)
+static void	validate_light(t_scene *scene)
 {
 	if (scene->light.status == false)
 	{
@@ -39,7 +40,7 @@ static	void validate_light(t_scene *scene)
 	}
 }
 
-static	void validate_obj_num(t_scene *scene)
+static void	validate_obj_num(t_scene *scene)
 {
 	if (scene->obj_num == 0)
 	{
@@ -48,12 +49,7 @@ static	void validate_obj_num(t_scene *scene)
 	}
 }
 
-// prevent scene without obj or without camera etc
-// > 1 obj
-// cam init
-// light init
-// amb init
-void validate_scene(t_scene *scene)
+void	validate_scene(t_scene *scene)
 {
 	validate_camera(scene);
 	validate_light(scene);

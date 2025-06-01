@@ -12,10 +12,7 @@
 
 #include "header.h"
 
-// get coordinates of position x, y, z
-// element -- whole line
-// i -- index of certain attribute of the element
-t_point get_point(char **element, int i, int lineno)
+t_point	get_point(char **element, int i, int lineno)
 {
 	char	**numbers;
 	t_point	point;

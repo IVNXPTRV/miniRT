@@ -30,7 +30,7 @@ for FILE in "$FOLDER"/*; do
 
     echo -e "Press Enter to close and open next, or 'q' to quit...\n"
     read -r -n1 KEY
-    echo
+    echo 
 
     # Kill the processes if they are still running
     kill $PID1 $PID2 $PID3 2>/dev/null

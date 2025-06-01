@@ -12,12 +12,12 @@
 
 #include "header.h"
 
-bool is_miss(t_hit hit)
+bool	is_miss(t_hit hit)
 {
-	return (hit.obj == NULL); // means no hit
+	return (hit.obj == NULL);
 }
 
-t_color get_pixel_color(t_scene *scene, int x, int y)
+t_color	get_pixel_color(t_scene *scene, int x, int y)
 {
 	t_ray	ray;
 	t_hit	hit;
@@ -26,9 +26,7 @@ t_color get_pixel_color(t_scene *scene, int x, int y)
 	ray = get_ray(scene->camera, x, y);
 	hit = get_hit(scene, ray);
 	if (is_miss(hit))
-		return (BLACK);			// BLACK
-	// dbg_print_ray(ray);
-	// dbg_print_hit(hit);
+		return (BLACK);
 	pixel = add_light(scene, hit);
 	return (pixel);
 }

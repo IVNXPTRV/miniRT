@@ -12,21 +12,21 @@
 
 #include "header.h"
 
-// attach image to window
-static void attach_image(t_scene *s)
+static void	attach_image(t_scene *s)
 {
 	if (mlx_image_to_window(s->gl.window, s->gl.image, 0, 0) == ERROR)
 	{
 		mlx_terminate(s->gl.window);
-		err(Z, (t_m){"minirt: failed to attach image to window in a graphic library"});
+		err(Z,
+			(t_m){"minirt: failed to attach image to window in a graph lib"});
 		exit(EXIT_FAILURE);
 	}
 }
 
-void display_image(t_scene *scene)
+void	display_image(t_scene *scene)
 {
 	attach_image(scene);
-	mlx_loop(scene->gl.window);						// display OS window woth image inside
-	mlx_terminate(scene->gl.window);				// clean connection of gl
-	exit(EXIT_SUCCESS);								// intended final exit from a program
+	mlx_loop(scene->gl.window);
+	mlx_terminate(scene->gl.window);
+	exit(EXIT_SUCCESS);
 }

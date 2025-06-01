@@ -12,41 +12,42 @@
 
 #include "header.h"
 
-static void register_closest_obj(t_num distance, t_num *min_distance, t_obj *obj, t_obj **dst)
+static void	register_closest_obj(t_num distance, t_num *min_distance,
+		t_obj *obj, t_obj **dst)
 {
 	if (distance < *min_distance)
 	{
-		// printf("here\n");
 		*min_distance = distance;
 		*dst = obj;
 	}
 }
 
-static t_hit init_hit(t_num distance, t_ray ray, t_obj *obj)
+static t_hit	init_hit(t_num distance, t_ray ray, t_obj *obj)
 {
 	t_hit	hit;
 
 	hit.position = (t_point){0};
 	hit.normal = (t_vector){0};
 	hit.obj = obj;
-	if (hit.obj == NULL)																		// means no object hit
+	if (hit.obj == NULL)
 		return (hit);
-	hit.position = add_vectors(ray.position, scale_vector(ray.direction, distance));	// check if IT IS CORRECT?																// get for light calculation later, or calculater later in a shadow??
+	hit.position = add_vectors(ray.position, scale_vector(ray.direction,
+				distance));
 	return (hit);
 }
 
-t_hit get_hit(t_scene *scene, t_ray ray)
+t_hit	get_hit(t_scene *scene, t_ray ray)
 {
-	int		i;											// counter
-	t_num	min_distance;								// distance along ray to object surface
+	int		i;
+	t_num	min_distance;
 	t_num	distance;
 	t_hit	hit;
 	t_obj	*obj;
 
 	i = -1;
-	min_distance = DBL_MAX; 							// change to -1 ????
-	obj = NULL;											// no obj hit so far
-	while(++i < scene->obj_num)							// loop to traverse all scene objects
+	min_distance = DBL_MAX;
+	obj = NULL;
+	while (++i < scene->obj_num)
 	{
 		if (scene->obj[i].type == PL)
 			distance = compute_plane_intersection(ray, scene->obj[i]);

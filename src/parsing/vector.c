@@ -12,9 +12,9 @@
 
 #include "header.h"
 
-static void verify_vector(char **element, int i, int lineno, t_vector *vector)
+static void	verify_vector(char **element, int i, int lineno, t_vector *vector)
 {
-	t_num mag;
+	t_num	mag;
 
 	mag = magnitude(*vector);
 	if (mag == 0)
@@ -26,12 +26,13 @@ static void verify_vector(char **element, int i, int lineno, t_vector *vector)
 	else if (mag != 1.0)
 	{
 		*vector = normalize(*vector);
-		err(lineno, (t_m){"vector is not normalized, magnitude should be 1 -> ", element[i], \
-						"\nthis vector is automatically normalized for convinience"});
+		err(lineno, (t_m){"vector is not normalized, magnitude should be 1 -> ",
+			element[i],
+			"\nthis vector is automatically normalized for convinience"});
 	}
 }
 
-t_vector get_vector(char **element, int i, int lineno)
+t_vector	get_vector(char **element, int i, int lineno)
 {
 	char		**numbers;
 	t_vector	vector;
@@ -44,4 +45,3 @@ t_vector get_vector(char **element, int i, int lineno)
 	verify_vector(element, i, lineno, &vector);
 	return (vector);
 }
-

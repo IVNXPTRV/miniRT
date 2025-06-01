@@ -12,11 +12,10 @@
 
 #include "header.h"
 
-static void verify_color(char **element, int i, int lineno, t_color color)
+static void	verify_color(char **element, int i, int lineno, t_color color)
 {
-	if (!is_in_range(color.r, 0, 1) || \
-		!is_in_range(color.g, 0, 1) || \
-		!is_in_range(color.b, 0, 1))
+	if (!is_in_range(color.r, 0, 1) || !is_in_range(color.g, 0, 1)
+		|| !is_in_range(color.b, 0, 1))
 	{
 		err(lineno, (t_m){"color is beyond 0 to 255 range -> ", element[i]});
 		ft_parrclean(&element);
@@ -26,11 +25,11 @@ static void verify_color(char **element, int i, int lineno, t_color color)
 
 t_color	get_color(char **element, int i, int lineno)
 {
-	char		**numbers;
-	t_color		color;
+	char	**numbers;
+	t_color	color;
 
 	numbers = get_numbers(element, i, lineno, 3);
-	color.r = get_int(element, numbers, 0, lineno) / 255.0;				// converted ro range 0.0 to 1.0
+	color.r = get_int(element, numbers, 0, lineno) / 255.0;
 	color.g = get_int(element, numbers, 1, lineno) / 255.0;
 	color.b = get_int(element, numbers, 2, lineno) / 255.0;
 	ft_parrclean(&numbers);
