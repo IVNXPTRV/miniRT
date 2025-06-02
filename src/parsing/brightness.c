@@ -17,7 +17,7 @@ static void	verify_brightness(char **element, int i, t_scene *s,
 {
 	if (!is_in_range(brightness, 0, 1))
 	{
-		err(s->lineno, (t_m){"value is beyond 0 to 1 range ->", element[i]});
+		err(s->lineno, (t_m){"value is beyond 0 to 1 range -> ", element[i]});
 		ft_parrclean(&element);
 		er_close(s->file);
 		exit(EXIT_FAILURE);
