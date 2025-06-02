@@ -12,11 +12,11 @@
 
 #include "header.h"
 
-void	parse_light(char **element, t_scene *scene, int lineno)
+void	parse_light(char **element, t_scene *scene)
 {
-	verify_uniqueness(element, &scene->light.status, lineno);
-	verify_attrs_number(element, 3, lineno);
-	scene->light.position = get_point(element, 1, lineno);
-	scene->light.brightness = get_brightness(element, 2, lineno);
-	scene->light.color = get_color(element, 3, lineno);
+	verify_uniqueness(element, &scene->light.status, scene);
+	verify_attrs_number(element, 3, scene);
+	scene->light.position = get_point(element, 1, scene);
+	scene->light.brightness = get_brightness(element, 2, scene);
+	scene->light.color = get_color(element, 3, scene);
 }

@@ -109,6 +109,7 @@ typedef struct s_obj
 typedef struct s_scene
 {
 	int				file;
+	int				lineno;
 	t_gl			gl;
 	t_camera		camera;
 	t_ambient		ambient;
@@ -132,35 +133,36 @@ typedef struct s_hit
 
 void				parse(int argc, char **argv, t_scene *scene);
 void				validate_argument(int argc, char **argv, t_scene *scene);
-void				parse_element(char **element, t_scene *scene, int lineno);
+void				parse_element(char **element, t_scene *scene);
 void				validate_scene(t_scene *scene);
 
-char				**get_numbers(char **element, int i, int lineno,
+char				**get_numbers(char **element, int i, t_scene *s,
 						size_t limit);
 
-void				verify_attrs_number(char **element, size_t num, int lineno);
+void				verify_attrs_number(char **element, size_t num,
+						t_scene *scene);
 void				verify_uniqueness(char **element, bool *singleton,
-						int lineno);
-void				verify_max_obj_num(char **element, t_scene *scene,
-						int lineno);
+						t_scene *scene);
+void				verify_max_obj_num(char **element, t_scene *scene);
 
 bool				is_in_range(double num, double min, double max);
 double				get_double(char **element, char **numbers, int i,
-						int lineno);
-int					get_int(char **element, char **numbers, int i, int lineno);
+						t_scene *scene);
+int					get_int(char **element, char **numbers, int i,
+						t_scene *scene);
 
-void				parse_camera(char **element, t_scene *scene, int lineno);
-void				parse_ambient(char **element, t_scene *scene, int lineno);
-void				parse_light(char **element, t_scene *scene, int lineno);
-void				parse_plane(char **element, t_scene *scene, int lineno);
-void				parse_sphere(char **element, t_scene *scene, int lineno);
-void				parse_cylinder(char **element, t_scene *scene, int lineno);
+void				parse_camera(char **element, t_scene *scene);
+void				parse_ambient(char **element, t_scene *scene);
+void				parse_light(char **element, t_scene *scene);
+void				parse_plane(char **element, t_scene *scene);
+void				parse_sphere(char **element, t_scene *scene);
+void				parse_cylinder(char **element, t_scene *scene);
 
-t_point				get_point(char **element, int i, int lineno);
-t_vector			get_vector(char **element, int i, int lineno);
-t_num				get_brightness(char **element, int i, int lineno);
-t_color				get_color(char **element, int i, int lineno);
-t_num				get_size(char **element, int i, int lineno);
+t_point				get_point(char **element, int i, t_scene *scene);
+t_vector			get_vector(char **element, int i, t_scene *scene);
+t_num				get_brightness(char **element, int i, t_scene *scene);
+t_color				get_color(char **element, int i, t_scene *scene);
+t_num				get_size(char **element, int i, t_scene *scene);
 
 void				err(int lineno, t_m msg);
 void				er_close(int fd);

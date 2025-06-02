@@ -12,15 +12,15 @@
 
 #include "header.h"
 
-t_point	get_point(char **element, int i, int lineno)
+t_point	get_point(char **element, int i, t_scene *scene)
 {
 	char	**numbers;
 	t_point	point;
 
-	numbers = get_numbers(element, i, lineno, 3);
-	point.x = get_double(element, numbers, 0, lineno);
-	point.y = get_double(element, numbers, 1, lineno);
-	point.z = get_double(element, numbers, 2, lineno);
+	numbers = get_numbers(element, i, scene, 3);
+	point.x = get_double(element, numbers, 0, scene);
+	point.y = get_double(element, numbers, 1, scene);
+	point.z = get_double(element, numbers, 2, scene);
 	ft_parrclean(&numbers);
 	return (point);
 }

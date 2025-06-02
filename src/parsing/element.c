@@ -12,41 +12,41 @@
 
 #include "header.h"
 
-void	verify_max_obj_num(char **element, t_scene *scene, int lineno)
+void	verify_max_obj_num(char **element, t_scene *scene)
 {
 	if (scene->obj_num >= MAX_OBJ)
 	{
-		err(lineno, (t_m){"reached maximum number of objects"});
+		err(scene->lineno, (t_m){"reached maximum number of objects"});
 		ft_parrclean(&element);
 		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }
 
-void	verify_uniqueness(char **element, bool *singleton, int lineno)
+void	verify_uniqueness(char **element, bool *singleton, t_scene *s)
 {
 	if (*singleton == true)
 	{
-		err(lineno, (t_m){"encountered more then one ", element[0]});
+		err(s->lineno, (t_m){"encountered more then one ", element[0]});
 		ft_parrclean(&element);
-		er_close(scene->file);
+		er_close(s->file);
 		exit(EXIT_FAILURE);
 	}
 	*singleton = true;
 }
 
-void	verify_attrs_number(char **element, size_t num, int lineno)
+void	verify_attrs_number(char **element, size_t num, t_scene *s)
 {
 	if (ft_parrlen(element + 1) != num)
 	{
-		err(lineno, (t_m){"wrong number of attributes"});
+		err(s->lineno, (t_m){"wrong number of attributes"});
 		ft_parrclean(&element);
-		er_close(scene->file);
+		er_close(s->file);
 		exit(EXIT_FAILURE);
 	}
 }
 
-char	**get_numbers(char **element, int i, int lineno, size_t limit)
+char	**get_numbers(char **element, int i, t_scene *s, size_t limit)
 {
 	char	**numbers;
 
@@ -55,38 +55,38 @@ char	**get_numbers(char **element, int i, int lineno, size_t limit)
 	{
 		ft_parrclean(&element);
 		err(Z, (t_m){"malloc: fatal error"});
-		er_close(scene->file);
+		er_close(s->file);
 		exit(EXIT_FAILURE);
 	}
 	if (ft_parrlen(numbers) != limit)
 	{
-		err(lineno, (t_m){"wrong number of parameters in an attribute -> ",
+		err(s->lineno, (t_m){"wrong number of parameters in an attribute -> ",
 			element[i]});
 		ft_parrclean(&element);
 		ft_parrclean(&numbers);
-		er_close(scene->file);
+		er_close(s->file);
 		exit(EXIT_FAILURE);
 	}
 	return (numbers);
 }
 
-void	parse_element(char **element, t_scene *scene, int lineno)
+void	parse_element(char **element, t_scene *scene)
 {
 	if (is_eqlstr(element[0], "C"))
-		parse_camera(element, scene, lineno);
+		parse_camera(element, scene);
 	else if (is_eqlstr(element[0], "A"))
-		parse_ambient(element, scene, lineno);
+		parse_ambient(element, scene);
 	else if (is_eqlstr(element[0], "L"))
-		parse_light(element, scene, lineno);
+		parse_light(element, scene);
 	else if (is_eqlstr(element[0], "pl"))
-		parse_plane(element, scene, lineno);
+		parse_plane(element, scene);
 	else if (is_eqlstr(element[0], "sp"))
-		parse_sphere(element, scene, lineno);
+		parse_sphere(element, scene);
 	else if (is_eqlstr(element[0], "cy"))
-		parse_cylinder(element, scene, lineno);
+		parse_cylinder(element, scene);
 	else
 	{
-		err(lineno, (t_m){"wrong identifier -> ", element[0]});
+		err(scene->lineno, (t_m){"wrong identifier -> ", element[0]});
 		ft_parrclean(&element);
 		er_close(scene->file);
 		exit(EXIT_FAILURE);

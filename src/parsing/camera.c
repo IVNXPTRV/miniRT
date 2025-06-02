@@ -12,27 +12,27 @@
 
 #include "header.h"
 
-static void	verify_fov(char **element, int i, int lineno, int fov)
+static void	verify_fov(char **element, int i, t_scene *s, int fov)
 {
 	if (!is_in_range((double)fov, 1, 179))
 	{
-		err(lineno, (t_m){"fov is beyond 0 to 180 range -> ", element[i]});
+		err(s->lineno, (t_m){"fov is beyond 0 to 180 range -> ", element[i]});
 		ft_parrclean(&element);
-		er_close(scene->file);
+		er_close(s->file);
 		exit(EXIT_FAILURE);
 	}
 }
 
-static t_num	get_scale(char **element, int i, int lineno)
+static t_num	get_scale(char **element, int i, t_scene *scene)
 {
 	char	**numbers;
 	int		fov;
 	t_num	scale;
 
-	numbers = get_numbers(element, i, lineno, 1);
-	fov = get_int(element, numbers, 0, lineno);
+	numbers = get_numbers(element, i, scene, 1);
+	fov = get_int(element, numbers, 0, scene);
 	ft_parrclean(&numbers);
-	verify_fov(element, i, lineno, fov);
+	verify_fov(element, i, scene, fov);
 	scale = tan(0.5 * (fov * M_PI / 180.0));
 	return (scale);
 }
@@ -52,13 +52,13 @@ static t_vector	get_up(t_vector right, t_vector forward)
 	return (cross(right, forward));
 }
 
-void	parse_camera(char **element, t_scene *scene, int lineno)
+void	parse_camera(char **element, t_scene *scene)
 {
-	verify_uniqueness(element, &scene->camera.status, lineno);
-	verify_attrs_number(element, 3, lineno);
-	scene->camera.position = get_point(element, 1, lineno);
-	scene->camera.forward = get_vector(element, 2, lineno);
-	scene->camera.scale = get_scale(element, 3, lineno);
+	verify_uniqueness(element, &scene->camera.status, scene);
+	verify_attrs_number(element, 3, scene);
+	scene->camera.position = get_point(element, 1, scene);
+	scene->camera.forward = get_vector(element, 2, scene);
+	scene->camera.scale = get_scale(element, 3, scene);
 	scene->camera.right = get_right(scene->camera.forward);
 	scene->camera.up = get_up(scene->camera.right, scene->camera.forward);
 	scene->camera.ratio = (double)WIDTH / (double)HEIGHT;

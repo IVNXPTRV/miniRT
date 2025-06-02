@@ -12,13 +12,13 @@
 
 #include "header.h"
 
-void	parse_plane(char **element, t_scene *scene, int lineno)
+void	parse_plane(char **element, t_scene *scene)
 {
-	verify_max_obj_num(element, scene, lineno);
-	verify_attrs_number(element, 3, lineno);
-	scene->obj[scene->obj_num].position = get_point(element, 1, lineno);
-	scene->obj[scene->obj_num].normal = get_vector(element, 2, lineno);
-	scene->obj[scene->obj_num].color = get_color(element, 3, lineno);
+	verify_max_obj_num(element, scene);
+	verify_attrs_number(element, 3, scene);
+	scene->obj[scene->obj_num].position = get_point(element, 1, scene);
+	scene->obj[scene->obj_num].normal = get_vector(element, 2, scene);
+	scene->obj[scene->obj_num].color = get_color(element, 3, scene);
 	scene->obj[scene->obj_num].type = PL;
 	scene->obj_num++;
 }

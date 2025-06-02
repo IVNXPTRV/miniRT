@@ -12,13 +12,13 @@
 
 #include "header.h"
 
-t_num	get_size(char **element, int i, int lineno)
+t_num	get_size(char **element, int i, t_scene *scene)
 {
 	char	**numbers;
 	t_num	diameter;
 
-	numbers = get_numbers(element, i, lineno, 1);
-	diameter = get_double(element, numbers, 0, lineno);
+	numbers = get_numbers(element, i, scene, 1);
+	diameter = get_double(element, numbers, 0, scene);
 	ft_parrclean(&numbers);
 	return (diameter);
 }

@@ -20,7 +20,7 @@ static inline bool	is_empty_line(char *line)
 	return (true);
 }
 
-static char	**get_element(char *line)
+static char	**get_element(char *line, t_scene *s)
 {
 	char	**element;
 
@@ -29,29 +29,28 @@ static char	**get_element(char *line)
 	if (element == NULL)
 	{
 		err(Z, (t_m){"malloc: fatal error"});
-		er_close(scene->file);
+		er_close(s->file);
 		exit(EXIT_FAILURE);
 	}
 	return (element);
 }
 
-static void	parse_line(char *line, t_scene *scene, int lineno)
+static void	parse_line(char *line, t_scene *scene)
 {
 	char	**element;
 
 	if (is_empty_line(line))
 		return ;
-	element = get_element(line);
-	parse_element(element, scene, lineno);
+	element = get_element(line, scene);
+	parse_element(element, scene);
 }
 
 static void	load_elements(t_scene *scene)
 {
 	char	*line;
-	int		lineno;
 
 	line = (void *)true;
-	lineno = 0;
+	scene->lineno = 0;
 	while (line)
 	{
 		line = get_next_line(scene->file);
@@ -62,7 +61,10 @@ static void	load_elements(t_scene *scene)
 			exit(EXIT_FAILURE);
 		}
 		if (line)
-			parse_line(line, scene, ++lineno);
+		{
+			scene->lineno++;
+			parse_line(line, scene);
+		}
 	}
 	er_close(scene->file);
 }

@@ -17,7 +17,6 @@ static void	validate_camera(t_scene *scene)
 	if (scene->camera.status == false)
 	{
 		err(Z, (t_m){"minirt: no camera found in a scene configuration"});
-		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -28,7 +27,6 @@ static void	validate_ambient(t_scene *scene)
 	{
 		err(Z,
 			(t_m){"minirt: no ambient light found in a scene configuration"});
-		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -38,7 +36,6 @@ static void	validate_light(t_scene *scene)
 	if (scene->light.status == false)
 	{
 		err(Z, (t_m){"minirt: no light found in a scene configuration"});
-		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -48,7 +45,6 @@ static void	validate_obj_num(t_scene *scene)
 	if (scene->obj_num == 0)
 	{
 		err(Z, (t_m){"minirt: no objects found in a scene configuration"});
-		er_close(scene->file);
 		exit(EXIT_FAILURE);
 	}
 }

@@ -17,31 +17,33 @@ inline bool	is_in_range(double num, double min, double max)
 	return (num >= min && num <= max);
 }
 
-double	get_double(char **element, char **numbers, int i, int lineno)
+double	get_double(char **element, char **numbers, int i, t_scene *s)
 {
 	double	result;
 
 	result = 0;
 	if (ft_atod(numbers[i], &result) == FAIL)
 	{
-		err(lineno, (t_m){"incorrect double -> ", numbers[i]});
+		err(s->lineno, (t_m){"incorrect double -> ", numbers[i]});
 		ft_parrclean(&element);
 		ft_parrclean(&numbers);
+		er_close(s->file);
 		exit(EXIT_SUCCESS);
 	}
 	return (result);
 }
 
-int	get_int(char **element, char **numbers, int i, int lineno)
+int	get_int(char **element, char **numbers, int i, t_scene *s)
 {
 	int	result;
 
 	result = 0;
 	if (ft_atoi(numbers[i], &result, sizeof(int), 10) == FAIL)
 	{
-		err(lineno, (t_m){"incorrect integer -> ", numbers[i]});
+		err(s->lineno, (t_m){"incorrect integer -> ", numbers[i]});
 		ft_parrclean(&element);
 		ft_parrclean(&numbers);
+		er_close(s->file);
 		exit(EXIT_SUCCESS);
 	}
 	return (result);
