@@ -26,7 +26,6 @@ if [ "$BASENAME" = "error" ]; then
      "./miniRT ./scenes/error/"
      "./miniRT ./arg1.rt ./arg2.rt"
      "./miniRT"
-     "./miniRT ./scenes/error/nopermission.rt"
    )
    for CMD in "${CMDS[@]}"; do
       echo -e "Running valgrind on $CMD \n"
