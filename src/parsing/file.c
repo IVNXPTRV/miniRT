@@ -21,7 +21,7 @@ static void	validate_synopsis(int argc)
 	}
 }
 
-static void	validate_filename(char *filename)
+static void	validate_filename(char *filename, t_scene *s)
 {
 	size_t	len;
 
@@ -29,6 +29,7 @@ static void	validate_filename(char *filename)
 	if (len < 4 || !is_eqlstr(".rt", filename + (len - 3)))
 	{
 		err(Z, (t_m){"minirt: file should end with .rt extention"});
+		er_close(s->file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -61,6 +62,6 @@ static void	validate_file(char *filename, t_scene *scene)
 void	validate_argument(int argc, char **argv, t_scene *scene)
 {
 	validate_synopsis(argc);
-	validate_filename(argv[1]);
 	validate_file(argv[1], scene);
+	validate_filename(argv[1], scene);
 }
