@@ -41,8 +41,6 @@ LIB					:=	./lib/elibft/elibft.a \
 endif
 
 SRC 				:=	\
-						./src/debug/debug.c \
-						\
 						./src/error/error_printer.c \
 						./src/error/error_wrappers.c \
 						\

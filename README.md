@@ -7,5 +7,7 @@
 
 2. Run the executable:
 	```bash
-	./miniRT ./scenes/subject_example.rt
+	./miniRT ./scenes/nice/room.rt
 	```
+
+This brunch is more verbose, to get polished code switch to Main brunch.

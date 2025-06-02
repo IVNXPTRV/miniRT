@@ -204,12 +204,4 @@ t_num compute_disk_intersection(t_ray ray, t_obj obj);
 t_color add_light(t_scene *scene, t_hit hit);
 bool is_shadowed(t_scene *scene, t_ray ray);
 
-// debug
-void dbg_print_camera(t_camera	camera);
-void dbg_print_num(t_num	num);
-void dbg_print_vector(t_3d	vector);
-void dbg_print_color(t_color	color);
-void dbg_print_ray(t_ray	ray);
-void dbg_print_hit(t_hit	hit);
-
 #endif
